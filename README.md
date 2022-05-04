@@ -4,7 +4,7 @@ _by Brenna Lavin_
 
 ## App Diagram
 
-![app diagram](WhatsForDinnerTemplate.png)
+![app diagram](WhatsForDinner/WhatsForDinnerTemplate.png)
 
 ### Research and Planning Log
 
