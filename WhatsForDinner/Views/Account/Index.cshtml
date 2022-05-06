@@ -6,11 +6,15 @@
 
 @if(User.Identity.IsAuthenticated)
 {
-  <p>Hello @User.Identity.Name!</p>
-  @using (Html.BeginForm("LogOff", "Account"))
+  <p>Hello @User.Identity.Name!
+    @using (Html.BeginForm("LogOff", "Account"))
   {
     <input type="submit" class="btn btn-default" value="Log out"/>
   }
+  </p>
+  <h2>Upcoming recipes</h2>
+  
+  <h2>Recipe Calendar</h2>
 }
 else{
   <p>@Html.ActionLink("Register", "Register")</p>

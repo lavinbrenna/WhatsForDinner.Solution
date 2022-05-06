@@ -23,12 +23,8 @@
       <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
         <div class="navbar-nav">
           @if(User.Identity.IsAuthenticated){
-            @Html.ActionLink("Home", "Index","Home", null, new {@class ="nav-item nav-link"})
+            @Html.ActionLink("Home", "Index","Account", null, new {@class ="nav-item nav-link"})
             @Html.ActionLink("Recipes", "Index", "Recipes", null, new {@class = "nav-item nav-link"})
-            @using (Html.BeginForm("LogOff", "Account"))
-            {
-              <input type="submit" class="btn btn-default" value="Log Out"/>
-            }
           }
           else{
             @Html.ActionLink("Register", "Register", "Account", null, new {@class = "nav-item nav-link"})
