@@ -209,25 +209,39 @@ namespace WhatsForDinner.Migrations
                     b.ToTable("AspNetUsers");
                 });
 
-            modelBuilder.Entity("WhatsForDinner.Models.ApplicationUserRecipe", b =>
+            modelBuilder.Entity("WhatsForDinner.Models.Category", b =>
                 {
-                    b.Property<int>("ApplicationUserRecipeId")
+                    b.Property<int>("CategoryId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    b.Property<string>("ApplicationUserId")
-                        .HasColumnType("varchar(255) CHARACTER SET utf8mb4");
+                    b.Property<string>("MealType")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+
+                    b.HasKey("CategoryId");
+
+                    b.ToTable("Categories");
+                });
+
+            modelBuilder.Entity("WhatsForDinner.Models.CategoryRecipe", b =>
+                {
+                    b.Property<int>("CategoryRecipeId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<int>("CategoryId")
+                        .HasColumnType("int");
 
                     b.Property<int>("RecipeId")
                         .HasColumnType("int");
 
-                    b.HasKey("ApplicationUserRecipeId");
+                    b.HasKey("CategoryRecipeId");
 
-                    b.HasIndex("ApplicationUserId");
+                    b.HasIndex("CategoryId");
 
                     b.HasIndex("RecipeId");
 
-                    b.ToTable("ApplicationUserRecipes");
+                    b.ToTable("CategoryRecipe");
                 });
 
             modelBuilder.Entity("WhatsForDinner.Models.Recipe", b =>
@@ -236,19 +250,7 @@ namespace WhatsForDinner.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    b.Property<string>("Breakfast")
-                        .HasColumnType("longtext CHARACTER SET utf8mb4");
-
-                    b.Property<string>("Category")
-                        .HasColumnType("longtext CHARACTER SET utf8mb4");
-
-                    b.Property<string>("Dinner")
-                        .HasColumnType("longtext CHARACTER SET utf8mb4");
-
                     b.Property<string>("Ingredients")
-                        .HasColumnType("longtext CHARACTER SET utf8mb4");
-
-                    b.Property<string>("Lunch")
                         .HasColumnType("longtext CHARACTER SET utf8mb4");
 
                     b.Property<int>("MaxFrequency")
@@ -266,7 +268,12 @@ namespace WhatsForDinner.Migrations
                     b.Property<string>("Title")
                         .HasColumnType("longtext CHARACTER SET utf8mb4");
 
+                    b.Property<string>("UserId")
+                        .HasColumnType("varchar(255) CHARACTER SET utf8mb4");
+
                     b.HasKey("RecipeId");
+
+                    b.HasIndex("UserId");
 
                     b.ToTable("Recipes");
                 });
@@ -322,11 +329,13 @@ namespace WhatsForDinner.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("WhatsForDinner.Models.ApplicationUserRecipe", b =>
+            modelBuilder.Entity("WhatsForDinner.Models.CategoryRecipe", b =>
                 {
-                    b.HasOne("WhatsForDinner.Models.ApplicationUser", "ApplicationUser")
+                    b.HasOne("WhatsForDinner.Models.Category", "Category")
                         .WithMany("JoinEntities")
-                        .HasForeignKey("ApplicationUserId");
+                        .HasForeignKey("CategoryId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("WhatsForDinner.Models.Recipe", "Recipe")
                         .WithMany("JoinEntities")
@@ -334,12 +343,21 @@ namespace WhatsForDinner.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("ApplicationUser");
+                    b.Navigation("Category");
 
                     b.Navigation("Recipe");
                 });
 
-            modelBuilder.Entity("WhatsForDinner.Models.ApplicationUser", b =>
+            modelBuilder.Entity("WhatsForDinner.Models.Recipe", b =>
+                {
+                    b.HasOne("WhatsForDinner.Models.ApplicationUser", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId");
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("WhatsForDinner.Models.Category", b =>
                 {
                     b.Navigation("JoinEntities");
                 });

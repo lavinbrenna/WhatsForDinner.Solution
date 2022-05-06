@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace WhatsForDinner.Migrations
 {
-    public partial class Initial : Migration
+    public partial class initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -48,25 +48,16 @@ namespace WhatsForDinner.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Recipes",
+                name: "Categories",
                 columns: table => new
                 {
-                    RecipeId = table.Column<int>(type: "int", nullable: false)
+                    CategoryId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    Title = table.Column<string>(type: "longtext CHARACTER SET utf8mb4", nullable: true),
-                    RecipeUrl = table.Column<string>(type: "longtext CHARACTER SET utf8mb4", nullable: true),
-                    Ingredients = table.Column<string>(type: "longtext CHARACTER SET utf8mb4", nullable: true),
-                    Category = table.Column<string>(type: "longtext CHARACTER SET utf8mb4", nullable: true),
-                    MinFrequency = table.Column<int>(type: "int", nullable: false),
-                    MaxFrequency = table.Column<int>(type: "int", nullable: false),
-                    Breakfast = table.Column<string>(type: "longtext CHARACTER SET utf8mb4", nullable: true),
-                    Lunch = table.Column<string>(type: "longtext CHARACTER SET utf8mb4", nullable: true),
-                    Dinner = table.Column<string>(type: "longtext CHARACTER SET utf8mb4", nullable: true),
-                    PreferredDay = table.Column<string>(type: "longtext CHARACTER SET utf8mb4", nullable: true)
+                    MealType = table.Column<string>(type: "longtext CHARACTER SET utf8mb4", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Recipes", x => x.RecipeId);
+                    table.PrimaryKey("PK_Categories", x => x.CategoryId);
                 });
 
             migrationBuilder.CreateTable(
@@ -176,40 +167,55 @@ namespace WhatsForDinner.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "ApplicationUserRecipes",
+                name: "Recipes",
                 columns: table => new
                 {
-                    ApplicationUserRecipeId = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    ApplicationUserId = table.Column<string>(type: "varchar(255) CHARACTER SET utf8mb4", nullable: true),
                     RecipeId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                    Title = table.Column<string>(type: "longtext CHARACTER SET utf8mb4", nullable: true),
+                    RecipeUrl = table.Column<string>(type: "longtext CHARACTER SET utf8mb4", nullable: true),
+                    Ingredients = table.Column<string>(type: "longtext CHARACTER SET utf8mb4", nullable: true),
+                    MinFrequency = table.Column<int>(type: "int", nullable: false),
+                    MaxFrequency = table.Column<int>(type: "int", nullable: false),
+                    PreferredDay = table.Column<string>(type: "longtext CHARACTER SET utf8mb4", nullable: true),
+                    UserId = table.Column<string>(type: "varchar(255) CHARACTER SET utf8mb4", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_ApplicationUserRecipes", x => x.ApplicationUserRecipeId);
+                    table.PrimaryKey("PK_Recipes", x => x.RecipeId);
                     table.ForeignKey(
-                        name: "FK_ApplicationUserRecipes_AspNetUsers_ApplicationUserId",
-                        column: x => x.ApplicationUserId,
+                        name: "FK_Recipes_AspNetUsers_UserId",
+                        column: x => x.UserId,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "CategoryRecipe",
+                columns: table => new
+                {
+                    CategoryRecipeId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                    RecipeId = table.Column<int>(type: "int", nullable: false),
+                    CategoryId = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_CategoryRecipe", x => x.CategoryRecipeId);
                     table.ForeignKey(
-                        name: "FK_ApplicationUserRecipes_Recipes_RecipeId",
+                        name: "FK_CategoryRecipe_Categories_CategoryId",
+                        column: x => x.CategoryId,
+                        principalTable: "Categories",
+                        principalColumn: "CategoryId",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_CategoryRecipe_Recipes_RecipeId",
                         column: x => x.RecipeId,
                         principalTable: "Recipes",
                         principalColumn: "RecipeId",
                         onDelete: ReferentialAction.Cascade);
                 });
-
-            migrationBuilder.CreateIndex(
-                name: "IX_ApplicationUserRecipes_ApplicationUserId",
-                table: "ApplicationUserRecipes",
-                column: "ApplicationUserId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_ApplicationUserRecipes_RecipeId",
-                table: "ApplicationUserRecipes",
-                column: "RecipeId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
@@ -247,13 +253,25 @@ namespace WhatsForDinner.Migrations
                 table: "AspNetUsers",
                 column: "NormalizedUserName",
                 unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "IX_CategoryRecipe_CategoryId",
+                table: "CategoryRecipe",
+                column: "CategoryId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_CategoryRecipe_RecipeId",
+                table: "CategoryRecipe",
+                column: "RecipeId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Recipes_UserId",
+                table: "Recipes",
+                column: "UserId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DropTable(
-                name: "ApplicationUserRecipes");
-
             migrationBuilder.DropTable(
                 name: "AspNetRoleClaims");
 
@@ -270,10 +288,16 @@ namespace WhatsForDinner.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
-                name: "Recipes");
+                name: "CategoryRecipe");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");
+
+            migrationBuilder.DropTable(
+                name: "Categories");
+
+            migrationBuilder.DropTable(
+                name: "Recipes");
 
             migrationBuilder.DropTable(
                 name: "AspNetUsers");
