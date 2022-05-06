@@ -22,5 +22,6 @@ namespace WhatsForDinner.Models
   public string PreferredDay{get;set;}
 
   public virtual ICollection<ApplicationUserRecipe> JoinEntities {get;}
+  
   }
 }
