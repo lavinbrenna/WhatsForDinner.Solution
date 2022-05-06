@@ -5,11 +5,6 @@ namespace WhatsForDinner.ViewModels
   public class RegisterViewModel
   {
     [Required]
-    [DataType(DataType.Text)]
-    [Display(Name = "Username")]
-    public string UserName { get;set; }
-
-    [Required]
     [EmailAddress]
     [DataType(DataType.EmailAddress)]
     [Display(Name = "Email")]
