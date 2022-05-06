@@ -1,0 +1,11 @@
+body{
+  font-family: 'Eb Garamond', serif;
+}
+
+.navbar-brand{
+  font-family: 'Oleo Script', cursive;
+}
+.navbar-brand a:active{
+  text-decoration: none;
+  color: rgb(153, 116, 88);
+}

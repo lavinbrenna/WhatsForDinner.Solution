@@ -9,21 +9,31 @@
   <link rel="stylesheet" href="~/css/styles.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Alegreya:wght@500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond&family=Oleo+Script&display=swap" rel="stylesheet">
 </head>
 
 <body>
   <div class="container">
-    <nav class="navbar navbar-expand-lg navbar-light" style="background-color: rgb(245, 187, 0);">
-      <a class="navbar-brand" href="/">WFD?</a>
+    <nav class="navbar navbar-expand-lg navbar-light" style="background-color: rgb(253, 243, 234);">
+      <a class="navbar-brand" href="/">What's For Dinner?</a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
         aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
         <div class="navbar-nav">
-          @Html.ActionLink("Home", "Index","Home", null, new {@class ="nav-item nav-link"})
-          @Html.ActionLink("Login", "Index", "Account", null, new {@class ="nav-item nav-link"})
+          @if(User.Identity.IsAuthenticated){
+            @Html.ActionLink("Home", "Index","Home", null, new {@class ="nav-item nav-link"})
+            @Html.ActionLink("Recipes", "Index", "Recipes", null, new {@class = "nav-item nav-link"})
+            @using (Html.BeginForm("LogOff", "Account"))
+            {
+              <input type="submit" class="btn btn-default" value="Log Out"/>
+            }
+          }
+          else{
+            @Html.ActionLink("Register", "Register", "Account", null, new {@class = "nav-item nav-link"})
+            @Html.ActionLink("Login", "Login", "Account", null, new {@class ="nav-item nav-link"})
+          }
         </div>
       </div>
     </nav>
