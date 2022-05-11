@@ -1,0 +1,53 @@
+@{
+  Layout ="_Layout";
+}
+
+@model WhatsForDinner.Models.Recipe
+
+<h4>Edit @Model.Title</h4>
+
+@using (Html.BeginForm())
+{
+  <p>@Html.LabelFor(m => m.Title)</p>
+  <p>@Html.EditorFor(m => m.Title, new { required="required" })</p>
+
+  <p>@Html.Label("Recipe URL")</p>
+  <p>@Html.EditorFor(m => m.RecipeUrl)</p>
+
+  <p>@Html.LabelFor(m => m.Ingredients)</p>
+  <p>@Html.EditorFor(m => m.Ingredients)</p>
+
+  <p>@Html.Label("Minimum Days")</p>
+  <p>@Html.EditorFor(m => m.MinFrequency, new{ type="number", required="required"})</p>
+
+  <p>@Html.Label("Maximum Days")</p>
+  <p>@Html.EditorFor(m => m.MaxFrequency, new{ type="number", required="required"})</p>
+
+  <p>@Html.Label("Breakfast")</p>
+  <p>@Html.CheckBoxFor( m=> m.isBreakfast)</p>
+
+  <p>@Html.Label("Lunch")</p>
+  <p>@Html.CheckBoxFor(m=> m.isLunch)</p>
+
+  <p>@Html.Label("Dinner")</p>
+  <p>@Html.CheckBoxFor(m=> m.isDinner)</p>
+
+  <p>@Html.Label("Is there a day you would most like to have this meal?")</p>
+  <p>@Html.Label("Monday")
+  @Html.RadioButtonFor(m => m.PreferredDay, "Monday")
+  @Html.Label("Tuesday")
+  @Html.RadioButtonFor(m => m.PreferredDay, "Tuesday")
+  @Html.Label("Wednesday")
+  @Html.RadioButtonFor(m => m.PreferredDay, "Wednesday")
+  @Html.Label("Thursday")
+  @Html.RadioButtonFor(m => m.PreferredDay, "Thursday")
+  @Html.Label("Friday")
+  @Html.RadioButtonFor(m => m.PreferredDay, "Friday")
+  @Html.Label("Saturday")
+  @Html.RadioButtonFor(m => m.PreferredDay, "Saturday")
+  @Html.Label("Sunday")
+  @Html.RadioButtonFor(m => m.PreferredDay, "Sunday")</p>
+
+  <p><input type="submit" value="Update Recipe"></p>
+}
+<p>@Html.ActionLink("Back to recipes", "Index")</p>

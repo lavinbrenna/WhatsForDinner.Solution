@@ -26,7 +26,7 @@ namespace WhatsForDinner.Controllers
       var userId = this.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
       var currentUser = await _userManager.FindByIdAsync(userId);
       var userRecipes = _db.Recipes.Where(entry => entry.User.Id == currentUser.Id).ToList();
-      return View();
+      return View(userRecipes);
     }
 
     public ActionResult Create()
@@ -43,6 +43,39 @@ namespace WhatsForDinner.Controllers
       _db.Recipes.Add(recipe);
       _db.SaveChanges();
       return RedirectToAction("Index");
+    }
+
+    public ActionResult Import()
+    {
+      return View();
+    }
+
+[HttpPost]
+public async Task<ActionResult> Import(Recipe recipe)
+{
+  var userId = this.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+  var currentUser = await _userManager.FindByIdAsync(userId);
+  recipe.User = currentUser;
+  _db.Recipes.Add(recipe);
+  _db.SaveChanges();
+  return RedirectToAction("Index");
+}
+    public ActionResult Details(int id)
+    {
+      var thisRecipe = _db.Recipes.FirstOrDefault(recipe => recipe.RecipeId == id);
+      return View(thisRecipe);
+    }
+    public ActionResult Edit(int id)
+    {
+      var thisRecipe = _db.Recipes.FirstOrDefault(recipe=> recipe.RecipeId == id);
+      return View(thisRecipe);
+    }
+    [HttpPost]
+    public ActionResult Edit(Recipe recipe)
+    {
+      _db.Entry(recipe).State = EntityState.Modified;
+      _db.SaveChanges();
+      return RedirectToAction("Account", "Index");
     }
   }
 }

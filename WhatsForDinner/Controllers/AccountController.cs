@@ -3,7 +3,9 @@ using Microsoft.AspNetCore.Identity;
 using WhatsForDinner.Models;
 using System.Threading.Tasks;
 using WhatsForDinner.ViewModels;
-
+using System.Security.Claims;
+using System.Collections.Generic;
+using System.Linq;
 namespace WhatsForDinner.Controllers
 {
   public class AccountController : Controller
@@ -18,9 +20,13 @@ namespace WhatsForDinner.Controllers
       _signInManager = signInManager;
       _db = db;
     }
-    public ActionResult Index()
+    public async Task<ActionResult> Index(string id)
     {
-      return View();
+      var userId = this.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+      var currentUser = await _userManager.FindByIdAsync(userId);
+      List<Recipe> allRecipes = _db.Recipes.Where(m => m.User.Id == userId).ToList();
+      //add createCalendar method, add upcoming recipes
+      return View(currentUser);
     }
 
     public IActionResult Register()

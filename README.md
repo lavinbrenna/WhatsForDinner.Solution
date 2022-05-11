@@ -24,6 +24,9 @@ Friday April 29th
 
 Monday May 2nd
 - Change tech stack to C#/MVC with MySQL backend.
+
+Friday May 6th
+8:20 am - planned out models/views for project.
 ```
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
