@@ -25,6 +25,7 @@
           @if(User.Identity.IsAuthenticated){
             @Html.ActionLink("Home", "Index","Account", null, new {@class ="nav-item nav-link"})
             @Html.ActionLink("Recipes", "Index", "Recipes", null, new {@class = "nav-item nav-link"})
+            @Html.ActionLink("Recipe Calendar", "Calendar", "Recipes", null, new {@class = "nav-item nav-link"})
           }
           else{
             @Html.ActionLink("Register", "Register", "Account", null, new {@class = "nav-item nav-link"})

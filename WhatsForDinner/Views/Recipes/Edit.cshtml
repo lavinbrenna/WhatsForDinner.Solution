@@ -4,10 +4,12 @@
 
 @model WhatsForDinner.Models.Recipe
 
-<h4>Edit @Model.Title</h4>
+<h4>Edit @Html.DisplayFor(model => model.Title)</h4>
+
 
 @using (Html.BeginForm())
 {
+  @Html.HiddenFor(m => m.RecipeId)
   <p>@Html.LabelFor(m => m.Title)</p>
   <p>@Html.EditorFor(m => m.Title, new { required="required" })</p>
 
@@ -15,7 +17,7 @@
   <p>@Html.EditorFor(m => m.RecipeUrl)</p>
 
   <p>@Html.LabelFor(m => m.Ingredients)</p>
-  <p>@Html.EditorFor(m => m.Ingredients)</p>
+  <p>@Html.TextAreaFor(m => m.Ingredients)</p>
 
   <p>@Html.Label("Minimum Days")</p>
   <p>@Html.EditorFor(m => m.MinFrequency, new{ type="number", required="required"})</p>
@@ -48,6 +50,6 @@
   @Html.Label("Sunday")
   @Html.RadioButtonFor(m => m.PreferredDay, "Sunday")</p>
 
-  <p><input type="submit" value="Update Recipe"></p>
+  <p><input type="submit" value="Save"></p>
 }
 <p>@Html.ActionLink("Back to recipes", "Index")</p>

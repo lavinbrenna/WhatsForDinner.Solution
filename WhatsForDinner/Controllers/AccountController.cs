@@ -6,6 +6,7 @@ using WhatsForDinner.ViewModels;
 using System.Security.Claims;
 using System.Collections.Generic;
 using System.Linq;
+using System;
 namespace WhatsForDinner.Controllers
 {
   public class AccountController : Controller
@@ -25,8 +26,9 @@ namespace WhatsForDinner.Controllers
       var userId = this.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
       var currentUser = await _userManager.FindByIdAsync(userId);
       List<Recipe> allRecipes = _db.Recipes.Where(m => m.User.Id == userId).ToList();
-      //add createCalendar method, add upcoming recipes
-      return View(currentUser);
+      var model = _db;
+
+      return View(model);
     }
 
     public IActionResult Register()

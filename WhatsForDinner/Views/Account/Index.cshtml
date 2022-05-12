@@ -3,6 +3,8 @@
 }
 
 @using System.Security.Claims
+@using WhatsForDinner.Models;
+@model WhatsForDinner.Models.WhatsForDinnerContext;
 
 @if(User.Identity.IsAuthenticated)
 {
@@ -12,12 +14,18 @@
     <input type="submit" class="btn btn-default" value="Log out"/>
   }
   </p>
-  <h2>Upcoming Recipes</h2>
-  
-  <h2>Recipe Calendar</h2>
+  @* <h2>Upcoming Recipes</h2>
+  @foreach(Recipe recipe in Model.Recipes.ToList())
+  {
+    if(recipe.isDinner){
+      <li>@Html.ActionLink($"{recipe.Title}", "Details", "Recipes", new{id = recipe.RecipeId})</li>
+    }
+  }
+  <h2>Recipe Calendar</h2> *@
 }
 else{
   <p>@Html.ActionLink("Register", "Register")</p>
   <p>@Html.ActionLink("Log In", "Login")</p>
   <p>@Html.ActionLink("Home", "Index", "Home")</p>
+  <p>@Html.ActionLink("Recipe Calendar", "Calendar", "Recipes")</p>
 }

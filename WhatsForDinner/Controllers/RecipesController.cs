@@ -7,6 +7,8 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using System.Threading.Tasks;
 using System.Security.Claims;
+using System.Collections.Generic;
+using System;
 
 namespace WhatsForDinner.Controllers
 {
@@ -28,7 +30,49 @@ namespace WhatsForDinner.Controllers
       var userRecipes = _db.Recipes.Where(entry => entry.User.Id == currentUser.Id).ToList();
       return View(userRecipes);
     }
-
+  public async Task<ActionResult> Calendar(){
+    var userId = this.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+    var currentUser = await _userManager.FindByIdAsync(userId);
+    var userRecipes = _db.Recipes.Where(entry => entry.User.Id == currentUser.Id).ToList();
+    List<Recipe> CalendarRecipes = new List<Recipe>{};
+    List<Recipe> WeekBreakfast = new List<Recipe>{};
+    List<Recipe> WeekLunch = new List<Recipe>{};
+    List<Recipe> WeekDinner = new List<Recipe>{};
+    Random rnd = new Random();
+    while(WeekBreakfast.Count != 7){
+      int random = rnd.Next(0, userRecipes.Count);
+      if(!WeekBreakfast.Contains(userRecipes[random]) && userRecipes[random].isBreakfast)
+      {
+        WeekBreakfast.Add(userRecipes[random]);
+      }
+      else if(WeekBreakfast.Contains(userRecipes[random]) && userRecipes[random].MinFrequency < 7 && userRecipes[random].isBreakfast)
+      {
+        WeekBreakfast.Add(userRecipes[random]);
+      }
+    }
+    Console.WriteLine(WeekBreakfast[0].Title);
+    // while(WeekTwo.Count != 7){
+    //   int random = rnd.Next(0, userRecipes.Count);
+    //   if(!WeekOne.Contains(userRecipes[random])){
+    //     for(var i = 0; i < WeekOne.Count; i++)
+    //     {
+    //       for(var j = 0; j < WeekTwo.Count; j++)
+    //       {
+    //         if(WeekTwo[j] != WeekOne[i] || userRecipes[j].MinFrequency > 7 ){
+    //           WeekTwo.Add(userRecipes[random]);
+    //         }
+    //       }
+    //     }
+    //   }
+    // }
+    foreach(Recipe recipe in WeekBreakfast){
+      CalendarRecipes.Add(recipe);
+    }
+    // foreach(Recipe recipe in WeekTwo){
+    //   CalendarRecipes.Add(recipe);
+    // }
+    return View(CalendarRecipes);
+  }
     public ActionResult Create()
     {
       return View();
@@ -73,9 +117,9 @@ public async Task<ActionResult> Import(Recipe recipe)
     [HttpPost]
     public ActionResult Edit(Recipe recipe)
     {
-      _db.Entry(recipe).State = EntityState.Modified;
-      _db.SaveChanges();
-      return RedirectToAction("Account", "Index");
+        _db.Entry(recipe).State = EntityState.Modified;
+        _db.SaveChanges();
+      return RedirectToAction("Index");
     }
   }
 }
