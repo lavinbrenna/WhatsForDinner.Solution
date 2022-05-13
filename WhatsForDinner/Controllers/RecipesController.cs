@@ -34,11 +34,47 @@ namespace WhatsForDinner.Controllers
     var userId = this.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
     var currentUser = await _userManager.FindByIdAsync(userId);
     var userRecipes = _db.Recipes.Where(entry => entry.User.Id == currentUser.Id).ToList();
-    // List<Recipe> CalendarRecipes = new List<Recipe>{};
-    // List<Recipe> WeekBreakfast = new List<Recipe>{};
-    // List<Recipe> WeekLunch = new List<Recipe>{};
-    // List<Recipe> WeekDinner = new List<Recipe>{};
+    List<Recipe> UserBreakfast = new List<Recipe>{};
+    List<Recipe> UserLunch = new List<Recipe>{};
+    List<Recipe> UserDinner = new List<Recipe>{};
+    List<Recipe> WeekRecipes = new List<Recipe>{};
+    foreach(Recipe recipe in userRecipes){
+      if(recipe.isBreakfast){
+        UserBreakfast.Add(recipe);
+      }
+      else if(recipe.isLunch){
+        UserLunch.Add(recipe);
+      }
+      else{
+        UserDinner.Add(recipe);
+      }
+    }
     Random rnd = new Random();
+    int randomBreakfast = rnd.Next(0, UserBreakfast.Count);
+    int randomLunch = rnd.Next(0, UserLunch.Count);
+    int randomDinner = rnd.Next(0, UserDinner.Count);
+    RecipeDay Monday = new RecipeDay();
+    Monday.Breakfast = UserBreakfast[randomBreakfast];
+    Monday.Lunch = UserLunch[randomLunch];
+    Monday.Dinner = UserDinner[randomDinner];
+
+    WeekRecipes.Add(Monday.Breakfast);
+    WeekRecipes.Add(Monday.Lunch);
+    WeekRecipes.Add(Monday.Dinner);
+    // RecipeDay Tuesday = new RecipeDay("Tuesday", UserBreakfast[randomBreakfast], UserLunch[randomLunch], UserDinner[randomDinner]);
+    // WeekRecipes.Add(Tuesday);
+    // RecipeDay Wednesday = new RecipeDay("Wednesday", UserBreakfast[randomBreakfast], UserLunch[randomLunch], UserDinner[randomDinner]);
+    // WeekRecipes.Add(Wednesday);
+    // RecipeDay Thursday = new RecipeDay("Thursday", UserBreakfast[randomBreakfast], UserLunch[randomLunch], UserDinner[randomDinner]);
+    // WeekRecipes.Add(Thursday);
+    // RecipeDay Friday = new RecipeDay("Friday", UserBreakfast[randomBreakfast], UserLunch[randomLunch], UserDinner[randomDinner]);
+    // WeekRecipes.Add(Friday);
+    // RecipeDay Saturday = new RecipeDay("Saturday", UserBreakfast[randomBreakfast], UserLunch[randomLunch], UserDinner[randomDinner]);
+    // WeekRecipes.Add(Saturday);
+    // RecipeDay Sunday = new RecipeDay("Sunday", UserBreakfast[randomBreakfast], UserLunch[randomLunch], UserDinner[randomDinner]);
+    // WeekRecipes.Add(Sunday);
+
+
     // while(WeekBreakfast.Count != 7){
     //   int random = rnd.Next(0, userRecipes.Count);
     //   if(!WeekBreakfast.Contains(userRecipes[random]) && userRecipes[random].isBreakfast)
@@ -82,7 +118,7 @@ namespace WhatsForDinner.Controllers
     // foreach(Recipe recipe in WeekDinner){
     //   CalendarRecipes.Add(recipe);
     // }
-    // return View(CalendarRecipes);
+    return View(WeekRecipes);
     //add an option to save this list as a new userRecipe list (recipeWeeklist or something);
   }
   // [HttpPost]

@@ -5,6 +5,10 @@ using System;
 namespace WhatsForDinner.Models{
   public class ApplicationUser : IdentityUser
   {
-    public virtual List<Recipe> WeeklyRecipes{get;set;}
+    public ApplicationUser()
+    {
+      this.JoinEntities = new HashSet<ApplicationUserWeek>();
+    }
+    public virtual ICollection<ApplicationUserWeek> JoinEntities{get;set;}
   }
 }
