@@ -88,6 +88,16 @@ namespace WhatsForDinner.Controllers
     return View(CalendarRecipes);
     //add an option to save this list as a new userRecipe list (recipeWeeklist or something);
   }
+  [HttpPost]
+  public async Task<ActionResult> Calendar(List<Recipe> Recipes, int UserCalendarId)
+  {
+    var userId = this.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+    var currentUser = await _userManager.FindByIdAsync(userId);
+    // userCalendar.User = currentUser;
+    // _db.UserCalendars.Add();
+    // _db.SaveChanges();
+    return RedirectToAction("Index");
+  }
     public ActionResult Create()
     {
       return View();

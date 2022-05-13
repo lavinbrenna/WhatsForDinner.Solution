@@ -3,31 +3,69 @@
 }
 @using WhatsForDinner.Models;
 @model List<WhatsForDinner.Models.Recipe>;
-  <ul>
-    <h4>Breakfast Recipes</h4>
-    @foreach(Recipe recipe in Model)
-    {
-      if(recipe.isBreakfast){
-        <li>@Html.ActionLink($"{recipe.Title}", "Details", new {id = recipe.RecipeId})</li>
-      }
-    }
-    <h4>Lunch Recipes</h4>
-    @foreach(Recipe recipe in Model)
-    {
-      if(recipe.isLunch){
-        <li>@Html.ActionLink($"{recipe.Title}", "Details", new {id = recipe.RecipeId})</li>
-      }
-    }
-    <h4>Dinner Recipes</h4>
-    @foreach(Recipe recipe in Model)
-    {
-      if(recipe.isDinner){
-        <li>@Html.ActionLink($"{recipe.Title}", "Details", new {id = recipe.RecipeId})</li>
-      }
-    }
-  </ul>
-
-
-<p>@Html.ActionLink("Add Recipe", "Create")</p>
-<p>@Html.ActionLink("Import Recipe","Import")</p>
-<p>@Html.ActionLink("Home", "Index", "Account")</p>
+  @using(Html.BeginForm()){
+    <div class="calendar-card">
+      <h4>Monday</h4>
+      <h4>Breakfast</h4>
+      <li>@Html.ActionLink($"{Model[0].Title}", "Details", new {id= Model[0].RecipeId})</li>
+      <h4>Lunch</h4>
+      <li>@Html.ActionLink($"{Model[7].Title}", "Details", new {id= Model[7].RecipeId})</li>
+      <h4>Dinner</h4>
+      <li>@Html.ActionLink($"{Model[14].Title}", "Details", new {id= Model[14].RecipeId})</li>
+    </div>
+    <div class="calendar-card">
+      <h4>Tuesday</h4>
+      <h4>Breakfast</h4>
+      <li>@Html.ActionLink($"{Model[1].Title}", "Details", new {id= Model[1].RecipeId})</li>
+      <h4>Lunch</h4>
+      <li>@Html.ActionLink($"{Model[8].Title}", "Details", new {id= Model[8].RecipeId})</li>
+      <h4>Dinner</h4>
+      <li>@Html.ActionLink($"{Model[15].Title}", "Details", new {id= Model[15].RecipeId})</li>
+    </div>
+    <div class="calendar-card">
+      <h4>Wednesday</h4>
+      <h4>Breakfast</h4>
+      <li>@Html.ActionLink($"{Model[2].Title}", "Details", new {id= Model[2].RecipeId})</li>
+      <h4>Lunch</h4>
+      <li>@Html.ActionLink($"{Model[9].Title}", "Details", new {id= Model[9].RecipeId})</li>
+      <h4>Dinner</h4>
+      <li>@Html.ActionLink($"{Model[16].Title}", "Details", new {id= Model[16].RecipeId})</li>
+    </div>
+    <div class="calendar-card">
+      <h4>Thursday</h4>
+      <h4>Breakfast</h4>
+      <li>@Html.ActionLink($"{Model[3].Title}", "Details", new {id= Model[3].RecipeId})</li>
+      <h4>Lunch</h4>
+      <li>@Html.ActionLink($"{Model[10].Title}", "Details", new {id= Model[10].RecipeId})</li>
+      <h4>Dinner</h4>
+      <li>@Html.ActionLink($"{Model[17].Title}", "Details", new {id= Model[17].RecipeId})</li>
+    </div>
+    <div class="calendar-card">
+      <h4>Friday</h4>
+      <h4>Breakfast</h4>
+      <li>@Html.ActionLink($"{Model[4].Title}", "Details", new {id= Model[4].RecipeId})</li>
+      <h4>Lunch</h4>
+      <li>@Html.ActionLink($"{Model[11].Title}", "Details", new {id= Model[11].RecipeId})</li>
+      <h4>Dinner</h4>
+      <li>@Html.ActionLink($"{Model[18].Title}", "Details", new {id= Model[18].RecipeId})</li>
+    </div>
+    <div class="calendar-card">
+      <h4>Saturday</h4>
+      <h4>Breakfast</h4>
+      <li>@Html.ActionLink($"{Model[5].Title}", "Details", new {id= Model[5].RecipeId})</li>
+      <h4>Lunch</h4>
+      <li>@Html.ActionLink($"{Model[12].Title}", "Details", new {id= Model[12].RecipeId})</li>
+      <h4>Dinner</h4>
+      <li>@Html.ActionLink($"{Model[19].Title}", "Details", new {id= Model[19].RecipeId})</li>
+    </div>
+    <div class="calendar-card">
+      <h4>Sunday</h4>
+      <h4>Breakfast</h4>
+      <li>@Html.ActionLink($"{Model[6].Title}", "Details", new {id= Model[6].RecipeId})</li>
+      <h4>Lunch</h4>
+      <li>@Html.ActionLink($"{Model[13].Title}", "Details", new {id= Model[13].RecipeId})</li>
+      <h4>Dinner</h4>
+      <li>@Html.ActionLink($"{Model[20].Title}", "Details", new {id= Model[20].RecipeId})</li>
+    </div>
+    <p><input type="submit" value="Save Meal Plan"></p>
+  }
