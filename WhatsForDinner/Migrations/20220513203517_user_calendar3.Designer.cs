@@ -2,15 +2,17 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using WhatsForDinner.Models;
 
 namespace WhatsForDinner.Migrations
 {
     [DbContext(typeof(WhatsForDinnerContext))]
-    partial class WhatsForDinnerContextModelSnapshot : ModelSnapshot
+    [Migration("20220513203517_user_calendar3")]
+    partial class user_calendar3
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -209,30 +211,6 @@ namespace WhatsForDinner.Migrations
                     b.ToTable("AspNetUsers");
                 });
 
-            modelBuilder.Entity("WhatsForDinner.Models.ApplicationUserRecipes", b =>
-                {
-                    b.Property<int>("ApplicationUserRecipesId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    b.Property<string>("ApplicationUserId")
-                        .HasColumnType("varchar(255) CHARACTER SET utf8mb4");
-
-                    b.Property<int?>("RecipeId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("RecipeList")
-                        .HasColumnType("longtext CHARACTER SET utf8mb4");
-
-                    b.HasKey("ApplicationUserRecipesId");
-
-                    b.HasIndex("ApplicationUserId");
-
-                    b.HasIndex("RecipeId");
-
-                    b.ToTable("ApplicationUserRecipes");
-                });
-
             modelBuilder.Entity("WhatsForDinner.Models.Recipe", b =>
                 {
                     b.Property<int>("RecipeId")
@@ -251,14 +229,14 @@ namespace WhatsForDinner.Migrations
                     b.Property<string>("PreferredDay")
                         .HasColumnType("longtext CHARACTER SET utf8mb4");
 
-                    b.Property<int?>("RecipeId1")
-                        .HasColumnType("int");
-
                     b.Property<string>("RecipeUrl")
                         .HasColumnType("longtext CHARACTER SET utf8mb4");
 
                     b.Property<string>("Title")
                         .HasColumnType("longtext CHARACTER SET utf8mb4");
+
+                    b.Property<int?>("UserCalendarId")
+                        .HasColumnType("int");
 
                     b.Property<string>("UserId")
                         .HasColumnType("varchar(255) CHARACTER SET utf8mb4");
@@ -274,11 +252,27 @@ namespace WhatsForDinner.Migrations
 
                     b.HasKey("RecipeId");
 
-                    b.HasIndex("RecipeId1");
+                    b.HasIndex("UserCalendarId");
 
                     b.HasIndex("UserId");
 
                     b.ToTable("Recipes");
+                });
+
+            modelBuilder.Entity("WhatsForDinner.Models.UserCalendar", b =>
+                {
+                    b.Property<int>("UserCalendarId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<string>("UserId")
+                        .HasColumnType("varchar(255) CHARACTER SET utf8mb4");
+
+                    b.HasKey("UserCalendarId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("UserCalendars");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -332,26 +326,11 @@ namespace WhatsForDinner.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("WhatsForDinner.Models.ApplicationUserRecipes", b =>
-                {
-                    b.HasOne("WhatsForDinner.Models.ApplicationUser", "User")
-                        .WithMany("JoinEntities")
-                        .HasForeignKey("ApplicationUserId");
-
-                    b.HasOne("WhatsForDinner.Models.Recipe", "Recipe")
-                        .WithMany("JoinEntities")
-                        .HasForeignKey("RecipeId");
-
-                    b.Navigation("Recipe");
-
-                    b.Navigation("User");
-                });
-
             modelBuilder.Entity("WhatsForDinner.Models.Recipe", b =>
                 {
-                    b.HasOne("WhatsForDinner.Models.Recipe", null)
-                        .WithMany("CalendarRecipes")
-                        .HasForeignKey("RecipeId1");
+                    b.HasOne("WhatsForDinner.Models.UserCalendar", null)
+                        .WithMany("Recipes")
+                        .HasForeignKey("UserCalendarId");
 
                     b.HasOne("WhatsForDinner.Models.ApplicationUser", "User")
                         .WithMany()
@@ -360,16 +339,18 @@ namespace WhatsForDinner.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("WhatsForDinner.Models.ApplicationUser", b =>
+            modelBuilder.Entity("WhatsForDinner.Models.UserCalendar", b =>
                 {
-                    b.Navigation("JoinEntities");
+                    b.HasOne("WhatsForDinner.Models.ApplicationUser", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId");
+
+                    b.Navigation("User");
                 });
 
-            modelBuilder.Entity("WhatsForDinner.Models.Recipe", b =>
+            modelBuilder.Entity("WhatsForDinner.Models.UserCalendar", b =>
                 {
-                    b.Navigation("CalendarRecipes");
-
-                    b.Navigation("JoinEntities");
+                    b.Navigation("Recipes");
                 });
 #pragma warning restore 612, 618
         }

@@ -5,6 +5,10 @@ namespace WhatsForDinner.Models
 {
   public class Recipe
   {
+    public Recipe()
+    {
+      this.JoinEntities = new HashSet<ApplicationUserRecipes>();
+    }
     public int RecipeId{get;set;}
     public string Title{get;set;}
     public string RecipeUrl{get;set;}
@@ -17,19 +21,10 @@ namespace WhatsForDinner.Models
     public string PreferredDay{get;set;}
     public virtual ApplicationUser User {get;set;}
 
+    public virtual ICollection<ApplicationUserRecipes> JoinEntities{get;}
+
     private readonly Random _random = new Random();
 
-    public static List<Recipe> CreateRandomList(List<Recipe> Recipes){
-      List<Recipe> randomRecipe = new List<Recipe>{};
-      while(randomRecipe.Count != 7){
-        Random rnd = new Random();
-        int recipeToAdd = rnd.Next(0, Recipes.Count);
-        if(!randomRecipe.Contains(Recipes[recipeToAdd])){
-          randomRecipe.Add(Recipes[recipeToAdd]);
-        }
-      }
-      return randomRecipe;
-    }
 
     // public static List<Recipe> CreateCalendar()
     // {

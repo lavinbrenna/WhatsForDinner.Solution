@@ -2,15 +2,17 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using WhatsForDinner.Models;
 
 namespace WhatsForDinner.Migrations
 {
     [DbContext(typeof(WhatsForDinnerContext))]
-    partial class WhatsForDinnerContextModelSnapshot : ModelSnapshot
+    [Migration("20220513211217_update_application_user_recipes")]
+    partial class update_application_user_recipes
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -251,9 +253,6 @@ namespace WhatsForDinner.Migrations
                     b.Property<string>("PreferredDay")
                         .HasColumnType("longtext CHARACTER SET utf8mb4");
 
-                    b.Property<int?>("RecipeId1")
-                        .HasColumnType("int");
-
                     b.Property<string>("RecipeUrl")
                         .HasColumnType("longtext CHARACTER SET utf8mb4");
 
@@ -273,8 +272,6 @@ namespace WhatsForDinner.Migrations
                         .HasColumnType("tinyint(1)");
 
                     b.HasKey("RecipeId");
-
-                    b.HasIndex("RecipeId1");
 
                     b.HasIndex("UserId");
 
@@ -349,10 +346,6 @@ namespace WhatsForDinner.Migrations
 
             modelBuilder.Entity("WhatsForDinner.Models.Recipe", b =>
                 {
-                    b.HasOne("WhatsForDinner.Models.Recipe", null)
-                        .WithMany("CalendarRecipes")
-                        .HasForeignKey("RecipeId1");
-
                     b.HasOne("WhatsForDinner.Models.ApplicationUser", "User")
                         .WithMany()
                         .HasForeignKey("UserId");
@@ -367,8 +360,6 @@ namespace WhatsForDinner.Migrations
 
             modelBuilder.Entity("WhatsForDinner.Models.Recipe", b =>
                 {
-                    b.Navigation("CalendarRecipes");
-
                     b.Navigation("JoinEntities");
                 });
 #pragma warning restore 612, 618
