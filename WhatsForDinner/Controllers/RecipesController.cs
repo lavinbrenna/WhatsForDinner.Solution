@@ -45,33 +45,48 @@ namespace WhatsForDinner.Controllers
       {
         WeekBreakfast.Add(userRecipes[random]);
       }
-      else if(WeekBreakfast.Contains(userRecipes[random]) && userRecipes[random].MinFrequency < 7 && userRecipes[random].isBreakfast)
+      else if(WeekBreakfast.Contains(userRecipes[random]) && userRecipes[random].isBreakfast)
       {
-        WeekBreakfast.Add(userRecipes[random]);
+        if(userRecipes[random].MinFrequency < 7 && userRecipes[random].MinFrequency <= 4){
+          WeekBreakfast.Add(userRecipes[random]);
+        }
       }
     }
     Console.WriteLine(WeekBreakfast[0].Title);
-    // while(WeekTwo.Count != 7){
-    //   int random = rnd.Next(0, userRecipes.Count);
-    //   if(!WeekOne.Contains(userRecipes[random])){
-    //     for(var i = 0; i < WeekOne.Count; i++)
-    //     {
-    //       for(var j = 0; j < WeekTwo.Count; j++)
-    //       {
-    //         if(WeekTwo[j] != WeekOne[i] || userRecipes[j].MinFrequency > 7 ){
-    //           WeekTwo.Add(userRecipes[random]);
-    //         }
-    //       }
-    //     }
-    //   }
-    // }
+    while(WeekLunch.Count != 7){
+      int random = rnd.Next(0, userRecipes.Count);
+      if(!WeekLunch.Contains(userRecipes[random]) && userRecipes[random].isLunch)
+      {
+        WeekLunch.Add(userRecipes[random]);
+      }
+      else if(WeekLunch.Contains(userRecipes[random]) && userRecipes[random].isLunch)
+      {
+        if(userRecipes[random].MinFrequency < 7 && userRecipes[random].MinFrequency <= 3){
+          WeekLunch.Add(userRecipes[random]);
+        }
+      }
+    }
+    Console.WriteLine(WeekLunch[0].Title);
+
+    while(WeekDinner.Count != 7){
+      int random = rnd.Next(0, userRecipes.Count);
+      if(!WeekDinner.Contains(userRecipes[random]) && userRecipes[random].isDinner)
+      {
+        WeekDinner.Add(userRecipes[random]);
+      }
+    }
+    Console.WriteLine(WeekDinner[0].Title);
     foreach(Recipe recipe in WeekBreakfast){
       CalendarRecipes.Add(recipe);
     }
-    // foreach(Recipe recipe in WeekTwo){
-    //   CalendarRecipes.Add(recipe);
-    // }
+    foreach(Recipe recipe in WeekLunch){
+      CalendarRecipes.Add(recipe);
+    }
+    foreach(Recipe recipe in WeekDinner){
+      CalendarRecipes.Add(recipe);
+    }
     return View(CalendarRecipes);
+    //add an option to save this list as a new userRecipe list (recipeWeeklist or something);
   }
     public ActionResult Create()
     {

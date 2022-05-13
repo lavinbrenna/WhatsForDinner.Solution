@@ -4,7 +4,7 @@ _Brenna Lavin_
 
 ### Name of Project
 
-_What's For Dinner?_
+_Hey Kids, What's For Dinner?_
 
 ### Project's Purpose or Goal
 
@@ -18,21 +18,19 @@ Help plan dinners using meals you already know that you like. I often forget abo
 
 #### What tools, frameworks, libraries, APIs, modules and/or other resources (whatever is specific to your track, and your language) will you use to create this MVP
 
-* React
-* JavaScript
-* Firebase
-* CSS
-* maybe another react styling tool like tailwind, semantic ui, or material UI.
-* Also considering writing this app using a Python stack : Python, Flask, React
-* Adobe XD
+* C#
+* Razor
+* Entity FrameWork Core
+* MySQL WorkBench
 * Figma
 
 #### If you finish developing the minimum viable product (MVP) with time to spare, what will you work on next? Describe these features here
 
-* Reshuffle week button.
-* Allow user to categorize meals based on their own categorization of healthy, normal and unhealthy meals
-* A user should be able to skip certain meals and then if the user has skipped the meal more than twice, they should be asked to re-evaluate the frequency that they want that meal.
-* Allow user to create a grocery list using a tag system for when the user creates the recipe. Maybe allow user to import recipe information from URLs
+* A user can add recipes for breakfast, lunch and dinner.
+* A user can reshuffle the week if they don't like the line up
+* A user can import recipes via URL
+* A user can create a grocery list using the ingredients listed
+* A user can set day preferences, minimum times and maximum times they'd like to eat a meal per week.
 
 #### What additional tools, frameworks, libraries, APIs, or other resources will these additional features require
 

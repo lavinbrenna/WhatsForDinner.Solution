@@ -4,22 +4,65 @@
 <head>
   <meta charset="utf-8">
   <title>What's For Dinner?</title>
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
-    integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
-  <link rel="stylesheet" href="~/css/styles.css">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=EB+Garamond&family=Oleo+Script&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="~/css/styles.css">
 </head>
-
 <body>
+
+<div class="navbar">
+  <a href="/">Hey Kids, What's For Dinner?</a>
+  
+  @if(User.Identity.IsAuthenticated){
+  <a href="/Account/">Home</a>
+  <div class="dropdown">
+  <button class="dropbtn" onclick="myFunction()">Recipes
+    <i class="fa fa-caret-down"></i>
+  </button>
+  <div class="dropdown-content" id="myDropdown">
+    <a href="/Recipes/Create">Add a Recipe</a>
+    <a href="/Recipes/Calendar">Weekly Meal Plan</a>
+    <a href="/Recipes/">Recipe Index</a>
+  </div>
+  </div>
+  }
+  <a href="#news">News</a>
+  <div class="dropdown">
+  <button class="dropbtn" onclick="myFunction()">Dropdown
+    <i class="fa fa-caret-down"></i>
+  </button>
+  <div class="dropdown-content" id="myDropdown">
+    <a href="#">Link 1</a>
+    <a href="#">Link 2</a>
+    <a href="#">Link 3</a>
+  </div>
+  </div> 
+</div>
+
+
+<script>
+/* When the user clicks on the button, 
+toggle between hiding and showing the dropdown content */
+function myFunction() {
+  document.getElementById("myDropdown").classList.toggle("show");
+}
+
+// Close the dropdown if the user clicks outside of it
+window.onclick = function(e) {
+  if (!e.target.matches('.dropbtn')) {
+  var myDropdown = document.getElementById("myDropdown");
+    if (myDropdown.classList.contains('show')) {
+      myDropdown.classList.remove('show');
+    }
+  }
+}
+</script>
+@RenderBody()
+</body>
+
+@* <body>
   <div class="container">
-    <nav class="navbar navbar-expand-lg navbar-light" style="background-color: rgb(253, 243, 234);">
-      <a class="navbar-brand" href="/">What's For Dinner?</a>
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
-        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
+    <nav class="navbar navbar-expand-lg navbar-light" style="background-color: rgb(42,59,51);">
+      <a class="navbar-brand" href="/">Hey Kids, What's For Dinner?</a>
       <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
         <div class="navbar-nav">
           @if(User.Identity.IsAuthenticated){
@@ -36,6 +79,6 @@
     </nav>
     @RenderBody()
   </div>
-</body>
+</body> *@
 
 </html>

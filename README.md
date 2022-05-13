@@ -1,4 +1,4 @@
-# What's For Dinner
+# Hey Kids, What's For Dinner?
 
 _by Brenna Lavin_
 
