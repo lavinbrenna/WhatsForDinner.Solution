@@ -15,17 +15,16 @@
   }
   </p>
   <h2>Upcoming Recipes</h2>
- @* @foreach(Recipe recipe in Model.UserCalendars.recipe)
+  @foreach(Recipe recipes in Model.Recipes)
   {
-    if(Model.isDinner){
-      <li>@Html.ActionLink($"{UserCalendar.recipe.Title}", "Details", "Recipes", new{id = recipe.RecipeId})</li>
-    } *@
-  } 
-
+    <li>@recipes</li>
+    }
 }
+
+@*
 else{
   <p>@Html.ActionLink("Register", "Register")</p>
   <p>@Html.ActionLink("Log In", "Login")</p>
   <p>@Html.ActionLink("Home", "Index", "Home")</p>
   <p>@Html.ActionLink("Recipe Calendar", "Calendar", "Recipes")</p>
-}
+} *@

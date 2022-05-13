@@ -2,15 +2,17 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using WhatsForDinner.Models;
 
 namespace WhatsForDinner.Migrations
 {
     [DbContext(typeof(WhatsForDinnerContext))]
-    partial class WhatsForDinnerContextModelSnapshot : ModelSnapshot
+    [Migration("20220513200647_add_applicationuserrecipes_update")]
+    partial class add_applicationuserrecipes_update
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

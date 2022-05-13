@@ -52,7 +52,6 @@ namespace WhatsForDinner.Controllers
         }
       }
     }
-    Console.WriteLine(WeekBreakfast[0].Title);
     while(WeekLunch.Count != 7){
       int random = rnd.Next(0, userRecipes.Count);
       if(!WeekLunch.Contains(userRecipes[random]) && userRecipes[random].isLunch)
@@ -66,7 +65,6 @@ namespace WhatsForDinner.Controllers
         }
       }
     }
-    Console.WriteLine(WeekLunch[0].Title);
 
     while(WeekDinner.Count != 7){
       int random = rnd.Next(0, userRecipes.Count);
@@ -75,7 +73,6 @@ namespace WhatsForDinner.Controllers
         WeekDinner.Add(userRecipes[random]);
       }
     }
-    Console.WriteLine(WeekDinner[0].Title);
     foreach(Recipe recipe in WeekBreakfast){
       CalendarRecipes.Add(recipe);
     }
@@ -89,13 +86,12 @@ namespace WhatsForDinner.Controllers
     //add an option to save this list as a new userRecipe list (recipeWeeklist or something);
   }
   [HttpPost]
-  public async Task<ActionResult> Calendar(List<Recipe> Recipes, int UserCalendarId)
+  public async Task<ActionResult> Calendar(List<Recipe> recipes)
   {
     var userId = this.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
     var currentUser = await _userManager.FindByIdAsync(userId);
-    // userCalendar.User = currentUser;
-    // _db.UserCalendars.Add();
-    // _db.SaveChanges();
+    var weeklyList = recipes;
+    _db.SaveChanges();
     return RedirectToAction("Index");
   }
     public ActionResult Create()

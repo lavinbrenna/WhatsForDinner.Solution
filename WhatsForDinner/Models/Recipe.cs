@@ -5,10 +5,6 @@ namespace WhatsForDinner.Models
 {
   public class Recipe
   {
-    public Recipe()
-    {
-      this.JoinEntities = new HashSet<UserCalendar>();
-    }
     public int RecipeId{get;set;}
     public string Title{get;set;}
     public string RecipeUrl{get;set;}
@@ -20,7 +16,6 @@ namespace WhatsForDinner.Models
     public bool isDinner {get;set;}
     public string PreferredDay{get;set;}
     public virtual ApplicationUser User {get;set;}
-    public virtual ICollection<UserCalendar> JoinEntities {get;set;}
 
     private readonly Random _random = new Random();
 
