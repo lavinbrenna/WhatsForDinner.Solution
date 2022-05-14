@@ -30,108 +30,8 @@ namespace WhatsForDinner.Controllers
       var userRecipes = _db.Recipes.Where(entry => entry.User.Id == currentUser.Id).ToList();
       return View(userRecipes);
     }
-  public async Task<ActionResult> Calendar(){
-    var userId = this.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
-    var currentUser = await _userManager.FindByIdAsync(userId);
-    var userRecipes = _db.Recipes.Where(entry => entry.User.Id == currentUser.Id).ToList();
-    List<Recipe> UserBreakfast = new List<Recipe>{};
-    List<Recipe> UserLunch = new List<Recipe>{};
-    List<Recipe> UserDinner = new List<Recipe>{};
-    List<Recipe> WeekRecipes = new List<Recipe>{};
-    foreach(Recipe recipe in userRecipes){
-      if(recipe.isBreakfast){
-        UserBreakfast.Add(recipe);
-      }
-      else if(recipe.isLunch){
-        UserLunch.Add(recipe);
-      }
-      else{
-        UserDinner.Add(recipe);
-      }
-    }
-    Random rnd = new Random();
-    int randomBreakfast = rnd.Next(0, UserBreakfast.Count);
-    int randomLunch = rnd.Next(0, UserLunch.Count);
-    int randomDinner = rnd.Next(0, UserDinner.Count);
-    RecipeDay Monday = new RecipeDay();
-    Monday.Breakfast = UserBreakfast[randomBreakfast];
-    Monday.Lunch = UserLunch[randomLunch];
-    Monday.Dinner = UserDinner[randomDinner];
 
-    WeekRecipes.Add(Monday.Breakfast);
-    WeekRecipes.Add(Monday.Lunch);
-    WeekRecipes.Add(Monday.Dinner);
-    // RecipeDay Tuesday = new RecipeDay("Tuesday", UserBreakfast[randomBreakfast], UserLunch[randomLunch], UserDinner[randomDinner]);
-    // WeekRecipes.Add(Tuesday);
-    // RecipeDay Wednesday = new RecipeDay("Wednesday", UserBreakfast[randomBreakfast], UserLunch[randomLunch], UserDinner[randomDinner]);
-    // WeekRecipes.Add(Wednesday);
-    // RecipeDay Thursday = new RecipeDay("Thursday", UserBreakfast[randomBreakfast], UserLunch[randomLunch], UserDinner[randomDinner]);
-    // WeekRecipes.Add(Thursday);
-    // RecipeDay Friday = new RecipeDay("Friday", UserBreakfast[randomBreakfast], UserLunch[randomLunch], UserDinner[randomDinner]);
-    // WeekRecipes.Add(Friday);
-    // RecipeDay Saturday = new RecipeDay("Saturday", UserBreakfast[randomBreakfast], UserLunch[randomLunch], UserDinner[randomDinner]);
-    // WeekRecipes.Add(Saturday);
-    // RecipeDay Sunday = new RecipeDay("Sunday", UserBreakfast[randomBreakfast], UserLunch[randomLunch], UserDinner[randomDinner]);
-    // WeekRecipes.Add(Sunday);
-
-
-    // while(WeekBreakfast.Count != 7){
-    //   int random = rnd.Next(0, userRecipes.Count);
-    //   if(!WeekBreakfast.Contains(userRecipes[random]) && userRecipes[random].isBreakfast)
-    //   {
-    //     WeekBreakfast.Add(userRecipes[random]);
-    //   }
-    //   else if(WeekBreakfast.Contains(userRecipes[random]) && userRecipes[random].isBreakfast)
-    //   {
-    //     if(userRecipes[random].MinFrequency < 7 && userRecipes[random].MinFrequency <= 4){
-    //       WeekBreakfast.Add(userRecipes[random]);
-    //     }
-    //   }
-    // }
-    // while(WeekLunch.Count != 7){
-    //   int random = rnd.Next(0, userRecipes.Count);
-    //   if(!WeekLunch.Contains(userRecipes[random]) && userRecipes[random].isLunch)
-    //   {
-    //     WeekLunch.Add(userRecipes[random]);
-    //   }
-    //   else if(WeekLunch.Contains(userRecipes[random]) && userRecipes[random].isLunch)
-    //   {
-    //     if(userRecipes[random].MinFrequency < 7 && userRecipes[random].MinFrequency <= 3){
-    //       WeekLunch.Add(userRecipes[random]);
-    //     }
-    //   }
-    // }
-
-    // while(WeekDinner.Count != 7){
-    //   int random = rnd.Next(0, userRecipes.Count);
-    //   if(!WeekDinner.Contains(userRecipes[random]) && userRecipes[random].isDinner)
-    //   {
-    //     WeekDinner.Add(userRecipes[random]);
-    //   }
-    // }
-    // foreach(Recipe recipe in WeekBreakfast){
-    //   CalendarRecipes.Add(recipe);
-    // }
-    // foreach(Recipe recipe in WeekLunch){
-    //   CalendarRecipes.Add(recipe);
-    // }
-    // foreach(Recipe recipe in WeekDinner){
-    //   CalendarRecipes.Add(recipe);
-    // }
-    return View(WeekRecipes);
-    //add an option to save this list as a new userRecipe list (recipeWeeklist or something);
-  }
-  // [HttpPost]
-  // public async Task<ActionResult> Calendar(List<Recipe> recipes)
-  // {
-  //   var userId = this.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
-  //   var currentUser = await _userManager.FindByIdAsync(userId);
-  //   var weeklyList = recipes;
-
-  //   _db.SaveChanges();
-  //   return RedirectToAction("Index");
-  // }
-    public ActionResult Create()
+      public ActionResult Create()
     {
       return View();
     }
@@ -146,22 +46,60 @@ namespace WhatsForDinner.Controllers
       _db.SaveChanges();
       return RedirectToAction("Index");
     }
+  public async Task<ActionResult> Calendar(){
+    var userId = this.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+    var currentUser = await _userManager.FindByIdAsync(userId);
+    var userRecipes = _db.Recipes.Where(entry => entry.User.Id == currentUser.Id).ToList();
+    List<Recipe> UserBreakfast = Recipe.GetBreakfastRecipes(userRecipes);
+    List<Recipe> UserLunch = Recipe.GetLunchRecipes(userRecipes);
+    List<Recipe> UserDinner = Recipe.GetDinnerRecipes(userRecipes);
+    List<Recipe> WeekBreakfast = Recipe.RandomBreakfasts(UserBreakfast);
+    List<Recipe> WeekLunch = Recipe.RandomLunches(UserLunch);
+    List<Recipe> WeekDinner = Recipe.RandomDinners(UserDinner);
+    List<Recipe> WeekRecipes = Recipe.GetWeekPlan(WeekBreakfast, WeekLunch, WeekDinner);
+    return View(WeekRecipes);
+  }
 
-    public ActionResult Import()
-    {
-      return View();
-    }
+  [HttpPost]
+  public async Task<ActionResult> Calendar(List<Recipe> WeekRecipes)
+  {
+    var userId = this.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+    var currentUser = await _userManager.FindByIdAsync(userId);
+    // RecipeDay Monday = new RecipeDay(){Name = "Monday", Breakfast = WeekRecipes[0], Lunch = WeekRecipes[7], Dinner = WeekRecipes[14]};
+    // _db.RecipeDays.Add(Monday);
+    // RecipeDay Tuesday = new RecipeDay(){Name = "Tuesday", Breakfast = WeekRecipes[1], Lunch = WeekRecipes[8], Dinner = WeekRecipes[15]};
+    // _db.RecipeDays.Add(Tuesday);
+    // RecipeDay Wednesday = new RecipeDay(){Name = "Wednesday", Breakfast = WeekRecipes[2], Lunch = WeekRecipes[9], Dinner = WeekRecipes[16]};
+    // _db.RecipeDays.Add(Wednesday);
+    // RecipeDay Thursday = new RecipeDay(){Name = "Thursday", Breakfast = WeekRecipes[3], Lunch = WeekRecipes[10], Dinner = WeekRecipes[17]};
+    // _db.RecipeDays.Add(Thursday);
+    // RecipeDay Friday = new RecipeDay(){Name = "Friday", Breakfast = WeekRecipes[4], Lunch = WeekRecipes[11], Dinner = WeekRecipes[18]};
+    // _db.RecipeDays.Add(Friday);
+    // RecipeDay Saturday = new RecipeDay(){Name = "Saturday", Breakfast = WeekRecipes[5], Lunch = WeekRecipes[12], Dinner = WeekRecipes[19]};
+    // _db.RecipeDays.Add(Saturday);
+    // RecipeDay Sunday = new RecipeDay(){Name = "Sunday", Breakfast = WeekRecipes[6], Lunch = WeekRecipes[13], Dinner = WeekRecipes[20]};
+    // _db.RecipeDays.Add(Sunday);
+    // RecipeWeek thisWeek = new RecipeWeek(){Week = {Monday, Tuesday, Wednesday, Thursday, Friday}};
+    // _db.RecipeWeeks.Add(thisWeek);
+    // _db.ApplicationUserWeeks.Add(new ApplicationUserWeek(){RecipeWeek = thisWeek, ApplicationUserId = userId});
+    // _db.SaveChanges();
+    return RedirectToAction("Index");
+  }
+    // public ActionResult Import()
+    // {
+    //   return View();
+    // }
 
-[HttpPost]
-public async Task<ActionResult> Import(Recipe recipe)
-{
-  var userId = this.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
-  var currentUser = await _userManager.FindByIdAsync(userId);
-  recipe.User = currentUser;
-  _db.Recipes.Add(recipe);
-  _db.SaveChanges();
-  return RedirectToAction("Index");
-}
+// [HttpPost]
+// public async Task<ActionResult> Import(Recipe recipe)
+// {
+//   var userId = this.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+//   var currentUser = await _userManager.FindByIdAsync(userId);
+//   recipe.User = currentUser;
+//   _db.Recipes.Add(recipe);
+//   _db.SaveChanges();
+//   return RedirectToAction("Index");
+// }
     public ActionResult Details(int id)
     {
       var thisRecipe = _db.Recipes.FirstOrDefault(recipe => recipe.RecipeId == id);

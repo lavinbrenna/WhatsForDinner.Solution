@@ -3,11 +3,7 @@
 }
 @using WhatsForDinner.Models;
 @model List<WhatsForDinner.Models.Recipe>;
-  @foreach(Recipe recipe in Model)
-  {
-    <li>@recipe.Title</li>
-  }
-  @* @using(Html.BeginForm()){
+@using(Html.BeginForm()){
     <div class="calendar-card">
       <h4>Monday</h4>
       <h4>Breakfast</h4>
@@ -71,5 +67,5 @@
       <h4>Dinner</h4>
       <li>@Html.ActionLink($"{Model[20].Title}", "Details", new {id= Model[20].RecipeId})</li>
     </div>
-    <p><input type="submit" value="Save Meal Plan"></p> *@
+    <p><input type="submit" value="Save Meal Plan"></p>
   }
