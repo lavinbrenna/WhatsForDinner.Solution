@@ -25,9 +25,8 @@ namespace WhatsForDinner.Controllers
     {
       var userId = this.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
       var currentUser = await _userManager.FindByIdAsync(userId);
-      List<Recipe> allRecipes = _db.Recipes.Where(m => m.User.Id == userId).ToList();
-      var model = _db;
-      return View(model);
+      ApplicationUserWeek thisWeek = _db.ApplicationUserWeeks.FirstOrDefault(m => m.User.Id == userId);
+      return View(thisWeek);
     }
 
     public IActionResult Register()

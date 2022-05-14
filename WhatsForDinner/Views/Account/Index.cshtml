@@ -4,7 +4,7 @@
 
 @using System.Security.Claims
 @using WhatsForDinner.Models;
-@model WhatsForDinner.Models.WhatsForDinnerContext;
+@model WhatsForDinner.Models.ApplicationUserWeek;
 
 @if(User.Identity.IsAuthenticated)
 {
@@ -15,10 +15,13 @@
   }
   </p>
   <h2>Upcoming Recipes</h2>
-  @* @foreach(UserCalendar userCalendar in Model)
-  {
-    <li>hi</li>
-  } *@
+  <ul>
+
+    <li>@Html.ActionLink($"{@Model.RecipeWeek.Week[0].Dinner.Title}", "Details", "Recipes", new {id = $"{@Model.RecipeWeek.Week[0].Dinner.RecipeId}"})</li>
+    <li>@Html.ActionLink($"{@Model.RecipeWeek.Week[1].Dinner.Title}", "Details", "Recipes", new {id = $"{@Model.RecipeWeek.Week[1].Dinner.RecipeId}"})</li>
+    <li>@Html.ActionLink($"{@Model.RecipeWeek.Week[2].Dinner.Title}", "Details", "Recipes", new {id = $"{@Model.RecipeWeek.Week[2].Dinner.RecipeId}"})</li>
+  </ul>
+
 }
 
 @*
