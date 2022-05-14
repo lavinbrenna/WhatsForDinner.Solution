@@ -2,15 +2,17 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using WhatsForDinner.Models;
 
 namespace WhatsForDinner.Migrations
 {
     [DbContext(typeof(WhatsForDinnerContext))]
-    partial class WhatsForDinnerContextModelSnapshot : ModelSnapshot
+    [Migration("20220514010849_update_recipe_again")]
+    partial class update_recipe_again
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -318,15 +320,10 @@ namespace WhatsForDinner.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    b.Property<string>("ApplicationUserId")
-                        .HasColumnType("varchar(255) CHARACTER SET utf8mb4");
-
                     b.Property<DateTime>("WeekOf")
                         .HasColumnType("datetime(6)");
 
                     b.HasKey("RecipeWeekId");
-
-                    b.HasIndex("ApplicationUserId");
 
                     b.ToTable("RecipeWeeks");
                 });
@@ -435,15 +432,6 @@ namespace WhatsForDinner.Migrations
                     b.Navigation("Dinner");
 
                     b.Navigation("Lunch");
-                });
-
-            modelBuilder.Entity("WhatsForDinner.Models.RecipeWeek", b =>
-                {
-                    b.HasOne("WhatsForDinner.Models.ApplicationUser", "User")
-                        .WithMany()
-                        .HasForeignKey("ApplicationUserId");
-
-                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("WhatsForDinner.Models.ApplicationUser", b =>

@@ -9,8 +9,10 @@ namespace WhatsForDinner.Models
       this.JoinEntities = new HashSet<ApplicationUserWeek>();
     }
     public int RecipeWeekId {get;set;}
+    public string ApplicationUserId {get;set;}
     public DateTime WeekOf {get;set;}
     public virtual List<RecipeDay> Week {get;set;}
+    public virtual ApplicationUser User{get;set;}
     public virtual ICollection<ApplicationUserWeek> JoinEntities{get;}
   }
 }

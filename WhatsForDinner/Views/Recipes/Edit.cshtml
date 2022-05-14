@@ -19,11 +19,11 @@
   <p>@Html.LabelFor(m => m.Ingredients)</p>
   <p>@Html.TextAreaFor(m => m.Ingredients)</p>
 
-  @* <p>@Html.Label("Minimum Days")</p>
+  <p>@Html.Label("Minimum Days")</p>
   <p>@Html.EditorFor(m => m.MinFrequency, new{ type="number", required="required"})</p>
 
   <p>@Html.Label("Maximum Days")</p>
-  <p>@Html.EditorFor(m => m.MaxFrequency, new{ type="number", required="required"})</p> *@
+  <p>@Html.EditorFor(m => m.MaxFrequency, new{ type="number", required="required"})</p>
 
   <p>@Html.Label("Breakfast")</p>
   <p>@Html.CheckBoxFor( m=> m.isBreakfast)</p>
@@ -52,4 +52,5 @@
 
   <p><input type="submit" value="Save"></p>
 }
+<button onClick="window.location.reload();">Reshuffle</button>
 <p>@Html.ActionLink("Back to recipes", "Index")</p>

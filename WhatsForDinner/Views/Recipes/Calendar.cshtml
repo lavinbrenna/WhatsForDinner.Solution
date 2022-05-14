@@ -7,65 +7,66 @@
     <div class="calendar-card">
       <h4>Monday</h4>
       <h4>Breakfast</h4>
-      <li>@Html.ActionLink($"{Model[0].Title}", "Details", new {id= Model[0].RecipeId})</li>
+      <p>@Html.TextBoxFor(m => m[0].Title, new { @readonly="readonly" })</p>
       <h4>Lunch</h4>
-      <li>@Html.ActionLink($"{Model[7].Title}", "Details", new {id= Model[7].RecipeId})</li>
+      <p>@Html.TextBoxFor(m => m[7].Title,  new { @readonly="readonly" })</p>
       <h4>Dinner</h4>
-      <li>@Html.ActionLink($"{Model[14].Title}", "Details", new {id= Model[14].RecipeId})</li>
+      <p>@Html.TextBoxFor(m => m[14].Title,  new { @readonly="readonly" })</p>
     </div>
     <div class="calendar-card">
       <h4>Tuesday</h4>
       <h4>Breakfast</h4>
-      <li>@Html.ActionLink($"{Model[1].Title}", "Details", new {id= Model[1].RecipeId})</li>
+      <p>@Html.TextBoxFor(m => m[1].Title, new { @readonly="readonly" })</p>
       <h4>Lunch</h4>
-      <li>@Html.ActionLink($"{Model[8].Title}", "Details", new {id= Model[8].RecipeId})</li>
+      <p>@Html.TextBoxFor(m => m[8].Title, new { @readonly="readonly" })</p>
       <h4>Dinner</h4>
-      <li>@Html.ActionLink($"{Model[15].Title}", "Details", new {id= Model[15].RecipeId})</li>
+      <p>@Html.TextBoxFor(m => m[15].Title, new { @readonly="readonly" })</p>
     </div>
     <div class="calendar-card">
       <h4>Wednesday</h4>
       <h4>Breakfast</h4>
-      <li>@Html.ActionLink($"{Model[2].Title}", "Details", new {id= Model[2].RecipeId})</li>
+      <p>@Html.TextBoxFor(m => m[2].Title, new { @readonly="readonly" })</p>
       <h4>Lunch</h4>
-      <li>@Html.ActionLink($"{Model[9].Title}", "Details", new {id= Model[9].RecipeId})</li>
+      <p>@Html.TextBoxFor(m => m[9].Title, new { @readonly="readonly" })</p>
       <h4>Dinner</h4>
-      <li>@Html.ActionLink($"{Model[16].Title}", "Details", new {id= Model[16].RecipeId})</li>
+      <p>@Html.TextBoxFor(m => m[16].Title, new { @readonly="readonly" })</p>
     </div>
     <div class="calendar-card">
       <h4>Thursday</h4>
       <h4>Breakfast</h4>
-      <li>@Html.ActionLink($"{Model[3].Title}", "Details", new {id= Model[3].RecipeId})</li>
+      <p>@Html.TextBoxFor(m => m[3].Title, new { @readonly="readonly" })</p>
       <h4>Lunch</h4>
-      <li>@Html.ActionLink($"{Model[10].Title}", "Details", new {id= Model[10].RecipeId})</li>
+      <p>@Html.TextBoxFor(m => m[10].Title, new { @readonly="readonly" })</p>
       <h4>Dinner</h4>
-      <li>@Html.ActionLink($"{Model[17].Title}", "Details", new {id= Model[17].RecipeId})</li>
+      <p>@Html.TextBoxFor(m => m[17].Title, new { @readonly="readonly" })</p>
     </div>
     <div class="calendar-card">
       <h4>Friday</h4>
       <h4>Breakfast</h4>
-      <li>@Html.ActionLink($"{Model[4].Title}", "Details", new {id= Model[4].RecipeId})</li>
+      <p>@Html.TextBoxFor(m => m[4].Title, new { @readonly="readonly" })</p>
       <h4>Lunch</h4>
-      <li>@Html.ActionLink($"{Model[11].Title}", "Details", new {id= Model[11].RecipeId})</li>
+      <p>@Html.TextBoxFor(m => m[11].Title, new { @readonly="readonly" })</p>
       <h4>Dinner</h4>
-      <li>@Html.ActionLink($"{Model[18].Title}", "Details", new {id= Model[18].RecipeId})</li>
+      <p>@Html.TextBoxFor(m => m[18].Title, new { @readonly="readonly" })</p>
     </div>
     <div class="calendar-card">
       <h4>Saturday</h4>
       <h4>Breakfast</h4>
-      <li>@Html.ActionLink($"{Model[5].Title}", "Details", new {id= Model[5].RecipeId})</li>
+      <p>@Html.TextBoxFor(m => m[5].Title, new { @readonly="readonly" })</p>
       <h4>Lunch</h4>
-      <li>@Html.ActionLink($"{Model[12].Title}", "Details", new {id= Model[12].RecipeId})</li>
+      <p>@Html.TextBoxFor(m => m[12].Title, new { @readonly="readonly" })</p>
       <h4>Dinner</h4>
-      <li>@Html.ActionLink($"{Model[19].Title}", "Details", new {id= Model[19].RecipeId})</li>
+      <p>@Html.TextBoxFor(m => m[19].Title, new { @readonly="readonly" })</p>
     </div>
     <div class="calendar-card">
       <h4>Sunday</h4>
       <h4>Breakfast</h4>
-      <li>@Html.ActionLink($"{Model[6].Title}", "Details", new {id= Model[6].RecipeId})</li>
+      <p>@Html.TextBoxFor(m => m[6].Title, new { @readonly="readonly" })</p>
       <h4>Lunch</h4>
-      <li>@Html.ActionLink($"{Model[13].Title}", "Details", new {id= Model[13].RecipeId})</li>
+      <p>@Html.TextBoxFor(m => m[13].Title, new { @readonly="readonly" })</p>
       <h4>Dinner</h4>
-      <li>@Html.ActionLink($"{Model[20].Title}", "Details", new {id= Model[20].RecipeId})</li>
+      <p>@Html.TextBoxFor(m => m[20].Title, new { @readonly="readonly" })</p>
     </div>
     <p><input type="submit" value="Save Meal Plan"></p>
   }
+  <button onClick="window.location.reload();">Reshuffle</button>

@@ -16,6 +16,7 @@ namespace WhatsForDinner.Models
     public bool isDinner {get;set;}
     public string PreferredDay{get;set;}
     public virtual ApplicationUser User {get;set;}
+    public virtual List<Recipe> WeeklyRecipes {get;set;}
     private readonly Random _random = new Random();
     public static List<Recipe> GetBreakfastRecipes(List<Recipe> recipeList){
       List<Recipe> breakfastList = new List<Recipe>{};
