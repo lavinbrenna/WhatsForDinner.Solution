@@ -11,23 +11,31 @@
 
 <div class="navbar">
   <a href="/">Hey Kids, What's For Dinner?</a>
-  
   @if(User.Identity.IsAuthenticated){
-  <a href="/Account/">Home</a>
+  <a href="/Account/"><i class="fa fa-user-circle-o" aria-hidden="true"></i> Home</a>
   <div class="dropdown">
-  <button class="dropbtn" onclick="myFunction()">Recipes
+  <button class="dropbtn" onclick="recipesFunction()"><i class="fa fa-cutlery" aria-hidden="true"></i> Recipes
     <i class="fa fa-caret-down"></i>
   </button>
-  <div class="dropdown-content" id="myDropdown">
+  <div class="dropdown-content" id="recipesDropDown">
     <a href="/Recipes/Create">Add a Recipe</a>
-    <a href="/Recipes/Calendar">Weekly Meal Plan</a>
+    <a href="/Recipes/Import">Import Recipe from URL</a>
     <a href="/Recipes/">Recipe Index</a>
+  </div>
+  </div>
+  <div class="dropdown">
+  <button class="dropbtn" onclick="mealPlanFunction()"><i class="fa fa-calendar-o" aria-hidden="true"></i> Meal Plans
+    <i class="fa fa-caret-down"></i>
+  </button>
+  <div class="dropdown-content" id="mealPlanDropDown">
+    <a href="/Calendars/Create">Create meal plan</a>
+    <a href="/Calendars/">All Meal Plans</a>
   </div>
   </div>
   }
   else{
-    <a href="Account/Login">Login</a>
-    <a href="Account/Register">Sign Up</a>
+    <a href="/Account/Login">Login</a>
+    <a href="/Account/Register">Sign Up</a>
   }
 </div>
 
@@ -35,43 +43,34 @@
 <script>
 /* When the user clicks on the button,
 toggle between hiding and showing the dropdown content */
-function myFunction() {
-  document.getElementById("myDropdown").classList.toggle("show");
+function recipesFunction() {
+  document.getElementById("recipesDropDown").classList.toggle("show");
+}
+function mealPlanFunction() {
+  document.getElementById("mealPlanDropDown").classList.toggle("show");
 }
 
 // Close the dropdown if the user clicks outside of it
 window.onclick = function(e) {
   if (!e.target.matches('.dropbtn')) {
-  var myDropdown = document.getElementById("myDropdown");
-    if (myDropdown.classList.contains('show')) {
-      myDropdown.classList.remove('show');
+  var recipeDropDown = document.getElementById("recipesDropDown");
+    if (recipesDropDown.classList.contains('show')) {
+      recipesDropDown.classList.remove('show');
+    }
+  }
+}
+window.onclick = function(e) {
+  if (!e.target.matches('.dropbtn')) {
+  var mealPlanDropDown = document.getElementById("mealPlanDropDown");
+    if (mealPlanDropDown.classList.contains('show')) {
+      mealPlanDropDown.classList.remove('show');
     }
   }
 }
 </script>
+<div class="container">
 @RenderBody()
+</div>
 </body>
-
-@* <body>
-  <div class="container">
-    <nav class="navbar navbar-expand-lg navbar-light" style="background-color: rgb(42,59,51);">
-      <a class="navbar-brand" href="/">Hey Kids, What's For Dinner?</a>
-      <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-        <div class="navbar-nav">
-          @if(User.Identity.IsAuthenticated){
-            @Html.ActionLink("Home", "Index","Account", null, new {@class ="nav-item nav-link"})
-            @Html.ActionLink("Recipes", "Index", "Recipes", null, new {@class = "nav-item nav-link"})
-            @Html.ActionLink("Recipe Calendar", "Calendar", "Recipes", null, new {@class = "nav-item nav-link"})
-          }
-          else{
-            @Html.ActionLink("Register", "Register", "Account", null, new {@class = "nav-item nav-link"})
-            @Html.ActionLink("Login", "Login", "Account", null, new {@class ="nav-item nav-link"})
-          }
-        </div>
-      </div>
-    </nav>
-    @RenderBody()
-  </div>
-</body> *@
-
 </html>
+@* todo: add username to navbar, option to sign out from nav *@

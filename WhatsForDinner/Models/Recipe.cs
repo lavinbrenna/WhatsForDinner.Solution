@@ -60,12 +60,19 @@ namespace WhatsForDinner.Models
       }
       else if(WeekBreakfast.Contains(recipeList[random]))
       {
-        if(recipeList[random].MinFrequency < 7 && recipeList[random].MinFrequency <= 4){
+        if(recipeList[random].MinFrequency < 7 && recipeList[random].MinFrequency <= 3){
           WeekBreakfast.Add(recipeList[random]);
         }
       }
     }
     return WeekBreakfast;
+    }
+    public static Recipe RandomBreakfast(List<Recipe> recipeList)
+    {
+      Random rndB = new Random();
+      int rndBreakfast = rndB.Next(0, recipeList.Count);
+      Recipe breakfast = recipeList[rndBreakfast];
+      return breakfast;
     }
     public static List<Recipe> RandomLunches(List<Recipe> recipeList)
     {
@@ -85,6 +92,13 @@ namespace WhatsForDinner.Models
       }
     }
     return WeekLunch;
+    }
+    public static Recipe RandomLunch(List<Recipe> recipeList)
+    {
+      Random rndL = new Random();
+      int rndLunch = rndL.Next(0, recipeList.Count);
+      Recipe lunch = recipeList[rndLunch];
+      return lunch;
     }
     public static List<Recipe> RandomDinners(List<Recipe> recipeList)
     {
@@ -106,6 +120,13 @@ namespace WhatsForDinner.Models
     return WeekDinner;
     }
 
+  public static Recipe RandomDinner(List<Recipe> recipeList)
+    {
+      Random rndD = new Random();
+      int rndDinner = rndD.Next(0, recipeList.Count);
+      Recipe dinner = recipeList[rndDinner];
+      return dinner;
+    }
     public static List<Recipe> GetWeekPlan(List<Recipe> breakfastList, List<Recipe> lunchList, List<Recipe> dinnerList){
       List<Recipe> WeekRecipes = new List <Recipe>{};
       foreach(Recipe recipe in breakfastList)
@@ -121,6 +142,18 @@ namespace WhatsForDinner.Models
         WeekRecipes.Add(recipe);
       }
       return WeekRecipes;
+    }
+
+    public static List<Recipe> ReRollDay(List<Recipe> breakfastList, List<Recipe> lunchList, List<Recipe> dinnerList)
+    {
+      List<Recipe> DayRecipes = new List<Recipe>{};
+      Recipe breakfast = Recipe.RandomBreakfast(breakfastList);
+      Recipe lunch = Recipe.RandomLunch(lunchList);
+      Recipe dinner = Recipe.RandomDinner(dinnerList);
+      DayRecipes.Add(breakfast);
+      DayRecipes.Add(lunch);
+      DayRecipes.Add(dinner);
+      return DayRecipes;
     }
   }
 }

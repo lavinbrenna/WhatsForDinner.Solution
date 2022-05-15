@@ -12,4 +12,5 @@
 <p>The longest you'd like to go before eating @Model.Title: @Model.MaxFrequency days</p>
 
 <button>@Html.ActionLink("Edit recipe", "Edit", new{id= Model.RecipeId})</button>
+<button>@Html.ActionLink("Delete recipe", "Delete", new{id=Model.RecipeId})</button>
 <p>@Html.ActionLink("Back to Recipes", "Index")</p>

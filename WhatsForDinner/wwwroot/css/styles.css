@@ -10,11 +10,66 @@ a{
 a:hover{
   font-size: 18px;
 }
+button#calendar-save{
+  display: block;
+  max-width: 50%;
+  text-align: center;
+}
+.container {
+  padding-right: 15px;
+  padding-left: 15px;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+@media (min-width: 768px) {
+  .container {
+    width: 750px;
+  }
+}
+
+@media (min-width: 992px) {
+  .container {
+    width: 970px;
+  }
+}
+
+@media (min-width: 1200px) {
+  .container {
+    width: 1170px;
+  }
+}
+/* 2 columns (600px) */
+
+@media only screen and (min-width:600px) {
+  .container .col {
+    float: left;
+    width: 50%;
+  }
+}
+
+
+/* 3 columns (768px) */
+
+@media only screen and (min-width:768px) {
+  .container .col {
+    width: 33.333%;
+  }
+}
+
+
+/* 4 columns (992px) */
+
+@media only screen and (min-width:992px) {
+  .container .col {
+    width: 25%;
+  }
+}
+
 .navbar {
   overflow: hidden;
   background-color: rgb(17,27,30);
   font-family: Helvetica, sans-serif;
-  
 }
 
 .navbar a {
@@ -74,4 +129,13 @@ a:hover{
   display: block;
 }
 
-/* todo: edit recipe card styling */
+#calendar-card{
+  border: 2px dotted rgb(218, 224, 231);
+  border-radius: 25px;
+  float: left;
+  margin: 10px;
+  padding: 10px;
+  text-align: center;
+}
+
+/* todo: finish styling */
