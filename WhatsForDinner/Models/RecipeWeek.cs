@@ -7,6 +7,7 @@ namespace WhatsForDinner.Models
   {
     public RecipeWeek(){
       this.JoinEntities = new HashSet<ApplicationUserWeek>();
+      this.JoinEntities1 = new HashSet<RecipeDay>();
     }
     public int RecipeWeekId {get;set;}
     public string ApplicationUserId {get;set;}
@@ -14,5 +15,6 @@ namespace WhatsForDinner.Models
     public virtual List<RecipeDay> Week {get;set;}
     public virtual ApplicationUser User{get;set;}
     public virtual ICollection<ApplicationUserWeek> JoinEntities{get;}
+    public virtual ICollection<RecipeDay> JoinEntities1{get;}
   }
 }

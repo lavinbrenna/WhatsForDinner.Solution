@@ -48,6 +48,42 @@ namespace WhatsForDinner.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Breakfasts",
+                columns: table => new
+                {
+                    BreakfastId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Breakfasts", x => x.BreakfastId);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Dinners",
+                columns: table => new
+                {
+                    DinnerId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Dinners", x => x.DinnerId);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Lunches",
+                columns: table => new
+                {
+                    LunchId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Lunches", x => x.LunchId);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "AspNetRoleClaims",
                 columns: table => new
                 {
@@ -167,7 +203,6 @@ namespace WhatsForDinner.Migrations
                     isBreakfast = table.Column<bool>(type: "tinyint(1)", nullable: false),
                     isLunch = table.Column<bool>(type: "tinyint(1)", nullable: false),
                     isDinner = table.Column<bool>(type: "tinyint(1)", nullable: false),
-                    PreferredDay = table.Column<string>(type: "longtext CHARACTER SET utf8mb4", nullable: true),
                     UserId = table.Column<string>(type: "varchar(255) CHARACTER SET utf8mb4", nullable: true),
                     RecipeId1 = table.Column<int>(type: "int", nullable: true)
                 },
@@ -209,13 +244,137 @@ namespace WhatsForDinner.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "BreakfastRecipes",
+                columns: table => new
+                {
+                    BreakfastRecipeId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                    RecipeId = table.Column<int>(type: "int", nullable: false),
+                    BreakfastId = table.Column<int>(type: "int", nullable: false),
+                    UserId = table.Column<string>(type: "varchar(255) CHARACTER SET utf8mb4", nullable: true),
+                    BreakfastRecipeId1 = table.Column<int>(type: "int", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_BreakfastRecipes", x => x.BreakfastRecipeId);
+                    table.ForeignKey(
+                        name: "FK_BreakfastRecipes_AspNetUsers_UserId",
+                        column: x => x.UserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_BreakfastRecipes_BreakfastRecipes_BreakfastRecipeId1",
+                        column: x => x.BreakfastRecipeId1,
+                        principalTable: "BreakfastRecipes",
+                        principalColumn: "BreakfastRecipeId",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_BreakfastRecipes_Breakfasts_BreakfastId",
+                        column: x => x.BreakfastId,
+                        principalTable: "Breakfasts",
+                        principalColumn: "BreakfastId",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_BreakfastRecipes_Recipes_RecipeId",
+                        column: x => x.RecipeId,
+                        principalTable: "Recipes",
+                        principalColumn: "RecipeId",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "DinnerRecipes",
+                columns: table => new
+                {
+                    DinnerRecipeId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                    RecipeId = table.Column<int>(type: "int", nullable: false),
+                    DinnerId = table.Column<int>(type: "int", nullable: false),
+                    UserId = table.Column<string>(type: "varchar(255) CHARACTER SET utf8mb4", nullable: true),
+                    DinnerRecipeId1 = table.Column<int>(type: "int", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_DinnerRecipes", x => x.DinnerRecipeId);
+                    table.ForeignKey(
+                        name: "FK_DinnerRecipes_AspNetUsers_UserId",
+                        column: x => x.UserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_DinnerRecipes_DinnerRecipes_DinnerRecipeId1",
+                        column: x => x.DinnerRecipeId1,
+                        principalTable: "DinnerRecipes",
+                        principalColumn: "DinnerRecipeId",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_DinnerRecipes_Dinners_DinnerId",
+                        column: x => x.DinnerId,
+                        principalTable: "Dinners",
+                        principalColumn: "DinnerId",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_DinnerRecipes_Recipes_RecipeId",
+                        column: x => x.RecipeId,
+                        principalTable: "Recipes",
+                        principalColumn: "RecipeId",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "LunchRecipes",
+                columns: table => new
+                {
+                    LunchRecipeId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                    RecipeId = table.Column<int>(type: "int", nullable: false),
+                    LunchId = table.Column<int>(type: "int", nullable: false),
+                    UserId = table.Column<string>(type: "varchar(255) CHARACTER SET utf8mb4", nullable: true),
+                    LunchRecipeId1 = table.Column<int>(type: "int", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_LunchRecipes", x => x.LunchRecipeId);
+                    table.ForeignKey(
+                        name: "FK_LunchRecipes_AspNetUsers_UserId",
+                        column: x => x.UserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_LunchRecipes_Lunches_LunchId",
+                        column: x => x.LunchId,
+                        principalTable: "Lunches",
+                        principalColumn: "LunchId",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_LunchRecipes_LunchRecipes_LunchRecipeId1",
+                        column: x => x.LunchRecipeId1,
+                        principalTable: "LunchRecipes",
+                        principalColumn: "LunchRecipeId",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_LunchRecipes_Recipes_RecipeId",
+                        column: x => x.RecipeId,
+                        principalTable: "Recipes",
+                        principalColumn: "RecipeId",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "ApplicationUserWeeks",
                 columns: table => new
                 {
                     ApplicationUserWeekId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                     ApplicationUserId = table.Column<string>(type: "varchar(255) CHARACTER SET utf8mb4", nullable: true),
-                    RecipeWeekId = table.Column<int>(type: "int", nullable: false)
+                    RecipeWeekId = table.Column<int>(type: "int", nullable: false),
+                    BreakfastPlan = table.Column<bool>(type: "tinyint(1)", nullable: false),
+                    LunchPlan = table.Column<bool>(type: "tinyint(1)", nullable: false),
+                    DinnerPlan = table.Column<bool>(type: "tinyint(1)", nullable: false),
+                    EverythingPlan = table.Column<bool>(type: "tinyint(1)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -235,41 +394,67 @@ namespace WhatsForDinner.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Days",
+                columns: table => new
+                {
+                    DayId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                    Name = table.Column<string>(type: "longtext CHARACTER SET utf8mb4", nullable: true),
+                    BreakfastRecipeId = table.Column<int>(type: "int", nullable: false),
+                    LunchRecipeId = table.Column<int>(type: "int", nullable: false),
+                    DinnerRecipeId = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Days", x => x.DayId);
+                    table.ForeignKey(
+                        name: "FK_Days_BreakfastRecipes_BreakfastRecipeId",
+                        column: x => x.BreakfastRecipeId,
+                        principalTable: "BreakfastRecipes",
+                        principalColumn: "BreakfastRecipeId",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Days_DinnerRecipes_DinnerRecipeId",
+                        column: x => x.DinnerRecipeId,
+                        principalTable: "DinnerRecipes",
+                        principalColumn: "DinnerRecipeId",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Days_LunchRecipes_LunchRecipeId",
+                        column: x => x.LunchRecipeId,
+                        principalTable: "LunchRecipes",
+                        principalColumn: "LunchRecipeId",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "RecipeDays",
                 columns: table => new
                 {
                     RecipeDayId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    DayName = table.Column<string>(type: "longtext CHARACTER SET utf8mb4", nullable: true),
-                    BreakfastRecipeId = table.Column<int>(type: "int", nullable: true),
-                    LunchRecipeId = table.Column<int>(type: "int", nullable: true),
-                    DinnerRecipeId = table.Column<int>(type: "int", nullable: true),
-                    RecipeWeekId = table.Column<int>(type: "int", nullable: true)
+                    DayId = table.Column<int>(type: "int", nullable: false),
+                    RecipeWeekId = table.Column<int>(type: "int", nullable: true),
+                    RecipeWeekId1 = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_RecipeDays", x => x.RecipeDayId);
                     table.ForeignKey(
-                        name: "FK_RecipeDays_Recipes_BreakfastRecipeId",
-                        column: x => x.BreakfastRecipeId,
-                        principalTable: "Recipes",
-                        principalColumn: "RecipeId",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_RecipeDays_Recipes_DinnerRecipeId",
-                        column: x => x.DinnerRecipeId,
-                        principalTable: "Recipes",
-                        principalColumn: "RecipeId",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_RecipeDays_Recipes_LunchRecipeId",
-                        column: x => x.LunchRecipeId,
-                        principalTable: "Recipes",
-                        principalColumn: "RecipeId",
-                        onDelete: ReferentialAction.Restrict);
+                        name: "FK_RecipeDays_Days_DayId",
+                        column: x => x.DayId,
+                        principalTable: "Days",
+                        principalColumn: "DayId",
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_RecipeDays_RecipeWeeks_RecipeWeekId",
                         column: x => x.RecipeWeekId,
+                        principalTable: "RecipeWeeks",
+                        principalColumn: "RecipeWeekId",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_RecipeDays_RecipeWeeks_RecipeWeekId1",
+                        column: x => x.RecipeWeekId1,
                         principalTable: "RecipeWeeks",
                         principalColumn: "RecipeWeekId",
                         onDelete: ReferentialAction.Restrict);
@@ -323,24 +508,94 @@ namespace WhatsForDinner.Migrations
                 unique: true);
 
             migrationBuilder.CreateIndex(
-                name: "IX_RecipeDays_BreakfastRecipeId",
-                table: "RecipeDays",
+                name: "IX_BreakfastRecipes_BreakfastId",
+                table: "BreakfastRecipes",
+                column: "BreakfastId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_BreakfastRecipes_BreakfastRecipeId1",
+                table: "BreakfastRecipes",
+                column: "BreakfastRecipeId1");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_BreakfastRecipes_RecipeId",
+                table: "BreakfastRecipes",
+                column: "RecipeId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_BreakfastRecipes_UserId",
+                table: "BreakfastRecipes",
+                column: "UserId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Days_BreakfastRecipeId",
+                table: "Days",
                 column: "BreakfastRecipeId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_RecipeDays_DinnerRecipeId",
-                table: "RecipeDays",
+                name: "IX_Days_DinnerRecipeId",
+                table: "Days",
                 column: "DinnerRecipeId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_RecipeDays_LunchRecipeId",
-                table: "RecipeDays",
+                name: "IX_Days_LunchRecipeId",
+                table: "Days",
                 column: "LunchRecipeId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_DinnerRecipes_DinnerId",
+                table: "DinnerRecipes",
+                column: "DinnerId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_DinnerRecipes_DinnerRecipeId1",
+                table: "DinnerRecipes",
+                column: "DinnerRecipeId1");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_DinnerRecipes_RecipeId",
+                table: "DinnerRecipes",
+                column: "RecipeId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_DinnerRecipes_UserId",
+                table: "DinnerRecipes",
+                column: "UserId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_LunchRecipes_LunchId",
+                table: "LunchRecipes",
+                column: "LunchId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_LunchRecipes_LunchRecipeId1",
+                table: "LunchRecipes",
+                column: "LunchRecipeId1");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_LunchRecipes_RecipeId",
+                table: "LunchRecipes",
+                column: "RecipeId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_LunchRecipes_UserId",
+                table: "LunchRecipes",
+                column: "UserId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_RecipeDays_DayId",
+                table: "RecipeDays",
+                column: "DayId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_RecipeDays_RecipeWeekId",
                 table: "RecipeDays",
                 column: "RecipeWeekId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_RecipeDays_RecipeWeekId1",
+                table: "RecipeDays",
+                column: "RecipeWeekId1");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Recipes_RecipeId1",
@@ -385,10 +640,31 @@ namespace WhatsForDinner.Migrations
                 name: "AspNetRoles");
 
             migrationBuilder.DropTable(
-                name: "Recipes");
+                name: "Days");
 
             migrationBuilder.DropTable(
                 name: "RecipeWeeks");
+
+            migrationBuilder.DropTable(
+                name: "BreakfastRecipes");
+
+            migrationBuilder.DropTable(
+                name: "DinnerRecipes");
+
+            migrationBuilder.DropTable(
+                name: "LunchRecipes");
+
+            migrationBuilder.DropTable(
+                name: "Breakfasts");
+
+            migrationBuilder.DropTable(
+                name: "Dinners");
+
+            migrationBuilder.DropTable(
+                name: "Lunches");
+
+            migrationBuilder.DropTable(
+                name: "Recipes");
 
             migrationBuilder.DropTable(
                 name: "AspNetUsers");

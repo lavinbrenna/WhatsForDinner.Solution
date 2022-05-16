@@ -12,7 +12,7 @@
 <div class="navbar">
   <a href="/">Hey Kids, What's For Dinner?</a>
   @if(User.Identity.IsAuthenticated){
-  <a href="/Account/"><i class="fa fa-user-circle-o" aria-hidden="true"></i> Home</a>
+  <a href="/Account/"><i class="fa fa-home" aria-hidden="true"></i> Home</a>
   <div class="dropdown">
   <button class="dropbtn" onclick="recipesFunction()"><i class="fa fa-cutlery" aria-hidden="true"></i> Recipes
     <i class="fa fa-caret-down"></i>
@@ -32,6 +32,7 @@
     <a href="/Calendars/">All Meal Plans</a>
   </div>
   </div>
+  <a href="/Account/"><i class="fa fa-user-circle-o" aria-hidden="true"></i> @User.Identity.Name's Account</a>
   }
   else{
     <a href="/Account/Login">Login</a>

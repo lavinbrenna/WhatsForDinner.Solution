@@ -3,11 +3,8 @@
 }
 @using WhatsForDinner.Models;
 @model List<WhatsForDinner.Models.Recipe>;
-@if(Model.Count == 0){
-<p>You have no recipes in your collection, please add some to get started!</p>
-}
-else if(Model.Count > 0 && Model.Count < 7){
-  <p>You don't have enough recipes for us to make a meal plan for you, add more so we can get you started! </p>
+@if(Model.Count == 0 || Model.Count > 0 && Model.Count < 7){
+<p>You don't have enough recipes in your collection for us to make meal plan for you, please add some to get started!</p>
 }
 else{
 <div class="card-container">
@@ -85,5 +82,6 @@ else{
     </div>
   }
   </div>
-}
   <button onClick="window.location.reload();" class="calendar-shuffle">Reshuffle</button>
+}
+  

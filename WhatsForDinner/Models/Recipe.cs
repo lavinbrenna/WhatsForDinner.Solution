@@ -5,6 +5,11 @@ namespace WhatsForDinner.Models
 {
   public class Recipe
   {
+    // public Recipe(){
+    //   this.JoinEntities1 = new HashSet<BreakfastRecipe>();
+    //   this.JoinEntities2 = new HashSet<LunchRecipe>();
+    //   this.JoinEntities3 = new HashSet<DinnerRecipe>();
+    // }
     public int RecipeId{get;set;}
     public string Title{get;set;}
     public string RecipeUrl{get;set;}
@@ -14,40 +19,22 @@ namespace WhatsForDinner.Models
     public bool isBreakfast {get;set;}
     public bool isLunch {get;set;}
     public bool isDinner {get;set;}
-    public string PreferredDay{get;set;}
+
+    // public string PreferredDay{get;set;}
     public virtual ApplicationUser User {get;set;}
+    // public virtual ICollection<BreakfastRecipe> JoinEntities1{get;}
+    // public virtual ICollection<LunchRecipe> JoinEntities2{get;}
+    // public virtual ICollection<DinnerRecipe> JoinEntities3{get;}
     public virtual List<Recipe> WeeklyRecipes {get;set;}
     private readonly Random _random = new Random();
-    public static List<Recipe> GetBreakfastRecipes(List<Recipe> recipeList){
-      List<Recipe> breakfastList = new List<Recipe>{};
-      foreach(Recipe recipe in recipeList)
-      {
-      if(recipe.isBreakfast){
-        breakfastList.Add(recipe);
-        } 
-      }
-      return breakfastList;
+    public static Recipe RandomBreakfast(List<Recipe> recipeList)
+    {
+      Random rndB = new Random();
+      int rndBreakfast = rndB.Next(0, recipeList.Count);
+      Recipe breakfast = recipeList[rndBreakfast];
+      return breakfast;
     }
-    public static List<Recipe> GetLunchRecipes(List<Recipe> recipeList){
-      List<Recipe> lunchList = new List<Recipe>{};
-      foreach(Recipe recipe in recipeList)
-      {
-        if(recipe.isLunch){
-          lunchList.Add(recipe);
-        }
-      }
-      return lunchList;
-    }
-    public static List<Recipe> GetDinnerRecipes(List<Recipe> recipeList){
-      List<Recipe> dinnerList = new List<Recipe>{};
-      foreach(Recipe recipe in recipeList)
-      {
-        if(recipe.isDinner){
-          dinnerList.Add(recipe);
-        }
-      }
-      return dinnerList;
-    }
+
     public static List<Recipe> RandomBreakfasts(List<Recipe> recipeList)
     {
       Random rnd = new Random();
@@ -67,12 +54,12 @@ namespace WhatsForDinner.Models
     }
     return WeekBreakfast;
     }
-    public static Recipe RandomBreakfast(List<Recipe> recipeList)
+    public static Recipe RandomLunch(List<Recipe> recipeList)
     {
-      Random rndB = new Random();
-      int rndBreakfast = rndB.Next(0, recipeList.Count);
-      Recipe breakfast = recipeList[rndBreakfast];
-      return breakfast;
+      Random rndL = new Random();
+      int rndLunch = rndL.Next(0, recipeList.Count);
+      Recipe lunch = recipeList[rndLunch];
+      return lunch;
     }
     public static List<Recipe> RandomLunches(List<Recipe> recipeList)
     {
@@ -92,13 +79,6 @@ namespace WhatsForDinner.Models
       }
     }
     return WeekLunch;
-    }
-    public static Recipe RandomLunch(List<Recipe> recipeList)
-    {
-      Random rndL = new Random();
-      int rndLunch = rndL.Next(0, recipeList.Count);
-      Recipe lunch = recipeList[rndLunch];
-      return lunch;
     }
     public static List<Recipe> RandomDinners(List<Recipe> recipeList)
     {

@@ -18,10 +18,10 @@
   <p>@Html.TextAreaFor(m => m.Ingredients)</p>
 
   <p>@Html.Label("How frequently would you like to have this meal (in days)?")</p>
-  <p>@Html.TextBoxFor(m => m.MinFrequency, new{ type="number", required="required"})</p>
+  <p>@Html.TextBoxFor(m => m.MinFrequency, new{ type="number"})</p>
 
   <p>@Html.Label("What is the most amount of time you'd like to go before having this meal again(in days)?")</p>
-  <p>@Html.TextBoxFor(m => m.MaxFrequency, new{ type="number", required="required"})</p>
+  <p>@Html.TextBoxFor(m => m.MaxFrequency, new{ type="number"})</p>
   <p>@Html.Label("What meal do you usually have this recipe for?")</p>
   <p>@Html.Label("Breakfast")
   @Html.CheckBoxFor( m=> m.isBreakfast)</p>

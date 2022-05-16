@@ -43,6 +43,15 @@ namespace WhatsForDinner.Controllers
       var currentUser = await _userManager.FindByIdAsync(userId);
       recipe.User = currentUser;
       _db.Recipes.Add(recipe);
+      if(recipe.isBreakfast){
+        _db.BreakfastRecipes.Add(new BreakfastRecipe(){Recipe = recipe});
+      }
+      else if(recipe.isLunch){
+        _db.LunchRecipes.Add(new LunchRecipe(){Recipe = recipe});
+      }
+      else{
+        _db.DinnerRecipes.Add(new DinnerRecipe(){Recipe = recipe});
+      }
       _db.SaveChanges();
       return RedirectToAction("Index");
     }
