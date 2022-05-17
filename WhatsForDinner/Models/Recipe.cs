@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 using System;
-
+using System.Linq;
 
 namespace WhatsForDinner.Models
 {
@@ -94,9 +94,12 @@ namespace WhatsForDinner.Models
       }
       return WeekRecipes;
     }
-
-
-
+    public static List<String> MakeIngredientList(String Ingredients)
+    {
+      List<string> ingredientList = new List<string>();
+      ingredientList = Ingredients.Split(',').ToList();
+      return ingredientList;
+    }
   }
 }
 
