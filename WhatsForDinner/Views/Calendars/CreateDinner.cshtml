@@ -1,0 +1,50 @@
+@{
+  Layout = "_Layout";
+}
+@model List<WhatsForDinner.Models.Recipe>;
+@if(Model.Count == 0 || Model.Count > 0 && Model.Count < 7){
+<p>You don't have enough recipes in your collection for us to make meal plan for you, please add some to get started!</p>
+}
+else{
+<div class="card-container">
+@using(Html.BeginForm()){
+    <div class ="row">
+      <div id="calendar-card" class="col">
+        <h4>Monday</h4>
+        <p>@Html.TextBoxFor(m => m[0].Title, new { @readonly="readonly" })</p>
+      </div>
+      <div id="calendar-card" class="col">
+        <h4>Tuesday</h4>
+        <p>@Html.TextBoxFor(m => m[1].Title, new { @readonly="readonly" })</p>
+      </div>
+      <div id="calendar-card" class="col">
+        <h4>Wednesday</h4>
+        <p>@Html.TextBoxFor(m => m[2].Title, new { @readonly="readonly" })</p>
+      </div>
+      <div id="calendar-card" class="col">
+        <h4>Thursday</h4>
+        <p>@Html.TextBoxFor(m => m[3].Title, new { @readonly="readonly" })</p>
+      </div>
+    </div>
+    <div class="row">
+      <div id="calendar-card" class="col">
+          <h4>Friday</h4>
+          <p>@Html.TextBoxFor(m => m[4].Title, new { @readonly="readonly" })</p>
+      </div>
+      <div id="calendar-card" class="col">
+          <h4>Saturday</h4>
+          <p>@Html.TextBoxFor(m => m[5].Title, new { @readonly="readonly" })</p>
+      </div>
+      <div id="calendar-card" class="col">
+        <h4>Sunday</h4>
+        <p>@Html.TextBoxFor(m => m[6].Title, new { @readonly="readonly" })</p>
+      </div>
+    </div>
+    <br>
+    <div class="row">
+    <button type="submit" class="calendar-save">Save</button>
+    </div>
+  }
+  </div>
+  <button onClick="window.location.reload();" class="calendar-shuffle">Reshuffle</button> 
+}

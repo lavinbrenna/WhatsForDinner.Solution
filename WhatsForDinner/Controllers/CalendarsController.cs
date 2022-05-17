@@ -28,10 +28,14 @@ namespace WhatsForDinner.Controllers
     {
       var userId = this.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
       var currentUser = await _userManager.FindByIdAsync(userId);
-      var userCalendars = _db.ApplicationUserWeeks.Where(entry => entry.User.Id == currentUser.Id).ToList();
+      var userCalendars = _db.RecipeWeeks.Where(entry => entry.User.Id == currentUser.Id).ToList();
       return View(userCalendars);
     }
-    public async Task<ActionResult> Create()
+
+    public ActionResult Create(){
+      return View();
+    }
+    public async Task<ActionResult> CreateAll()
     {
       var userId = this.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
       var currentUser = await _userManager.FindByIdAsync(userId);
@@ -72,26 +76,26 @@ namespace WhatsForDinner.Controllers
     }
 
     [HttpPost]
-    public async Task<ActionResult> Create(List<Recipe> WeekRecipes)
+    public async Task<ActionResult> CreateAll(List<Recipe> WeekRecipes)
     {
       var userId = this.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
       var currentUser = await _userManager.FindByIdAsync(userId);
-      RecipeDay RecipeMonday = new RecipeDay(){Breakfast = WeekRecipes[0], Lunch = WeekRecipes[7], Dinner = WeekRecipes[14], User = currentUser};
+      RecipeDay RecipeMonday = new RecipeDay(){BreakfastRecipeId = WeekRecipes[0].RecipeId, LunchRecipeId = WeekRecipes[7].RecipeId, DinnerRecipeId = WeekRecipes[14].RecipeId, User = currentUser};
       _db.RecipeDays.Add(RecipeMonday);
-      RecipeDay RecipeTuesday = new RecipeDay(){Breakfast = WeekRecipes[1], Lunch = WeekRecipes[8], Dinner = WeekRecipes[15], User = currentUser};
+      RecipeDay RecipeTuesday = new RecipeDay(){BreakfastRecipeId = WeekRecipes[1].RecipeId, LunchRecipeId = WeekRecipes[8].RecipeId, DinnerRecipeId = WeekRecipes[15].RecipeId, User = currentUser};
       _db.RecipeDays.Add(RecipeTuesday);
-      RecipeDay RecipeWednesday = new RecipeDay(){Breakfast = WeekRecipes[2], Lunch = WeekRecipes[9], Dinner = WeekRecipes[16], User = currentUser};
+      RecipeDay RecipeWednesday = new RecipeDay(){BreakfastRecipeId = WeekRecipes[2].RecipeId, LunchRecipeId = WeekRecipes[9].RecipeId, DinnerRecipeId = WeekRecipes[16].RecipeId, User = currentUser};
       _db.RecipeDays.Add(RecipeWednesday);
-      RecipeDay RecipeThursday = new RecipeDay(){Breakfast = WeekRecipes[3], Lunch = WeekRecipes[10], Dinner = WeekRecipes[17], User = currentUser};
+      RecipeDay RecipeThursday = new RecipeDay(){BreakfastRecipeId = WeekRecipes[3].RecipeId, LunchRecipeId = WeekRecipes[10].RecipeId, DinnerRecipeId = WeekRecipes[17].RecipeId, User = currentUser};
       _db.RecipeDays.Add(RecipeThursday);
-      RecipeDay RecipeFriday = new RecipeDay(){Breakfast = WeekRecipes[4], Lunch = WeekRecipes[11], Dinner = WeekRecipes[18], User = currentUser};
+      RecipeDay RecipeFriday = new RecipeDay(){BreakfastRecipeId = WeekRecipes[4].RecipeId, LunchRecipeId = WeekRecipes[11].RecipeId, DinnerRecipeId = WeekRecipes[18].RecipeId, User = currentUser};
       _db.RecipeDays.Add(RecipeFriday);
-      RecipeDay RecipeSaturday = new RecipeDay(){Breakfast = WeekRecipes[5], Lunch = WeekRecipes[12], Dinner = WeekRecipes[19], User = currentUser};
+      RecipeDay RecipeSaturday = new RecipeDay(){BreakfastRecipeId = WeekRecipes[5].RecipeId, LunchRecipeId = WeekRecipes[12].RecipeId, DinnerRecipeId = WeekRecipes[19].RecipeId, User = currentUser};
       _db.RecipeDays.Add(RecipeSaturday);
-      RecipeDay RecipeSunday = new RecipeDay(){Breakfast = WeekRecipes[6], Lunch = WeekRecipes[13], Dinner = WeekRecipes[20], User = currentUser};
+      RecipeDay RecipeSunday = new RecipeDay(){BreakfastRecipeId = WeekRecipes[6].RecipeId, LunchRecipeId = WeekRecipes[13].RecipeId, DinnerRecipeId = WeekRecipes[20].RecipeId, User = currentUser};
       _db.RecipeDays.Add(RecipeSunday);
       DateTime weekDate = DateTime.Now;
-      RecipeWeek thisWeek = new RecipeWeek() { Week = new List<RecipeDay> { RecipeMonday, RecipeTuesday, RecipeWednesday, RecipeThursday, RecipeFriday, RecipeSaturday, RecipeSunday }, ApplicationUserId = currentUser.Id};
+      RecipeWeek thisWeek = new RecipeWeek() { Week = new List<RecipeDay> { RecipeMonday, RecipeTuesday, RecipeWednesday, RecipeThursday, RecipeFriday, RecipeSaturday, RecipeSunday }, ApplicationUserId = currentUser.Id, EverythingPlan = true};
       if(weekDate.DayOfWeek == DayOfWeek.Monday){
         thisWeek.WeekOf = weekDate;
       }
@@ -110,20 +114,232 @@ namespace WhatsForDinner.Controllers
         {thisWeek.WeekOf = weekDate.AddDays(1);}
       }
       _db.RecipeWeeks.Add(thisWeek);
-      _db.ApplicationUserWeeks.Add(new ApplicationUserWeek() { RecipeWeek = thisWeek, ApplicationUserId = currentUser.Id });
       _db.SaveChanges();
-      Console.WriteLine(thisWeek.Week[0].Breakfast.RecipeId);
+      Console.WriteLine(thisWeek.Week[0].BreakfastRecipeId);
       return RedirectToAction("Index");
     }
 
+  //   public async Task<ActionResult> CreateBreakfast()
+  //   {
+  //     var userId = this.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+  //     var currentUser = await _userManager.FindByIdAsync(userId);
+  //     var userRecipes = _db.Recipes.Where(entry=> entry.User.Id==currentUser.Id).ToList();
+  //     List<Recipe> UserBreakfast = new List<Recipe>{};
+
+  //     foreach(Recipe recipe in userRecipes){
+  //       if(recipe.isBreakfast){
+  //         UserBreakfast.Add(recipe);
+  //       }
+  //     }
+  //     if(userRecipes.Count == 0){
+  //       return View(userRecipes);
+  //     }
+  //     else
+  //     {
+  //       List<Recipe> WeekBreakfast = Recipe.RandomBreakfasts(UserBreakfast);
+  //     return View(WeekBreakfast);
+  //     }
+  //   }
+
+  // [HttpPost]
+  //   public async Task<ActionResult> CreateBreakfast(List<Recipe> WeekBreakfast)
+  //   {
+  //     var userId = this.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+  //     var currentUser = await _userManager.FindByIdAsync(userId);
+  //     RecipeDay RecipeMonday = new RecipeDay(){BreakfastRecipeId = WeekBreakfast[0].RecipeId,User = currentUser};
+  //     _db.RecipeDays.Add(RecipeMonday);
+  //     RecipeDay RecipeTuesday = new RecipeDay(){BreakfastRecipeId = WeekBreakfast[1].RecipeId,LunchRecipeId = WeekBreakfast[1].RecipeId, DinnerRecipeId = WeekBreakfast[1].RecipeId, User = currentUser};
+  //     _db.RecipeDays.Add(RecipeTuesday);
+  //     RecipeDay RecipeWednesday = new RecipeDay(){BreakfastRecipeId = WeekBreakfast[2].RecipeId, LunchRecipeId = WeekBreakfast[2].RecipeId, DinnerRecipeId = WeekBreakfast[2].RecipeId,User = currentUser};
+  //     _db.RecipeDays.Add(RecipeWednesday);
+  //     RecipeDay RecipeThursday = new RecipeDay(){BreakfastRecipeId = WeekBreakfast[3].RecipeId, LunchRecipeId = WeekBreakfast[3].RecipeId, DinnerRecipeId = WeekBreakfast[3].RecipeId,User = currentUser};
+  //     _db.RecipeDays.Add(RecipeThursday);
+  //     RecipeDay RecipeFriday = new RecipeDay(){BreakfastRecipeId = WeekBreakfast[4].RecipeId,LunchRecipeId = WeekBreakfast[4].RecipeId, DinnerRecipeId = WeekBreakfast[4].RecipeId, User = currentUser};
+  //     _db.RecipeDays.Add(RecipeFriday);
+  //     RecipeDay RecipeSaturday = new RecipeDay(){BreakfastRecipeId = WeekBreakfast[5].RecipeId,LunchRecipeId = WeekBreakfast[5].RecipeId, DinnerRecipeId = WeekBreakfast[5].RecipeId,User = currentUser};
+  //     _db.RecipeDays.Add(RecipeSaturday);
+  //     RecipeDay RecipeSunday = new RecipeDay(){BreakfastRecipeId = WeekBreakfast[6].RecipeId,LunchRecipeId = WeekBreakfast[6].RecipeId, DinnerRecipeId = WeekBreakfast[6].RecipeId, User = currentUser};
+  //     _db.RecipeDays.Add(RecipeSunday);
+  //     DateTime weekDate = DateTime.Now;
+  //     RecipeWeek thisWeek = new RecipeWeek() { Week = new List<RecipeDay> { RecipeMonday, RecipeTuesday, RecipeWednesday, RecipeThursday, RecipeFriday, RecipeSaturday, RecipeSunday }, ApplicationUserId = currentUser.Id, BreakfastPlan = true};
+  //     if(weekDate.DayOfWeek == DayOfWeek.Monday){
+  //       thisWeek.WeekOf = weekDate;
+  //     }
+  //     else if(weekDate.DayOfWeek != DayOfWeek.Monday){
+  //       if(weekDate.DayOfWeek == DayOfWeek.Tuesday)
+  //       {thisWeek.WeekOf = weekDate.AddDays(6);}
+  //       else if(weekDate.DayOfWeek == DayOfWeek.Wednesday)
+  //       {thisWeek.WeekOf = weekDate.AddDays(5);}
+  //       else if(weekDate.DayOfWeek == DayOfWeek.Thursday)
+  //       {thisWeek.WeekOf = weekDate.AddDays(4);}
+  //       else if(weekDate.DayOfWeek == DayOfWeek.Friday)
+  //       {thisWeek.WeekOf = weekDate.AddDays(3);}
+  //       else if(weekDate.DayOfWeek == DayOfWeek.Saturday)
+  //       {thisWeek.WeekOf = weekDate.AddDays(2);}
+  //       else
+  //       {thisWeek.WeekOf = weekDate.AddDays(1);}
+  //     }
+  //     _db.RecipeWeeks.Add(thisWeek);
+  //     _db.SaveChanges();
+  //     Console.WriteLine(thisWeek.Week[0].Breakfast.Title);
+  //     return RedirectToAction("Index");
+  //   }
+
+  //   public async Task<ActionResult> CreateLunch()
+  //   {
+  //     var userId = this.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+  //     var currentUser = await _userManager.FindByIdAsync(userId);
+  //     var userRecipes = _db.Recipes.Where(entry=> entry.User.Id==currentUser.Id).ToList();
+  //     List<Recipe> UserLunch = new List<Recipe>{};
+
+  //     foreach(Recipe recipe in userRecipes){
+  //       if(recipe.isLunch){
+  //         UserLunch.Add(recipe);
+  //       }
+  //     }
+  //     if(userRecipes.Count == 0){
+  //       return View(userRecipes);
+  //     }
+  //     else
+  //     {
+  //       List<Recipe> WeekLunch = Recipe.RandomLunches(UserLunch);
+  //     return View(WeekLunch);
+  //     }
+  //   }
+
+  // [HttpPost]
+  //   public async Task<ActionResult> CreateLunch(List<Recipe> WeekLunch)
+  //   {
+  //     var userId = this.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+  //     var currentUser = await _userManager.FindByIdAsync(userId);
+  //     RecipeDay RecipeMonday = new RecipeDay(){LunchRecipeId = WeekLunch[0].RecipeId,User = currentUser};
+  //     _db.RecipeDays.Add(RecipeMonday);
+  //     RecipeDay RecipeTuesday = new RecipeDay(){LunchRecipeId = WeekLunch[1].RecipeId, User = currentUser};
+  //     _db.RecipeDays.Add(RecipeTuesday);
+  //     RecipeDay RecipeWednesday = new RecipeDay(){LunchRecipeId = WeekLunch[2].RecipeId, User = currentUser};
+  //     _db.RecipeDays.Add(RecipeWednesday);
+  //     RecipeDay RecipeThursday = new RecipeDay(){LunchRecipeId = WeekLunch[3].RecipeId, User = currentUser};
+  //     _db.RecipeDays.Add(RecipeThursday);
+  //     RecipeDay RecipeFriday = new RecipeDay(){LunchRecipeId = WeekLunch[4].RecipeId, User = currentUser};
+  //     _db.RecipeDays.Add(RecipeFriday);
+  //     RecipeDay RecipeSaturday = new RecipeDay(){LunchRecipeId = WeekLunch[5].RecipeId,User = currentUser};
+  //     _db.RecipeDays.Add(RecipeSaturday);
+  //     RecipeDay RecipeSunday = new RecipeDay(){LunchRecipeId = WeekLunch[6].RecipeId, User = currentUser};
+  //     _db.RecipeDays.Add(RecipeSunday);
+  //     DateTime weekDate = DateTime.Now;
+  //     RecipeWeek thisWeek = new RecipeWeek() { Week = new List<RecipeDay> { RecipeMonday, RecipeTuesday, RecipeWednesday, RecipeThursday, RecipeFriday, RecipeSaturday, RecipeSunday }, ApplicationUserId = currentUser.Id, LunchPlan = true};
+  //     if(weekDate.DayOfWeek == DayOfWeek.Monday){
+  //       thisWeek.WeekOf = weekDate;
+  //     }
+  //     else if(weekDate.DayOfWeek != DayOfWeek.Monday){
+  //       if(weekDate.DayOfWeek == DayOfWeek.Tuesday)
+  //       {thisWeek.WeekOf = weekDate.AddDays(6);}
+  //       else if(weekDate.DayOfWeek == DayOfWeek.Wednesday)
+  //       {thisWeek.WeekOf = weekDate.AddDays(5);}
+  //       else if(weekDate.DayOfWeek == DayOfWeek.Thursday)
+  //       {thisWeek.WeekOf = weekDate.AddDays(4);}
+  //       else if(weekDate.DayOfWeek == DayOfWeek.Friday)
+  //       {thisWeek.WeekOf = weekDate.AddDays(3);}
+  //       else if(weekDate.DayOfWeek == DayOfWeek.Saturday)
+  //       {thisWeek.WeekOf = weekDate.AddDays(2);}
+  //       else
+  //       {thisWeek.WeekOf = weekDate.AddDays(1);}
+  //     }
+  //     _db.RecipeWeeks.Add(thisWeek);
+  //     _db.SaveChanges();
+  //     Console.WriteLine(thisWeek.Week[0].Lunch.Title);
+  //     return RedirectToAction("Index");
+  //   }
+
+  // public async Task<ActionResult> CreateDinner()
+  //   {
+  //     var userId = this.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+  //     var currentUser = await _userManager.FindByIdAsync(userId);
+  //     var userRecipes = _db.Recipes.Where(entry=> entry.User.Id==currentUser.Id).ToList();
+  //     List<Recipe> UserDinner = new List<Recipe>{};
+
+  //     foreach(Recipe recipe in userRecipes){
+  //       if(recipe.isDinner){
+  //         UserDinner.Add(recipe);
+  //       }
+  //     }
+  //     if(userRecipes.Count == 0){
+  //       return View(userRecipes);
+  //     }
+  //     else
+  //     {
+  //       List<Recipe> WeekDinner = Recipe.RandomDinners(UserDinner);
+  //     return View(WeekDinner);
+  //     }
+  //   }
+
+  // [HttpPost]
+  //   public async Task<ActionResult> CreateDinner(List<Recipe> WeekDinner)
+  //   {
+  //     var userId = this.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+  //     var currentUser = await _userManager.FindByIdAsync(userId);
+  //     RecipeDay RecipeMonday = new RecipeDay(){DinnerRecipeId = WeekDinner[0].RecipeId,User = currentUser};
+  //     _db.RecipeDays.Add(RecipeMonday);
+  //     RecipeDay RecipeTuesday = new RecipeDay(){DinnerRecipeId = WeekDinner[1].RecipeId, User = currentUser};
+  //     _db.RecipeDays.Add(RecipeTuesday);
+  //     RecipeDay RecipeWednesday = new RecipeDay(){DinnerRecipeId = WeekDinner[2].RecipeId, User = currentUser};
+  //     _db.RecipeDays.Add(RecipeWednesday);
+  //     RecipeDay RecipeThursday = new RecipeDay(){DinnerRecipeId = WeekDinner[3].RecipeId, User = currentUser};
+  //     _db.RecipeDays.Add(RecipeThursday);
+  //     RecipeDay RecipeFriday = new RecipeDay(){DinnerRecipeId = WeekDinner[4].RecipeId, User = currentUser};
+  //     _db.RecipeDays.Add(RecipeFriday);
+  //     RecipeDay RecipeSaturday = new RecipeDay(){DinnerRecipeId = WeekDinner[5].RecipeId,User = currentUser};
+  //     _db.RecipeDays.Add(RecipeSaturday);
+  //     RecipeDay RecipeSunday = new RecipeDay(){DinnerRecipeId = WeekDinner[6].RecipeId, User = currentUser};
+  //     _db.RecipeDays.Add(RecipeSunday);
+  //     DateTime weekDate = DateTime.Now;
+  //     RecipeWeek thisWeek = new RecipeWeek() { Week = new List<RecipeDay> { RecipeMonday, RecipeTuesday, RecipeWednesday, RecipeThursday, RecipeFriday, RecipeSaturday, RecipeSunday }, ApplicationUserId = currentUser.Id, DinnerPlan = true};
+  //     if(weekDate.DayOfWeek == DayOfWeek.Monday){
+  //       thisWeek.WeekOf = weekDate;
+  //     }
+  //     else if(weekDate.DayOfWeek != DayOfWeek.Monday){
+  //       if(weekDate.DayOfWeek == DayOfWeek.Tuesday)
+  //       {thisWeek.WeekOf = weekDate.AddDays(6);}
+  //       else if(weekDate.DayOfWeek == DayOfWeek.Wednesday)
+  //       {thisWeek.WeekOf = weekDate.AddDays(5);}
+  //       else if(weekDate.DayOfWeek == DayOfWeek.Thursday)
+  //       {thisWeek.WeekOf = weekDate.AddDays(4);}
+  //       else if(weekDate.DayOfWeek == DayOfWeek.Friday)
+  //       {thisWeek.WeekOf = weekDate.AddDays(3);}
+  //       else if(weekDate.DayOfWeek == DayOfWeek.Saturday)
+  //       {thisWeek.WeekOf = weekDate.AddDays(2);}
+  //       else
+  //       {thisWeek.WeekOf = weekDate.AddDays(1);}
+  //     }
+  //     _db.RecipeWeeks.Add(thisWeek);
+  //     _db.SaveChanges();
+  //     Console.WriteLine(thisWeek.Week[0].Dinner.Title);
+  //     return RedirectToAction("Index");
+  //   }
     public ActionResult Details(int id)
     {
-      var thisMealPlan = _db.ApplicationUserWeeks.FirstOrDefault(applicationUserWeek => applicationUserWeek.ApplicationUserWeekId == id);
+      var thisMealPlan = _db.RecipeWeeks.FirstOrDefault(recipeWeek => recipeWeek.RecipeWeekId == id);
       return View(thisMealPlan);
     }
+
+    public ActionResult Delete(int id)
+    {
+      var thisMealPlan = _db.RecipeWeeks.FirstOrDefault(recipeWeek => recipeWeek.RecipeWeekId == id);
+      return View(thisMealPlan);
+    }
+    
+    [HttpPost, ActionName("Delete")]
+    public ActionResult DeleteConfirmed(int id)
+    {
+      var thisMealPlan = _db.RecipeWeeks.FirstOrDefault(recipeWeek => recipeWeek.RecipeWeekId == id);
+      _db.RecipeWeeks.Remove(thisMealPlan);
+      _db.SaveChanges();
+      return RedirectToAction("Index");
+    }
+
   }
 }
 
 // todo: add delete mealplan route
-// todo: add routes for just breakfast, just lunch, just dinner or all three meals randomizing.
+
 // todo: add a way for user to randomize single day

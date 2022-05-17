@@ -56,17 +56,30 @@ namespace WhatsForDinner.Controllers
       return RedirectToAction("Index");
     }
 
-    // public ActionResult Import()
-    // {
-    //   return View();
-    // }
+    public ActionResult Import()
+    {
+      return View();
+    }
 
-    // [HttpPost]
-    // public async Task<ActionResult> Import(Recipe recipe)
+    [HttpPost]
+    public async Task<ActionResult> Import(ImportedRecipe importedRecipe)
+    {
+      var userId = this.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+      var currentUser = await _userManager.FindByIdAsync(userId);
+      importedRecipe.User = currentUser;
+      var thisRecipe = ImportedRecipe.GetRecipe(EnvironmentVariables.apiKey, importedRecipe.sourceUrl);
+      ImportedRecipe newRecipe = new ImportedRecipe(){title = thisRecipe.title, image = thisRecipe.image, User = currentUser, Breakfast = importedRecipe.Breakfast, Lunch = importedRecipe.Lunch, Dinner = importedRecipe.Dinner};
+      _db.ImportedRecipes.Add(newRecipe);
+      Recipe recipe = ImportedRecipe.ConvertToRecipe(newRecipe);
+      _db.Recipes.Add(recipe);
+      _db.SaveChanges();
+      Console.WriteLine(thisRecipe.title);
+      return RedirectToAction("Index");
+    }
+    // [HttpPost, ActionName("Import")]
+    // public ActionResult ImportConfirmed(Recipe recipe)
     // {
-    //   var userId = this.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
-    //   var currentUser = await _userManager.FindByIdAsync(userId);
-    //   recipe.User = currentUser;
+    //   var thisRecipe = recipe;
     //   _db.Recipes.Add(recipe);
     //   _db.SaveChanges();
     //   return RedirectToAction("Index");

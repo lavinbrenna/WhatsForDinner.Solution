@@ -1,81 +1,225 @@
 @{
-  Layout ="_Layout";
+  Layout = "_Layout";
 }
 
-@model WhatsForDinner.Models.ApplicationUserWeek
+@model WhatsForDinner.Models.RecipeWeek
 
-<h2>Week of: @Model.RecipeWeek.WeekOf.ToShortDateString()</h2>
-
-<div class ="row">
-      <div id="calendar-card" class="col">
-        <h4>Monday</h4>
-        <h4>Breakfast</h4>
-        <p>@Html.ActionLink($"{Model.RecipeWeek.Week[0].Breakfast.Title}","Details", "Recipes", new{id=$"{@Model.RecipeWeek.Week[0].Breakfast.RecipeId}"})</p>
-        @*<h4>Lunch</h4>
-        <p>@Html.ActionLink($"{@Model.RecipeWeek.Week[0].Lunch.Title}","Details", "Recipes", new{id=$"{Model.RecipeWeek.Week[0].Lunch.RecipeId}"})</p>
-        <h4>Dinner</h4>
-        <p>@Html.ActionLink($"{@Model.RecipeWeek.Week[0].Dinner.Title}","Details", "Recipes", new{id=$"{Model.RecipeWeek.Week[0].Dinner.RecipeId}"})</p> *@
-      </div>
-      @* <div id="calendar-card" class="col">
-        <h4>Tuesday</h4>
-        <h4>Breakfast</h4>
-        <p>@Html.ActionLink($"{Model.RecipeWeek.Week[1].Breakfast.Title}","Details", "Recipes", new{id=$"{Model.RecipeWeek.Week[1].Breakfast.RecipeId}"})</p>
-        <h4>Lunch</h4>
-        <p>@Html.ActionLink($"{Model.RecipeWeek.Week[1].Lunch.Title}","Details", "Recipes", new{id=$"{Model.RecipeWeek.Week[1].Lunch.RecipeId}"})</p>
-        <h4>Dinner</h4>
-        <p>@Html.ActionLink($"{Model.RecipeWeek.Week[1].Dinner.Title}","Details", "Recipes", new{id=$"{Model.RecipeWeek.Week[1].Dinner.RecipeId}"})</p>
-      </div>
-      <div id="calendar-card" class="col">
-        <h4>Wednesday</h4>
-        <h4>Breakfast</h4>
-        <p>@Html.ActionLink($"{Model.RecipeWeek.Week[2].Breakfast.Title}","Details", "Recipes", new{id=$"{Model.RecipeWeek.Week[2].Breakfast.RecipeId}"})</p>
-        <h4>Lunch</h4>
-        <p>@Html.ActionLink($"{Model.RecipeWeek.Week[2].Lunch.Title}","Details", "Recipes", new{id=$"{Model.RecipeWeek.Week[2].Lunch.RecipeId}"})</p>
-        <h4>Dinner</h4>
-        <p>@Html.ActionLink($"{Model.RecipeWeek.Week[2].Dinner.Title}","Details", "Recipes", new{id=$"{Model.RecipeWeek.Week[2].Dinner.RecipeId}"})</p>
-      </div>
-      <div id="calendar-card" class="col">
-        <h4>Thursday</h4>
-        <h4>Breakfast</h4>
-        <p>@Html.ActionLink($"{Model.RecipeWeek.Week[3].Breakfast.Title}","Details", "Recipes", new{id=$"{Model.RecipeWeek.Week[3].Breakfast.RecipeId}"})</p>
-        <h4>Lunch</h4>
-        <p>@Html.ActionLink($"{Model.RecipeWeek.Week[3].Lunch.Title}","Details", "Recipes", new{id=$"{Model.RecipeWeek.Week[3].Lunch.RecipeId}"})</p>
-        <h4>Dinner</h4>
-        <p>@Html.ActionLink($"{Model.RecipeWeek.Week[3].Dinner.Title}","Details", "Recipes", new{id=$"{Model.RecipeWeek.Week[3].Dinner.RecipeId}"})</p>
-      </div>
-    </div>
-    <div class="row">
-      <div id="calendar-card" class="col">
-          <h4>Friday</h4>
-          <h4>Breakfast</h4>
-          <p>@Html.ActionLink($"{Model.RecipeWeek.Week[4].Breakfast.Title}","Details", "Recipes", new{id=$"{Model.RecipeWeek.Week[4].Breakfast.RecipeId}"})</p>
-          <h4>Lunch</h4>
-          <p>@Html.ActionLink($"{Model.RecipeWeek.Week[4].Lunch.Title}","Details", "Recipes", new{id=$"{Model.RecipeWeek.Week[4].Lunch.RecipeId}"})</p>
-          <h4>Dinner</h4>
-          <p>@Html.ActionLink($"{Model.RecipeWeek.Week[4].Dinner.Title}","Details", "Recipes", new{id=$"{Model.RecipeWeek.Week[4].Dinner.RecipeId}"})</p>
-      </div>
-      <div id="calendar-card" class="col">
-          <h4>Saturday</h4>
-          <h4>Breakfast</h4>
-          <p>@Html.ActionLink($"{Model.RecipeWeek.Week[5].Breakfast.Title}","Details", "Recipes", new{id=$"{Model.RecipeWeek.Week[5].Breakfast.RecipeId}"})</p>
-          <h4>Lunch</h4>
-          <p>@Html.ActionLink($"{Model.RecipeWeek.Week[5].Lunch.Title}","Details", "Recipes", new{id=$"{Model.RecipeWeek.Week[5].Lunch.RecipeId}"})</p>
-          <h4>Dinner</h4>
-          <p>@Html.ActionLink($"{Model.RecipeWeek.Week[5].Dinner.Title}","Details", "Recipes", new{id=$"{Model.RecipeWeek.Week[5].Dinner.RecipeId}"})</p>
-      </div>
-      <div id="calendar-card" class="col">
-        <h4>Sunday</h4>
-        <h4>Breakfast</h4>
-        <p>@Html.ActionLink($"{Model.RecipeWeek.Week[6].Breakfast.Title}","Details", "Recipes", new{id=$"{Model.RecipeWeek.Week[6].Breakfast.RecipeId}"})</p>
-        <h4>Lunch</h4>
-        <p>@Html.ActionLink($"{Model.RecipeWeek.Week[6].Lunch.Title}","Details", "Recipes", new{id=$"{Model.RecipeWeek.Week[6].Lunch.RecipeId}"})</p>
-        <h4>Dinner</h4>
-        <p>@Html.ActionLink($"{Model.RecipeWeek.Week[6].Dinner.Title}","Details", "Recipes", new{id=$"{Model.RecipeWeek.Week[6].Dinner.RecipeId}"})</p>
-      </div>
-    </div> *@
-
-@* <button>@Html.ActionLink("Edit recipe", "Edit", new{id= Model.RecipeId})</button>
-<button>@Html.ActionLink("Delete recipe", "Delete", new{id=Model.RecipeId})</button> *@
-<p>@Html.ActionLink("Back to Meal Plans", "Index")</p>
-
-@* todo: finish adding in weekly recipe info *@
+<h2>Week of: @Model.WeekOf.ToShortDateString()</h2>
+@if (Model.EverythingPlan)
+{
+  <div class="row">
+  <div id="calendar-card" class="col">
+    <h4>Monday</h4>
+    <h4>Breakfast</h4>
+    <p>@Html.ActionLink($"{Model.Week[0].Breakfast.Title}","Details", "Recipes",
+      new{id=$"{Model.Week[0].Breakfast.RecipeId}"})</p>
+    <h4>Lunch</h4>
+    <p>@Html.ActionLink($"{Model.Week[0].Lunch.Title}","Details", "Recipes", new{id=$"{Model.Week[0].Lunch.RecipeId}"})
+    </p>
+    <h4>Dinner</h4>
+    <p>@Html.ActionLink($"{Model.Week[0].Dinner.Title}","Details", "Recipes",
+      new{id=$"{Model.Week[0].Dinner.RecipeId}"})</p>
+  </div>
+  <div id="calendar-card" class="col">
+    <h4>Tuesday</h4>
+    <h4>Breakfast</h4>
+    <p>@Html.ActionLink($"{Model.Week[1].Breakfast.Title}","Details", "Recipes",
+      new{id=$"{Model.Week[1].Breakfast.RecipeId}"})</p>
+    <h4>Lunch</h4>
+    <p>@Html.ActionLink($"{Model.Week[1].Lunch.Title}","Details", "Recipes", new{id=$"{Model.Week[1].Lunch.RecipeId}"})
+    </p>
+    <h4>Dinner</h4>
+    <p>@Html.ActionLink($"{Model.Week[1].Dinner.Title}","Details", "Recipes",
+      new{id=$"{Model.Week[1].Dinner.RecipeId}"})</p>
+  </div>
+  <div id="calendar-card" class="col">
+    <h4>Wednesday</h4>
+    <h4>Breakfast</h4>
+    <p>@Html.ActionLink($"{Model.Week[2].Breakfast.Title}","Details", "Recipes",
+      new{id=$"{Model.Week[2].Breakfast.RecipeId}"})</p>
+    <h4>Lunch</h4>
+    <p>@Html.ActionLink($"{Model.Week[2].Lunch.Title}","Details", "Recipes", new{id=$"{Model.Week[2].Lunch.RecipeId}"})
+    </p>
+    <h4>Dinner</h4>
+    <p>@Html.ActionLink($"{Model.Week[2].Dinner.Title}","Details", "Recipes",
+      new{id=$"{Model.Week[2].Dinner.RecipeId}"})</p>
+  </div>
+  <div id="calendar-card" class="col">
+    <h4>Thursday</h4>
+    <h4>Breakfast</h4>
+    <p>@Html.ActionLink($"{Model.Week[3].Breakfast.Title}","Details", "Recipes",
+      new{id=$"{Model.Week[3].Breakfast.RecipeId}"})</p>
+    <h4>Lunch</h4>
+    <p>@Html.ActionLink($"{Model.Week[3].Lunch.Title}","Details", "Recipes", new{id=$"{Model.Week[3].Lunch.RecipeId}"})
+    </p>
+    <h4>Dinner</h4>
+    <p>@Html.ActionLink($"{Model.Week[3].Dinner.Title}","Details", "Recipes",
+      new{id=$"{Model.Week[3].Dinner.RecipeId}"})</p>
+  </div>
+</div>
+  <div class="row">
+  <div id="calendar-card" class="col">
+    <h4>Friday</h4>
+    <h4>Breakfast</h4>
+    <p>@Html.ActionLink($"{Model.Week[4].Breakfast.Title}","Details", "Recipes",
+      new{id=$"{Model.Week[4].Breakfast.RecipeId}"})</p>
+    <h4>Lunch</h4>
+    <p>@Html.ActionLink($"{Model.Week[4].Lunch.Title}","Details", "Recipes", new{id=$"{Model.Week[4].Lunch.RecipeId}"})
+    </p>
+    <h4>Dinner</h4>
+    <p>@Html.ActionLink($"{Model.Week[4].Dinner.Title}","Details", "Recipes",
+      new{id=$"{Model.Week[4].Dinner.RecipeId}"})</p>
+  </div>
+  <div id="calendar-card" class="col">
+    <h4>Saturday</h4>
+    <h4>Breakfast</h4>
+    <p>@Html.ActionLink($"{Model.Week[5].Breakfast.Title}","Details", "Recipes",
+      new{id=$"{Model.Week[5].Breakfast.RecipeId}"})</p>
+    <h4>Lunch</h4>
+    <p>@Html.ActionLink($"{Model.Week[5].Lunch.Title}","Details", "Recipes", new{id=$"{Model.Week[5].Lunch.RecipeId}"})
+    </p>
+    <h4>Dinner</h4>
+    <p>@Html.ActionLink($"{Model.Week[5].Dinner.Title}","Details", "Recipes",
+      new{id=$"{Model.Week[5].Dinner.RecipeId}"})</p>
+  </div>
+  <div id="calendar-card" class="col">
+    <h4>Sunday</h4>
+    <h4>Breakfast</h4>
+    <p>@Html.ActionLink($"{Model.Week[6].Breakfast.Title}","Details", "Recipes",
+      new{id=$"{Model.Week[6].Breakfast.RecipeId}"})</p>
+    <h4>Lunch</h4>
+    <p>@Html.ActionLink($"{Model.Week[6].Lunch.Title}","Details", "Recipes", new{id=$"{Model.Week[6].Lunch.RecipeId}"})
+    </p>
+    <h4>Dinner</h4>
+    <p>@Html.ActionLink($"{Model.Week[6].Dinner.Title}","Details", "Recipes",
+      new{id=$"{Model.Week[6].Dinner.RecipeId}"})</p>
+  </div>
+</div>
+}
+@* else if (Model.BreakfastPlan)
+{
+  <div class="row">
+  <div id="calendar-card" class="col">
+    <h4>Monday</h4>
+    <p>@Html.ActionLink($"{Model.Week[0].Breakfast.Title}","Details", "Recipes",
+      new{id=$"{Model.Week[0].Breakfast.RecipeId}"})</p>
+  </div>
+  <div id="calendar-card" class="col">
+    <h4>Tuesday</h4>
+    <p>@Html.ActionLink($"{Model.Week[1].Breakfast.Title}","Details", "Recipes",
+      new{id=$"{Model.Week[1].Breakfast.RecipeId}"})</p>
+  </div>
+  <div id="calendar-card" class="col">
+    <h4>Wednesday</h4>
+    <p>@Html.ActionLink($"{Model.Week[2].Breakfast.Title}","Details", "Recipes",
+      new{id=$"{Model.Week[2].Breakfast.RecipeId}"})</p>
+  </div>
+  <div id="calendar-card" class="col">
+    <h4>Thursday</h4>
+    <p>@Html.ActionLink($"{Model.Week[3].Breakfast.Title}","Details", "Recipes",
+      new{id=$"{Model.Week[3].Breakfast.RecipeId}"})</p>
+  </div>
+</div>
+  <div class="row">
+  <div id="calendar-card" class="col">
+    <h4>Friday</h4>
+    <p>@Html.ActionLink($"{Model.Week[4].Breakfast.Title}","Details", "Recipes",
+      new{id=$"{Model.Week[4].Breakfast.RecipeId}"})</p>
+  </div>
+  <div id="calendar-card" class="col">
+    <h4>Saturday</h4>
+    <p>@Html.ActionLink($"{Model.Week[5].Breakfast.Title}","Details", "Recipes",
+      new{id=$"{Model.Week[5].Breakfast.RecipeId}"})</p>
+  </div>
+  <div id="calendar-card" class="col">
+    <h4>Sunday</h4>
+    <p>@Html.ActionLink($"{Model.Week[6].Breakfast.Title}","Details", "Recipes",
+      new{id=$"{Model.Week[6].Breakfast.RecipeId}"})</p>
+  </div>
+</div>
+}
+else if (Model.LunchPlan)
+{
+  <div class="row">
+  <div id="calendar-card" class="col">
+    <h4>Monday</h4>
+    <p>@Html.ActionLink($"{Model.Week[0].Lunch.Title}","Details", "Recipes", new{id=$"{Model.Week[0].Lunch.RecipeId}"})
+    </p>
+  </div>
+  <div id="calendar-card" class="col">
+    <h4>Tuesday</h4>
+    <p>@Html.ActionLink($"{Model.Week[1].Lunch.Title}","Details", "Recipes", new{id=$"{Model.Week[1].Lunch.RecipeId}"})
+    </p>
+  </div>
+  <div id="calendar-card" class="col">
+    <h4>Wednesday</h4>
+    <p>@Html.ActionLink($"{Model.Week[2].Lunch.Title}","Details", "Recipes", new{id=$"{Model.Week[2].Lunch.RecipeId}"})
+    </p>
+  </div>
+  <div id="calendar-card" class="col">
+    <h4>Thursday</h4>
+    <p>@Html.ActionLink($"{Model.Week[3].Lunch.Title}","Details", "Recipes", new{id=$"{Model.Week[3].Lunch.RecipeId}"})
+    </p>
+  </div>
+</div>
+  <div class="row">
+  <div id="calendar-card" class="col">
+    <h4>Friday</h4>
+    <p>@Html.ActionLink($"{Model.Week[4].Lunch.Title}","Details", "Recipes", new{id=$"{Model.Week[4].Lunch.RecipeId}"})
+    </p>
+  </div>
+  <div id="calendar-card" class="col">
+    <h4>Saturday</h4>
+    <p>@Html.ActionLink($"{Model.Week[5].Lunch.Title}","Details", "Recipes", new{id=$"{Model.Week[5].Lunch.RecipeId}"})
+    </p>
+  </div>
+  <div id="calendar-card" class="col">
+    <h4>Sunday</h4>
+    <p>@Html.ActionLink($"{Model.Week[6].Lunch.Title}","Details", "Recipes", new{id=$"{Model.Week[6].Lunch.RecipeId}"})
+    </p>
+  </div>
+</div>
+}
+else
+{
+  <div class="row">
+  <div id="calendar-card" class="col">
+    <h4>Monday</h4>
+    <p>@Html.ActionLink($"{Model.Week[0].Dinner.Title}","Details", "Recipes",
+      new{id=$"{Model.Week[0].Dinner.RecipeId}"})</p>
+  </div>
+  <div id="calendar-card" class="col">
+    <h4>Tuesday</h4>
+    <p>@Html.ActionLink($"{Model.Week[1].Dinner.Title}","Details", "Recipes",
+      new{id=$"{Model.Week[1].Dinner.RecipeId}"})</p>
+  </div>
+  <div id="calendar-card" class="col">
+    <h4>Wednesday</h4>
+    <p>@Html.ActionLink($"{Model.Week[2].Dinner.Title}","Details", "Recipes",
+      new{id=$"{Model.Week[2].Dinner.RecipeId}"})</p>
+  </div>
+  <div id="calendar-card" class="col">
+    <h4>Thursday</h4>
+    <p>@Html.ActionLink($"{Model.Week[3].Dinner.Title}","Details", "Recipes",
+      new{id=$"{Model.Week[3].Dinner.RecipeId}"})</p>
+  </div>
+</div>
+  <div class="row">
+  <div id="calendar-card" class="col">
+    <h4>Friday</h4>
+    <p>@Html.ActionLink($"{Model.Week[4].Dinner.Title}","Details", "Recipes",
+      new{id=$"{Model.Week[4].Dinner.RecipeId}"})</p>
+  </div>
+  <div id="calendar-card" class="col">
+    <h4>Saturday</h4>
+    <p>@Html.ActionLink($"{Model.Week[5].Dinner.Title}","Details", "Recipes",
+      new{id=$"{Model.Week[5].Dinner.RecipeId}"})</p>
+  </div>
+  <div id="calendar-card" class="col">
+    <h4>Sunday</h4>
+    <p>@Html.ActionLink($"{Model.Week[6].Dinner.Title}","Details", "Recipes",
+      new{id=$"{Model.Week[6].Dinner.RecipeId}"})</p>
+  </div>
+</div>
+} *@
+<button>@Html.ActionLink("Delete Meal Plan", "Delete", new{id=Model.RecipeWeekId})</button>

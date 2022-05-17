@@ -11,7 +11,7 @@ namespace WhatsForDinner.Models
     public DbSet<BreakfastRecipe> BreakfastRecipes{get;set;}
     public DbSet<LunchRecipe> LunchRecipes{get;set;}
     public DbSet<DinnerRecipe> DinnerRecipes {get;set;}
-    public DbSet<ApplicationUserWeek> ApplicationUserWeeks{get;set;}
+    public DbSet<ImportedRecipe> ImportedRecipes{get;set;}
     public WhatsForDinnerContext(DbContextOptions options) : base(options){}
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {

@@ -1,0 +1,106 @@
+@{
+  Layout = "_Layout";
+}
+@model List<WhatsForDinner.Models.Recipe>;
+@if(Model.Count == 0 || Model.Count > 0 && Model.Count < 7){
+<p>You don't have enough recipes in your collection for us to make meal plan for you, please add some to get started!</p>
+}
+else{
+<div class="card-container">
+@using(Html.BeginForm()){
+    <div class ="row">
+      <div id="calendar-card" class="col">
+        <h4>Monday</h4>
+        <h4>Breakfast</h4>
+        @Html.HiddenFor(m=>m[0].RecipeId)
+        <p>@Html.TextBoxFor(m => m[0].Title, new { @readonly="readonly" })</p>
+        <h4>Lunch</h4>
+        @Html.HiddenFor(m=>m[7].RecipeId)
+        <p>@Html.TextBoxFor(m => m[7].Title,  new { @readonly="readonly" })</p>
+        <h4>Dinner</h4>
+        @Html.HiddenFor(m=>m[14].RecipeId)
+        <p>@Html.TextBoxFor(m => m[14].Title,  new { @readonly="readonly" })</p>
+      </div>
+      <div id="calendar-card" class="col">
+        <h4>Tuesday</h4>
+        <h4>Breakfast</h4>
+        @Html.HiddenFor(m=>m[1].RecipeId)
+        <p>@Html.TextBoxFor(m => m[1].Title, new { @readonly="readonly" })</p>
+        <h4>Lunch</h4>
+        @Html.HiddenFor(m=>m[8].RecipeId)
+        <p>@Html.TextBoxFor(m => m[8].Title, new { @readonly="readonly" })</p>
+        <h4>Dinner</h4>
+        @Html.HiddenFor(m=>m[15].RecipeId)
+        <p>@Html.TextBoxFor(m => m[15].Title, new { @readonly="readonly" })</p>
+      </div>
+      <div id="calendar-card" class="col">
+        <h4>Wednesday</h4>
+        <h4>Breakfast</h4>
+        @Html.HiddenFor(m=>m[2].RecipeId)
+        <p>@Html.TextBoxFor(m => m[2].Title, new { @readonly="readonly" })</p>
+        <h4>Lunch</h4>
+        @Html.HiddenFor(m=>m[9].RecipeId)
+        <p>@Html.TextBoxFor(m => m[9].Title, new { @readonly="readonly" })</p>
+        <h4>Dinner</h4>
+        @Html.HiddenFor(m=>m[16].RecipeId)
+        <p>@Html.TextBoxFor(m => m[16].Title, new { @readonly="readonly" })</p>
+      </div>
+      <div id="calendar-card" class="col">
+        <h4>Thursday</h4>
+        <h4>Breakfast</h4>
+        @Html.HiddenFor(m=>m[3].RecipeId)
+        <p>@Html.TextBoxFor(m => m[3].Title, new { @readonly="readonly" })</p>
+        <h4>Lunch</h4>
+        @Html.HiddenFor(m=>m[10].RecipeId)
+        <p>@Html.TextBoxFor(m => m[10].Title, new { @readonly="readonly" })</p>
+        <h4>Dinner</h4>
+        @Html.HiddenFor(m=>m[17].RecipeId)
+        <p>@Html.TextBoxFor(m => m[17].Title, new { @readonly="readonly" })</p>
+      </div>
+    </div>
+    <div class="row">
+      <div id="calendar-card" class="col">
+          <h4>Friday</h4>
+          <h4>Breakfast</h4>
+          @Html.HiddenFor(m=>m[4].RecipeId)
+          <p>@Html.TextBoxFor(m => m[4].Title, new { @readonly="readonly" })</p>
+          <h4>Lunch</h4>
+          @Html.HiddenFor(m=>m[11].RecipeId)
+          <p>@Html.TextBoxFor(m => m[11].Title, new { @readonly="readonly" })</p>
+          <h4>Dinner</h4>
+          @Html.HiddenFor(m=>m[18].RecipeId)
+          <p>@Html.TextBoxFor(m => m[18].Title, new { @readonly="readonly" })</p>
+      </div>
+      <div id="calendar-card" class="col">
+          <h4>Saturday</h4>
+          <h4>Breakfast</h4>
+          @Html.HiddenFor(m=>m[5].RecipeId)
+          <p>@Html.TextBoxFor(m => m[5].Title, new { @readonly="readonly" })</p>
+          <h4>Lunch</h4>
+          @Html.HiddenFor(m=>m[12].RecipeId)
+          <p>@Html.TextBoxFor(m => m[12].Title, new { @readonly="readonly" })</p>
+          <h4>Dinner</h4>
+          @Html.HiddenFor(m=>m[19].RecipeId)
+          <p>@Html.TextBoxFor(m => m[19].Title, new { @readonly="readonly" })</p>
+      </div>
+      <div id="calendar-card" class="col">
+        <h4>Sunday</h4>
+        <h4>Breakfast</h4>
+        @Html.HiddenFor(m=>m[6].RecipeId)
+        <p>@Html.TextBoxFor(m => m[6].Title, new { @readonly="readonly" })</p>
+        <h4>Lunch</h4>
+        @Html.HiddenFor(m=>m[13].RecipeId)
+        <p>@Html.TextBoxFor(m => m[13].Title, new { @readonly="readonly" })</p>
+        <h4>Dinner</h4>
+        @Html.HiddenFor(m=>m[20].RecipeId)
+        <p>@Html.TextBoxFor(m => m[20].Title, new { @readonly="readonly" })</p>
+      </div>
+    </div>
+    <br>
+    <div class="row">
+    <button type="submit" class="calendar-save">Save</button>
+    </div>
+  }
+  </div>
+  <button onClick="window.location.reload();" class="calendar-shuffle">Reshuffle</button> 
+}

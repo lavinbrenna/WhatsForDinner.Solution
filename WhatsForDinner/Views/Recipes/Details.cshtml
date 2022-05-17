@@ -5,9 +5,13 @@
 @model WhatsForDinner.Models.Recipe
 
 <h2>@Model.Title</h2>
-
+@if(@Model.Ingredients != null){
 <p>Ingredients: @Model.Ingredients</p>
-@* <p>Preferred day of the week: @Model.PreferredDay</p> *@
+}
+@if(@Model.RecipeUrl != null)
+{
+  <a href=@Model.RecipeUrl>Check out the recipe</a>
+}
 <p>How often you'd like to eat @Model.Title: Every @Model.MinFrequency days</p>
 <p>The longest you'd like to go before eating @Model.Title: @Model.MaxFrequency days</p>
 

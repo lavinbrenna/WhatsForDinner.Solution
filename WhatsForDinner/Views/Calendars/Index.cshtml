@@ -2,7 +2,7 @@
   Layout = "_Layout";
 }
 @using WhatsForDinner.Models;
-@model List<WhatsForDinner.Models.ApplicationUserWeek>
+@model List<WhatsForDinner.Models.RecipeWeek>
 
 @if(Model.Count == 0)
 {
@@ -10,11 +10,35 @@
 }
 else
 {
-  <ul>
-  @foreach(ApplicationUserWeek applicationUserWeek in Model)
+  <h3>Full Plans</h3>
+  @foreach(RecipeWeek recipeWeek in Model)
   {
-    <li>@Html.ActionLink($"Week Of: {applicationUserWeek.RecipeWeek.WeekOf.ToShortDateString()}","Details", new{id= applicationUserWeek.ApplicationUserWeekId})</li>
+    if(recipeWeek.EverythingPlan){
+      <li>@Html.ActionLink($"Week Of: {recipeWeek.WeekOf.ToShortDateString()}","Details", new{id= recipeWeek.RecipeWeekId})</li>
+    }
+  }
+  <h3>Breakfast Plans</h3>
+  <ul>
+  @foreach(RecipeWeek recipeWeek in Model)
+  {
+    if(recipeWeek.BreakfastPlan){
+      <li>@Html.ActionLink($"Week Of: {recipeWeek.WeekOf.ToShortDateString()}","Details", new{id= recipeWeek.RecipeWeekId})</li>
+    }
   }
   </ul>
+  <h3>Lunch Plans</h3>
+  @foreach(RecipeWeek recipeWeek in Model)
+  {
+    if(recipeWeek.LunchPlan){
+      <li>@Html.ActionLink($"Week Of: {recipeWeek.WeekOf.ToShortDateString()}","Details", new{id= recipeWeek.RecipeWeekId})</li>
+    }
+  }
+  <h3>Dinner Plans</h3>
+  @foreach(RecipeWeek recipeWeek in Model)
+  {
+    if(recipeWeek.DinnerPlan){
+      <li>@Html.ActionLink($"Week Of: {recipeWeek.WeekOf.ToShortDateString()}","Details", new{id= recipeWeek.RecipeWeekId})</li>
+    }
+  }
 }
 

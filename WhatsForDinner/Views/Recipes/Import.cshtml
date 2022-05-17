@@ -2,20 +2,22 @@
   Layout ="_Layout";
 }
 
-@model WhatsForDinner.Models.Recipe
+@model WhatsForDinner.Models.ImportedRecipe
 
 <h4>Add a new recipe</h4>
 
 @using (Html.BeginForm())
 {
-  <p>@Html.LabelFor(m => m.Title)</p>
-  <p>@Html.TextBoxFor(m => m.Title, new { required="required" })</p>
-
   <p>@Html.Label("Recipe URL")</p>
-  <p>@Html.TextBoxFor(m => m.RecipeUrl)</p>
-  <p><input type="submit" value="Import Recipe", new {required ="required"}></p>
+  <p>@Html.TextBoxFor(m => m.sourceUrl)</p>
+  <p>@Html.Label("Breakfast")
+  @Html.CheckBoxFor( m=> m.Breakfast)</p>
+  <p>@Html.Label("Lunch")
+  @Html.CheckBoxFor(m=> m.Lunch)</p>
+  <p>@Html.Label("Dinner")
+  @Html.CheckBoxFor(m=> m.Dinner)</p>
+  <p><input type="submit" value="Import Recipe"}></p>
 }
 <p>@Html.ActionLink("Add your own recipe", "Create")</p>
 <p>@Html.ActionLink("Back to recipes", "Index")</p>
 
-@* todo: add spoonacular API Call. *@

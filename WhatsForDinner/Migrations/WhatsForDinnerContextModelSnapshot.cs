@@ -209,39 +209,6 @@ namespace WhatsForDinner.Migrations
                     b.ToTable("AspNetUsers");
                 });
 
-            modelBuilder.Entity("WhatsForDinner.Models.ApplicationUserWeek", b =>
-                {
-                    b.Property<int>("ApplicationUserWeekId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    b.Property<string>("ApplicationUserId")
-                        .HasColumnType("varchar(255) CHARACTER SET utf8mb4");
-
-                    b.Property<bool>("BreakfastPlan")
-                        .HasColumnType("tinyint(1)");
-
-                    b.Property<bool>("DinnerPlan")
-                        .HasColumnType("tinyint(1)");
-
-                    b.Property<bool>("EverythingPlan")
-                        .HasColumnType("tinyint(1)");
-
-                    b.Property<bool>("LunchPlan")
-                        .HasColumnType("tinyint(1)");
-
-                    b.Property<int>("RecipeWeekId")
-                        .HasColumnType("int");
-
-                    b.HasKey("ApplicationUserWeekId");
-
-                    b.HasIndex("ApplicationUserId");
-
-                    b.HasIndex("RecipeWeekId");
-
-                    b.ToTable("ApplicationUserWeeks");
-                });
-
             modelBuilder.Entity("WhatsForDinner.Models.BreakfastRecipe", b =>
                 {
                     b.Property<int>("BreakfastRecipeId")
@@ -272,6 +239,40 @@ namespace WhatsForDinner.Migrations
                     b.HasIndex("RecipeId");
 
                     b.ToTable("DinnerRecipes");
+                });
+
+            modelBuilder.Entity("WhatsForDinner.Models.ImportedRecipe", b =>
+                {
+                    b.Property<int>("ImportedRecipeId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<bool>("Breakfast")
+                        .HasColumnType("tinyint(1)");
+
+                    b.Property<bool>("Dinner")
+                        .HasColumnType("tinyint(1)");
+
+                    b.Property<bool>("Lunch")
+                        .HasColumnType("tinyint(1)");
+
+                    b.Property<string>("UserId")
+                        .HasColumnType("varchar(255) CHARACTER SET utf8mb4");
+
+                    b.Property<string>("image")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+
+                    b.Property<string>("sourceUrl")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+
+                    b.Property<string>("title")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+
+                    b.HasKey("ImportedRecipeId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("ImportedRecipes");
                 });
 
             modelBuilder.Entity("WhatsForDinner.Models.LunchRecipe", b =>
@@ -341,19 +342,16 @@ namespace WhatsForDinner.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    b.Property<int?>("BreakfastRecipeId")
+                    b.Property<int>("BreakfastRecipeId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("DinnerRecipeId")
+                    b.Property<int>("DinnerRecipeId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("LunchRecipeId")
+                    b.Property<int>("LunchRecipeId")
                         .HasColumnType("int");
 
                     b.Property<int?>("RecipeWeekId")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("RecipeWeekId1")
                         .HasColumnType("int");
 
                     b.Property<string>("UserId")
@@ -369,8 +367,6 @@ namespace WhatsForDinner.Migrations
 
                     b.HasIndex("RecipeWeekId");
 
-                    b.HasIndex("RecipeWeekId1");
-
                     b.HasIndex("UserId");
 
                     b.ToTable("RecipeDays");
@@ -384,6 +380,18 @@ namespace WhatsForDinner.Migrations
 
                     b.Property<string>("ApplicationUserId")
                         .HasColumnType("varchar(255) CHARACTER SET utf8mb4");
+
+                    b.Property<bool>("BreakfastPlan")
+                        .HasColumnType("tinyint(1)");
+
+                    b.Property<bool>("DinnerPlan")
+                        .HasColumnType("tinyint(1)");
+
+                    b.Property<bool>("EverythingPlan")
+                        .HasColumnType("tinyint(1)");
+
+                    b.Property<bool>("LunchPlan")
+                        .HasColumnType("tinyint(1)");
 
                     b.Property<DateTime>("WeekOf")
                         .HasColumnType("datetime(6)");
@@ -446,27 +454,10 @@ namespace WhatsForDinner.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("WhatsForDinner.Models.ApplicationUserWeek", b =>
-                {
-                    b.HasOne("WhatsForDinner.Models.ApplicationUser", "User")
-                        .WithMany("JoinEntities")
-                        .HasForeignKey("ApplicationUserId");
-
-                    b.HasOne("WhatsForDinner.Models.RecipeWeek", "RecipeWeek")
-                        .WithMany("JoinEntities")
-                        .HasForeignKey("RecipeWeekId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("RecipeWeek");
-
-                    b.Navigation("User");
-                });
-
             modelBuilder.Entity("WhatsForDinner.Models.BreakfastRecipe", b =>
                 {
                     b.HasOne("WhatsForDinner.Models.Recipe", "Recipe")
-                        .WithMany("JoinEntities1")
+                        .WithMany()
                         .HasForeignKey("RecipeId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -477,7 +468,7 @@ namespace WhatsForDinner.Migrations
             modelBuilder.Entity("WhatsForDinner.Models.DinnerRecipe", b =>
                 {
                     b.HasOne("WhatsForDinner.Models.Recipe", "Recipe")
-                        .WithMany("JoinEntities3")
+                        .WithMany()
                         .HasForeignKey("RecipeId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -485,10 +476,19 @@ namespace WhatsForDinner.Migrations
                     b.Navigation("Recipe");
                 });
 
+            modelBuilder.Entity("WhatsForDinner.Models.ImportedRecipe", b =>
+                {
+                    b.HasOne("WhatsForDinner.Models.ApplicationUser", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId");
+
+                    b.Navigation("User");
+                });
+
             modelBuilder.Entity("WhatsForDinner.Models.LunchRecipe", b =>
                 {
                     b.HasOne("WhatsForDinner.Models.Recipe", "Recipe")
-                        .WithMany("JoinEntities2")
+                        .WithMany()
                         .HasForeignKey("RecipeId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -513,23 +513,25 @@ namespace WhatsForDinner.Migrations
                 {
                     b.HasOne("WhatsForDinner.Models.Recipe", "Breakfast")
                         .WithMany()
-                        .HasForeignKey("BreakfastRecipeId");
+                        .HasForeignKey("BreakfastRecipeId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("WhatsForDinner.Models.Recipe", "Dinner")
                         .WithMany()
-                        .HasForeignKey("DinnerRecipeId");
+                        .HasForeignKey("DinnerRecipeId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("WhatsForDinner.Models.Recipe", "Lunch")
                         .WithMany()
-                        .HasForeignKey("LunchRecipeId");
-
-                    b.HasOne("WhatsForDinner.Models.RecipeWeek", null)
-                        .WithMany("JoinEntities1")
-                        .HasForeignKey("RecipeWeekId");
+                        .HasForeignKey("LunchRecipeId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("WhatsForDinner.Models.RecipeWeek", null)
                         .WithMany("Week")
-                        .HasForeignKey("RecipeWeekId1");
+                        .HasForeignKey("RecipeWeekId");
 
                     b.HasOne("WhatsForDinner.Models.ApplicationUser", "User")
                         .WithMany()
@@ -553,28 +555,13 @@ namespace WhatsForDinner.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("WhatsForDinner.Models.ApplicationUser", b =>
-                {
-                    b.Navigation("JoinEntities");
-                });
-
             modelBuilder.Entity("WhatsForDinner.Models.Recipe", b =>
                 {
-                    b.Navigation("JoinEntities1");
-
-                    b.Navigation("JoinEntities2");
-
-                    b.Navigation("JoinEntities3");
-
                     b.Navigation("WeeklyRecipes");
                 });
 
             modelBuilder.Entity("WhatsForDinner.Models.RecipeWeek", b =>
                 {
-                    b.Navigation("JoinEntities");
-
-                    b.Navigation("JoinEntities1");
-
                     b.Navigation("Week");
                 });
 #pragma warning restore 612, 618

@@ -4,7 +4,7 @@
 
 @using System.Security.Claims
 @using WhatsForDinner.Models;
-@model List<WhatsForDinner.Models.ApplicationUserWeek>;
+@model List<WhatsForDinner.Models.RecipeWeek>;
 
 @if(User.Identity.IsAuthenticated)
 {
@@ -20,9 +20,9 @@
   }
   else{
     <ul>
-    <li>@Html.ActionLink($"{@Model[0].RecipeWeek.Week[0].Dinner.Title}", "Details", "Recipes", new {id = $"{@Model[0].RecipeWeek.Week[0].Dinner.RecipeId}"})</li>
-    <li>@Html.ActionLink($"{@Model[0].RecipeWeek.Week[1].Dinner.Title}", "Details", "Recipes", new {id = $"{@Model[0].RecipeWeek.Week[1].Dinner.RecipeId}"})</li>
-    <li>@Html.ActionLink($"{@Model[0].RecipeWeek.Week[2].Dinner.Title}", "Details", "Recipes", new {id = $"{@Model[0].RecipeWeek.Week[2].Dinner.RecipeId}"})</li>
+    <li>@Html.ActionLink($"{@Model[0].Week[0].Dinner.Title}", "Details", "Recipes", new {id = $"{@Model[0].Week[0].Dinner.RecipeId}"})</li>
+    <li>@Html.ActionLink($"{@Model[0].Week[1].Dinner.Title}", "Details", "Recipes", new {id = $"{@Model[0].Week[1].Dinner.RecipeId}"})</li>
+    <li>@Html.ActionLink($"{@Model[0].Week[2].Dinner.Title}", "Details", "Recipes", new {id = $"{@Model[0].Week[2].Dinner.RecipeId}"})</li>
   </ul>
   }
 
