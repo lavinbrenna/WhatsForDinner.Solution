@@ -30,11 +30,9 @@ If you hate trying to figure out what you're going to eat, and you also hate usi
   {
   "ConnectionStrings": {
       "DefaultConnection": "Server=localhost;Port=3306;database=whatsfordinner;uid=root;pwd={YOURPASSWORDHERE};"
+    }
   }
-
-}
-
-  ```json
+  ```
 
 * Replace {YOURPASSWORDHERE} with the password you used when setting up MySQL
 * Save this file then navigate to the main project folder by typing ```cd WhatsForDinner``` in your terminal
