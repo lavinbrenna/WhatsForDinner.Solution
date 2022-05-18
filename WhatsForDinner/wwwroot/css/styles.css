@@ -71,7 +71,6 @@ a:hover{
   font-family: 'chicagoflfregular';
   font-size: 14px;
   max-width: 100%;
-  margin-left:40px;
   display: inline-block;
 }
 
@@ -100,6 +99,7 @@ a:hover{
   background-color: inherit;
   font-family: inherit;
   margin: 0;
+  animation: textShadow 1.6s infinite;
 }
 
 .navbar a:hover, .dropdown:hover .dropbtn, .dropbtn:focus, button.a:hover, input.submit:hover, div.clickable:hover {
@@ -359,4 +359,12 @@ input, textarea{
   color: rgb(218,224,231);
 }
 
+.footer{
+  display: block;
+  text-align: center;
+  font-size: 12px;
+}
+.footer img{
+  width: 33px;
+}
 /* todo: finish styling */
