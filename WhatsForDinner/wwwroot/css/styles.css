@@ -180,5 +180,8 @@ div.clickable{
 .recipe-detail{
   max-width: 300px;
 }
+div.front-page h2, div.front-page p{
+text-align: center;
+}
 
 /* todo: finish styling */
