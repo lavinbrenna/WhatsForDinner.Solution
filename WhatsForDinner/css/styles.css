@@ -1,7 +1,7 @@
 body {
   font-family: 'chicagoflfregular';
   color: rgb(218,224,231);
-  background-color: rgb(17,27,30);
+  background-color: black;
   /* text-shadow: 0 0 1px rgb(150, 155, 161),
   0 0 1.5px rgb(150, 155, 161),
   0 0 1px rgb(150, 155, 161),
@@ -67,7 +67,7 @@ a:hover{
 
 .navbar {
   overflow: hidden;
-  background-color: rgb(17,27,30);
+  background-color: black;
   font-family: 'chicagoflfregular';
   font-size: 14px;
   display: block;

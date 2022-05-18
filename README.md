@@ -2,10 +2,6 @@
 
 _by Brenna Lavin_
 
-## App Diagram
-
-![app diagram](WhatsForDinner/WhatsForDinnerTemplate.png)
-
 ## Technologies Used
 
 * C#
@@ -72,6 +68,18 @@ Wednesday May 18
 11:45 - start logo design
 
 ```
+
+## App Screenshots
+
+![App Homepage](WhatsForDinner/wwwroot/img/Home_Page.png)
+![User Account Screen](WhatsForDinner/wwwroot/img/User_Account_Home.png)
+![Add Recipe Screen](WhatsForDinner/wwwroot/img/Add_Recipe.png)
+![Recipe DetailScreen](WhatsForDinner/wwwroot/img/Recipe_Detail.png)
+![Create Meal Plan](WhatsForDinner/wwwroot/img/Randomize_Meal_Plan.png)
+
+## App Diagram
+
+![app diagram](WhatsForDinner/wwwroot/img/WhatsForDinnerTemplate.png)
 
 ### License
 
