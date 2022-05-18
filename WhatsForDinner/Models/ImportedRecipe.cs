@@ -11,6 +11,7 @@ namespace WhatsForDinner.Models
     public string title {get;set;}
     public string image {get;set;}
     public string sourceUrl{get;set;}
+    public int MinFrequency{get;set;}
     public bool Breakfast{get;set;}
     public bool Lunch{get;set;}
     public bool Dinner{get;set;}
@@ -25,7 +26,7 @@ namespace WhatsForDinner.Models
     }
     public static Recipe ConvertToRecipe(ImportedRecipe importedRecipe)
     {
-      Recipe newRecipe = new Recipe(){Title = importedRecipe.title, RecipeUrl = importedRecipe.sourceUrl, isBreakfast = importedRecipe.Breakfast, isLunch = importedRecipe.Lunch, isDinner = importedRecipe.Dinner, User = importedRecipe.User};
+      Recipe newRecipe = new Recipe(){Title = importedRecipe.title, RecipeUrl = importedRecipe.sourceUrl, isBreakfast = importedRecipe.Breakfast, isLunch = importedRecipe.Lunch, isDinner = importedRecipe.Dinner, User = importedRecipe.User, MinFrequency = importedRecipe.MinFrequency, SourceImgUrl = importedRecipe.image};
       return newRecipe;
     }
   }

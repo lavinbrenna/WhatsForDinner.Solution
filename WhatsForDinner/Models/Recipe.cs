@@ -11,7 +11,7 @@ namespace WhatsForDinner.Models
     public string RecipeUrl{get;set;}
     public string Ingredients{get;set;}
     public int MinFrequency{get;set;}
-    public int MaxFrequency{get;set;}
+    public string SourceImgUrl{get;set;}
     public bool isBreakfast {get;set;}
     public bool isLunch {get;set;}
     public bool isDinner {get;set;}
@@ -23,15 +23,17 @@ namespace WhatsForDinner.Models
     {
       Random rnd = new Random();
       List<Recipe> WeekBreakfast = new List<Recipe>{};
+
       while(WeekBreakfast.Count != 7){
       int random = rnd.Next(0, recipeList.Count);
+      List<int> RecipeCount = new List<int>{};
       if(!WeekBreakfast.Contains(recipeList[random]))
       {
         WeekBreakfast.Add(recipeList[random]);
       }
       else if(WeekBreakfast.Contains(recipeList[random]))
       {
-        if(recipeList[random].MinFrequency < 7 && recipeList[random].MinFrequency <= 3){
+        if((recipeList[random].MinFrequency < 7 && recipeList[random].MinFrequency <= 2)){
           WeekBreakfast.Add(recipeList[random]);
         }
       }

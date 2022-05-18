@@ -1,12 +1,10 @@
-@* @{
+@{
   Layout = "_Layout";
 }
-@using WhatsForDinner.Models;
-@model List<WhatsForDinner.Models.Recipe>;
 
-  <p>What kind of meal plan would you like to create?</p>
-  <button>@Html.ActionLink("All of it", "CreateAll", "Calendars")</button>
-  <button>@Html.ActionLink("Breakfasts", "CreateBreakfast", "Calendars")</button>
-  <button>@Html.ActionLink("Lunches", "CreateLunch", "Calendars")</button>
-  <button>@Html.ActionLink("Dinners", "CreateDinner","Calendars")</button>
- *@
+<p>What meal would you like to create a plan for?</p>
+<div class="clickable">@Html.ActionLink("Everything","CreateAll","Calendars" )</div>
+<div class="clickable">@Html.ActionLink("Just Breakfast","CreateBreakfast","Calendars" )</div>
+<div class="clickable">@Html.ActionLink("Just Lunch","CreateLunch","Calendars" )</div>
+<div class="clickable">@Html.ActionLink("Just Dinners","CreateDinner","Calendars" )</div>
+

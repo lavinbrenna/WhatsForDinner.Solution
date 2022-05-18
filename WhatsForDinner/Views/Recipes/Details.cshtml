@@ -5,6 +5,10 @@
 @model WhatsForDinner.Models.Recipe
 
 <h2>@Model.Title</h2>
+@if(Model.SourceImgUrl != null)
+{
+  <img src=@Model.SourceImgUrl class="recipe-detail"></img><br>
+}
 @if(@Model.Ingredients != null){
 <p>Ingredients: @Model.Ingredients</p>
 }
@@ -12,9 +16,9 @@
 {
   <a href=@Model.RecipeUrl>Check out the recipe</a>
 }
-<p>How often you'd like to eat @Model.Title: Every @Model.MinFrequency days</p>
-<p>The longest you'd like to go before eating @Model.Title: @Model.MaxFrequency days</p>
 
-<button>@Html.ActionLink("Edit recipe", "Edit", new{id= Model.RecipeId})</button>
-<button>@Html.ActionLink("Delete recipe", "Delete", new{id=Model.RecipeId})</button>
-<p>@Html.ActionLink("Back to Recipes", "Index")</p>
+<p>How often you'd like to eat @Model.Title: Every @Model.MinFrequency days</p>
+
+<div class="clickable">@Html.ActionLink("Edit recipe", "Edit", new{id= Model.RecipeId})</div>
+<div class="clickable">@Html.ActionLink("Delete recipe", "Delete", new{id=Model.RecipeId})</div>
+<div class="clickable">@Html.ActionLink("Back to Recipes", "Index")</div>

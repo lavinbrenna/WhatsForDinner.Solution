@@ -1,19 +1,18 @@
 body {
-  font-family: "Helvetica", sans-serif;
+  font-family: 'chicagoflfregular';
   color: rgb(218,224,231);
   background-color: rgb(17,27,30);
+  text-shadow: 0 0 1px rgb(150, 155, 161),
+  0 0 1.5px rgb(150, 155, 161),
+  0 0 1px rgb(150, 155, 161),
+  0 0 1px rgb(150, 155, 161);
 }
 a{
   text-decoration: none;
   color: rgb(218, 224, 231);
 }
-a:hover{
-  font-size: 18px;
-}
-button#calendar-save{
-  display: block;
-  max-width: 50%;
-  text-align: center;
+li a:hover{
+  font-size: 17px;
 }
 .container {
   padding-right: 15px;
@@ -69,17 +68,20 @@ button#calendar-save{
 .navbar {
   overflow: hidden;
   background-color: rgb(17,27,30);
-  font-family: Helvetica, sans-serif;
+  font-family: 'chicagoflfregular';
+  font-size: 14px;
+  max-width: 100%;
+  position: top;
 }
 
 .navbar a {
   float: left;
-  font-size: 16px;
   font-weight: 600;
   color: rgb(218,224,231);
   text-align: center;
   padding: 14px 16px;
   text-decoration: none;
+  border: 1px solid rgb(218, 224,231);
 }
 
 .dropdown {
@@ -89,18 +91,23 @@ button#calendar-save{
 
 .dropdown .dropbtn {
   cursor: pointer;
-  font-size: 16px;  
-  border: none;
+  font-size: 14px;  
+  border: 1px solid rgb(218, 224,231);
   outline: none;
   color: rgb(218,224,231);
   padding: 14px 16px;
   background-color: inherit;
   font-family: inherit;
   margin: 0;
+  text-shadow: 0 0 1px rgb(150, 155, 161),
+  0 0 1.5px rgb(150, 155, 161),
+  0 0 1px rgb(150, 155, 161),
+  0 0 1px rgb(150, 155, 161);
 }
 
-.navbar a:hover, .dropdown:hover .dropbtn, .dropbtn:focus {
+.navbar a:hover, .dropdown:hover .dropbtn, .dropbtn:focus, button.a:hover, input.submit:hover, div.clickable:hover {
   background-color: rgb(66,81,88);
+  font-size: 14px;
 }
 
 .dropdown-content {
@@ -122,7 +129,7 @@ button#calendar-save{
 }
 
 .dropdown-content a:hover {
-  background-color: rgb(136,195,216);
+  background-color: rgb(66,81,88);
 }
 
 .show {
@@ -130,12 +137,48 @@ button#calendar-save{
 }
 
 #calendar-card{
-  border: 2px dotted rgb(218, 224, 231);
-  border-radius: 25px;
+  border: 2px dashed rgb(218, 224, 231);
   float: left;
   margin: 10px;
   padding: 10px;
   text-align: center;
+}
+button .a, input.submit{
+  background-color: rgb(17,27,30);
+  max-width: 160px;
+  text-decoration: none;
+  cursor: pointer;
+  font-size: 14px;
+  border: 1px solid rgb(218, 224,231);
+  outline: none;
+  color: rgb(218,224,231);
+  padding: 14px 16px;
+  font-family: inherit;
+  text-shadow: 0 0 1px rgb(150, 155, 161),
+  0 0 1.5px rgb(150, 155, 161),
+  0 0 1px rgb(150, 155, 161),
+  0 0 1px rgb(150, 155, 161);
+}
+div.clickable{
+  background-color: rgb(17,27,30);
+  max-width: 125px;
+  display: inline-block;
+  text-decoration: none;
+  cursor: pointer;
+  font-size: 14px;
+  border: 1px solid rgb(218, 224,231);
+  outline: none;
+  color: rgb(218,224,231);
+  padding: 10px;
+  text-align: center;
+  font-family: inherit;
+  text-shadow: 0 0 1px rgb(150, 155, 161),
+  0 0 1.5px rgb(150, 155, 161),
+  0 0 1px rgb(150, 155, 161),
+  0 0 1px rgb(150, 155, 161);
+}
+.recipe-detail{
+  max-width: 300px;
 }
 
 /* todo: finish styling */

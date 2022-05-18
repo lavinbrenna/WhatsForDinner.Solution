@@ -16,6 +16,8 @@
   @Html.CheckBoxFor(m=> m.Lunch)</p>
   <p>@Html.Label("Dinner")
   @Html.CheckBoxFor(m=> m.Dinner)</p>
+    <p>@Html.Label("How frequently would you like to have this meal (in days)?")</p>
+  <p>@Html.TextBoxFor(m => m.MinFrequency, new{ type="number"})</p>
   <p><input type="submit" value="Import Recipe"}></p>
 }
 <p>@Html.ActionLink("Add your own recipe", "Create")</p>

@@ -46,12 +46,12 @@ else{
         @Html.HiddenFor(m=>m[6].RecipeId)
         <p>@Html.TextBoxFor(m => m[6].Title, new { @readonly="readonly" })</p>
       </div>
+      <div id="calendar-card" >
+        <input type="submit" class="submit" value="Save Meal Plan">
+        <div onClick="window.location.reload();" class="clickable">Reshuffle</div> 
+      </div>
     </div>
     <br>
-    <div class="row">
-    <button type="submit" class="calendar-save">Save</button>
-    </div>
   }
   </div>
-  <button onClick="window.location.reload();" class="calendar-shuffle">Reshuffle</button> 
 }

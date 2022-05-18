@@ -68,7 +68,7 @@ namespace WhatsForDinner.Controllers
       var currentUser = await _userManager.FindByIdAsync(userId);
       importedRecipe.User = currentUser;
       var thisRecipe = ImportedRecipe.GetRecipe(EnvironmentVariables.apiKey, importedRecipe.sourceUrl);
-      ImportedRecipe newRecipe = new ImportedRecipe(){title = thisRecipe.title, image = thisRecipe.image, User = currentUser, Breakfast = importedRecipe.Breakfast, Lunch = importedRecipe.Lunch, Dinner = importedRecipe.Dinner};
+      ImportedRecipe newRecipe = new ImportedRecipe(){title = thisRecipe.title, sourceUrl = thisRecipe.sourceUrl,image = thisRecipe.image, User = currentUser, Breakfast = importedRecipe.Breakfast, Lunch = importedRecipe.Lunch, Dinner = importedRecipe.Dinner, MinFrequency = importedRecipe.MinFrequency};
       _db.ImportedRecipes.Add(newRecipe);
       Recipe recipe = ImportedRecipe.ConvertToRecipe(newRecipe);
       _db.Recipes.Add(recipe);
@@ -76,17 +76,10 @@ namespace WhatsForDinner.Controllers
       Console.WriteLine(thisRecipe.title);
       return RedirectToAction("Index");
     }
-    // [HttpPost, ActionName("Import")]
-    // public ActionResult ImportConfirmed(Recipe recipe)
-    // {
-    //   var thisRecipe = recipe;
-    //   _db.Recipes.Add(recipe);
-    //   _db.SaveChanges();
-    //   return RedirectToAction("Index");
-    // }
     public ActionResult Details(int id)
     {
       var thisRecipe = _db.Recipes.FirstOrDefault(recipe => recipe.RecipeId == id);
+      List<String> recipeIngredients = thisRecipe.Ingredients.Split(',').ToList();
       return View(thisRecipe);
     }
     public ActionResult Edit(int id)
