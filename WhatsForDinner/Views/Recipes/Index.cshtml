@@ -10,21 +10,21 @@
 }
 else
 {
-    <h3>Breakfast Recipes</h3>
+    <h3 class="day">Breakfast Recipes</h3>
     @foreach(Recipe recipe in Model)
     {
       if(recipe.isBreakfast){
         <p>@Html.ActionLink($"{recipe.Title}", "Details", new {id = recipe.RecipeId})</p>
       }
     }
-    <h3>Lunch Recipes</h3>
+    <h3 class="day">Lunch Recipes</h3>
     @foreach(Recipe recipe in Model)
     {
       if(recipe.isLunch){
         <p>@Html.ActionLink($"{recipe.Title}", "Details", new {id = recipe.RecipeId})</p>
       }
     }
-    <h3>Dinner Recipes</h3>
+    <h3 class="day">Dinner Recipes</h3>
     @foreach(Recipe recipe in Model)
     {
       if(recipe.isDinner){

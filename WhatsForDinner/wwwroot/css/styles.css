@@ -70,8 +70,9 @@ li a:hover{
   background-color: rgb(17,27,30);
   font-family: 'chicagoflfregular';
   font-size: 14px;
+  display: block;
   max-width: 100%;
-  position: top;
+  margin-left:40px;
 }
 
 .navbar a {
@@ -180,10 +181,15 @@ div.clickable{
 }
 .recipe-detail{
   max-width: 300px;
+  filter: grayscale(100%) blur(1px);
+  border-radius: 2%;
 }
 div.front-page h2, div.front-page p{
 text-align: center;
+margin: 10px;
+padding: 20px;
 }
+
 .day{
   text-decoration: underline;
 }
