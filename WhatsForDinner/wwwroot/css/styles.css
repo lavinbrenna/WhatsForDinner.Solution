@@ -2,17 +2,17 @@ body {
   font-family: 'chicagoflfregular';
   color: rgb(218,224,231);
   background-color: rgb(17,27,30);
-  text-shadow: 0 0 1px rgb(150, 155, 161),
+  /* text-shadow: 0 0 1px rgb(150, 155, 161),
   0 0 1.5px rgb(150, 155, 161),
   0 0 1px rgb(150, 155, 161),
-  0 0 1px rgb(150, 155, 161);
+  0 0 1px rgb(150, 155, 161); */
 }
 a{
   text-decoration: none;
   color: rgb(218, 224, 231);
 }
-li a:hover{
-  font-size: 17px;
+a:hover{
+  background-color:rgb(66,81,88);
 }
 .container {
   padding-right: 15px;
@@ -100,10 +100,6 @@ li a:hover{
   background-color: inherit;
   font-family: inherit;
   margin: 0;
-  text-shadow: 0 0 1px rgb(150, 155, 161),
-  0 0 1.5px rgb(150, 155, 161),
-  0 0 1px rgb(150, 155, 161),
-  0 0 1px rgb(150, 155, 161);
 }
 
 .navbar a:hover, .dropdown:hover .dropbtn, .dropbtn:focus, button.a:hover, input.submit:hover, div.clickable:hover {
@@ -138,8 +134,8 @@ li a:hover{
 }
 
 #calendar-card{
-  border: 2px dashed rgb(218, 224, 231);
-  float: left;
+  border: 1px solid rgb(218, 224, 231);
+  display: inline-block;
   margin: 10px;
   padding: 10px;
   text-align: center;

@@ -14,7 +14,7 @@
   <p>@Html.Label("Recipe URL (optional)")</p>
   <p>@Html.TextBoxFor(m => m.RecipeUrl)</p>
 
-  <p>@Html.Label("Ingredients - please separate by a comma")</p>
+  <p>@Html.LabelFor(m=> m.Ingredients)</p>
   <p>@Html.TextAreaFor(m => m.Ingredients)</p>
 
   <p>@Html.Label("How frequently would you like to have this meal (in days)?")</p>
