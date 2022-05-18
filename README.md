@@ -69,6 +69,8 @@ Friday May 6th
 
 Wednesday May 18
 8 am - research art for logo/front page
+11:45 - start logo design
+
 ```
 
 ### License
