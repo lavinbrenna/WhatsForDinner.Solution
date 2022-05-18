@@ -79,7 +79,6 @@ namespace WhatsForDinner.Controllers
     public ActionResult Details(int id)
     {
       var thisRecipe = _db.Recipes.FirstOrDefault(recipe => recipe.RecipeId == id);
-      List<String> recipeIngredients = thisRecipe.Ingredients.Split(',').ToList();
       return View(thisRecipe);
     }
     public ActionResult Edit(int id)

@@ -10,22 +10,22 @@ else{
 @using(Html.BeginForm()){
     <div class ="row">
       <div id="calendar-card" class="col">
-        <h4>Monday</h4>
+        <h4 class="day">Monday</h4>
         @Html.HiddenFor(m=>m[0].RecipeId)
         <p>@Html.TextBoxFor(m => m[0].Title, new { @readonly="readonly" })</p>
       </div>
       <div id="calendar-card" class="col">
-        <h4>Tuesday</h4>
+        <h4 class="day">Tuesday</h4>
         @Html.HiddenFor(m=>m[1].RecipeId)
         <p>@Html.TextBoxFor(m => m[1].Title, new { @readonly="readonly" })</p>
       </div>
       <div id="calendar-card" class="col">
-        <h4>Wednesday</h4>
+        <h4 class="day">Wednesday</h4>
         @Html.HiddenFor(m=>m[2].RecipeId)
         <p>@Html.TextBoxFor(m => m[2].Title, new { @readonly="readonly" })</p>
       </div>
       <div id="calendar-card" class="col">
-        <h4>Thursday</h4>
+        <h4 class="day">Thursday</h4>
         @Html.HiddenFor(m=>m[3].RecipeId)
         <p>@Html.TextBoxFor(m => m[3].Title, new { @readonly="readonly" })</p>
       </div>
@@ -37,21 +37,22 @@ else{
           <p>@Html.TextBoxFor(m => m[4].Title, new { @readonly="readonly" })</p>
       </div>
       <div id="calendar-card" class="col">
-          <h4>Saturday</h4>
+          <h4 class="day">Saturday</h4>
           @Html.HiddenFor(m=>m[5].RecipeId)
           <p>@Html.TextBoxFor(m => m[5].Title, new { @readonly="readonly" })</p>
       </div>
       <div id="calendar-card" class="col">
-        <h4>Sunday</h4>
+        <h4 class="day">Sunday</h4>
         @Html.HiddenFor(m=>m[6].RecipeId)
         <p>@Html.TextBoxFor(m => m[6].Title, new { @readonly="readonly" })</p>
       </div>
-      <div id="calendar-card" >
-        <input type="submit" class="submit" value="Save Meal Plan">
-        <div onClick="window.location.reload();" class="clickable">Reshuffle</div> 
-      </div>
     </div>
-    <br>
+      <div class="row">
+        <div id="calendar-card" class ="col">
+          <input type="submit" class="submit" value="Save Meal Plan"><br>
+          <div onClick="window.location.reload();" class="clickable">Reshuffle</div> 
+        </div>
+    </div>
   }
   </div>
 }

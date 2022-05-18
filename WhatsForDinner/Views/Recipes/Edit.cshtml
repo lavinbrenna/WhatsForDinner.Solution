@@ -31,23 +31,7 @@
   <p>@Html.Label("Dinner")</p>
   <p>@Html.CheckBoxFor(m=> m.isDinner)</p>
 
-  @* <p>@Html.Label("Is there a day you would most like to have this meal?")</p>
-  <p>@Html.Label("Monday")
-  @Html.RadioButtonFor(m => m.PreferredDay, "Monday")
-  @Html.Label("Tuesday")
-  @Html.RadioButtonFor(m => m.PreferredDay, "Tuesday")
-  @Html.Label("Wednesday")
-  @Html.RadioButtonFor(m => m.PreferredDay, "Wednesday")
-  @Html.Label("Thursday")
-  @Html.RadioButtonFor(m => m.PreferredDay, "Thursday")
-  @Html.Label("Friday")
-  @Html.RadioButtonFor(m => m.PreferredDay, "Friday")
-  @Html.Label("Saturday")
-  @Html.RadioButtonFor(m => m.PreferredDay, "Saturday")
-  @Html.Label("Sunday")
-  @Html.RadioButtonFor(m => m.PreferredDay, "Sunday")</p> *@
-
-  <p><input type="submit" value="Save"></p>
+  <p><input type="submit" value="Save" class="submit"></p>
 }
 
-<p>@Html.ActionLink("Back to recipes", "Index")</p>
+<div class="clickable">@Html.ActionLink("Back to recipes", "Index")</div>

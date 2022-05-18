@@ -205,19 +205,19 @@ namespace WhatsForDinner.Controllers
     {
       var userId = this.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
       var currentUser = await _userManager.FindByIdAsync(userId);
-      RecipeDay RecipeMonday = new RecipeDay(){ LunchRecipeId = WeeklyRecipes[0].RecipeId, User = currentUser};
+      RecipeDay RecipeMonday = new RecipeDay(){ BreakfastRecipeId = WeeklyRecipes[0].RecipeId, LunchRecipeId = WeeklyRecipes[0].RecipeId, DinnerRecipeId = WeeklyRecipes[0].RecipeId, User = currentUser};
       _db.RecipeDays.Add(RecipeMonday);
-      RecipeDay RecipeTuesday = new RecipeDay(){ LunchRecipeId = WeeklyRecipes[1].RecipeId, User = currentUser};
+      RecipeDay RecipeTuesday = new RecipeDay(){BreakfastRecipeId = WeeklyRecipes[1].RecipeId, LunchRecipeId = WeeklyRecipes[1].RecipeId, DinnerRecipeId = WeeklyRecipes[1].RecipeId, User = currentUser};
       _db.RecipeDays.Add(RecipeTuesday);
-      RecipeDay RecipeWednesday = new RecipeDay(){ LunchRecipeId = WeeklyRecipes[2].RecipeId, User = currentUser};
+      RecipeDay RecipeWednesday = new RecipeDay(){BreakfastRecipeId = WeeklyRecipes[2].RecipeId, LunchRecipeId = WeeklyRecipes[2].RecipeId, DinnerRecipeId = WeeklyRecipes[2].RecipeId, User = currentUser};
       _db.RecipeDays.Add(RecipeWednesday);
-      RecipeDay RecipeThursday = new RecipeDay(){ LunchRecipeId = WeeklyRecipes[3].RecipeId, User = currentUser};
+      RecipeDay RecipeThursday = new RecipeDay(){BreakfastRecipeId = WeeklyRecipes[3].RecipeId, LunchRecipeId = WeeklyRecipes[3].RecipeId, DinnerRecipeId = WeeklyRecipes[3].RecipeId, User = currentUser};
       _db.RecipeDays.Add(RecipeThursday);
-      RecipeDay RecipeFriday = new RecipeDay(){ LunchRecipeId = WeeklyRecipes[4].RecipeId, User = currentUser};
+      RecipeDay RecipeFriday = new RecipeDay(){BreakfastRecipeId = WeeklyRecipes[4].RecipeId, LunchRecipeId = WeeklyRecipes[4].RecipeId, DinnerRecipeId = WeeklyRecipes[4].RecipeId, User = currentUser};
       _db.RecipeDays.Add(RecipeFriday);
-      RecipeDay RecipeSaturday = new RecipeDay(){ LunchRecipeId = WeeklyRecipes[5].RecipeId, User = currentUser};
+      RecipeDay RecipeSaturday = new RecipeDay(){BreakfastRecipeId = WeeklyRecipes[5].RecipeId, LunchRecipeId = WeeklyRecipes[5].RecipeId, DinnerRecipeId = WeeklyRecipes[5].RecipeId, User = currentUser};
       _db.RecipeDays.Add(RecipeSaturday);
-      RecipeDay RecipeSunday = new RecipeDay(){LunchRecipeId = WeeklyRecipes[6].RecipeId, User = currentUser};
+      RecipeDay RecipeSunday = new RecipeDay(){BreakfastRecipeId = WeeklyRecipes[6].RecipeId, LunchRecipeId = WeeklyRecipes[6].RecipeId, DinnerRecipeId = WeeklyRecipes[6].RecipeId, User = currentUser};
       _db.RecipeDays.Add(RecipeSunday);
       DateTime weekDate = DateTime.Now;
       RecipeWeek thisWeek = new RecipeWeek() { Week = new List<RecipeDay> { RecipeMonday, RecipeTuesday, RecipeWednesday, RecipeThursday, RecipeFriday, RecipeSaturday, RecipeSunday }, ApplicationUserId = currentUser.Id, LunchPlan = true};

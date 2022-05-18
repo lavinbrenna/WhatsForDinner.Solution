@@ -18,14 +18,14 @@ else
     }
   }
   <h3>Breakfast Plans</h3>
-  <ul>
+
   @foreach(RecipeWeek recipeWeek in Model)
   {
     if(recipeWeek.BreakfastPlan){
       <li>@Html.ActionLink($"Week Of: {recipeWeek.WeekOf.ToShortDateString()}","Details", new{id= recipeWeek.RecipeWeekId})</li>
     }
   }
-  </ul>
+
   <h3>Lunch Plans</h3>
   @foreach(RecipeWeek recipeWeek in Model)
   {

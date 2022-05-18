@@ -8,24 +8,23 @@
 
 @if(User.Identity.IsAuthenticated)
 {
-  <p>Hello @User.Identity.Name!
-    @using (Html.BeginForm("LogOff", "Account"))
-  {
-    <input type="submit" class="submit" value="Log out"/>
-  }
-  </p>
-  <h2>Upcoming Recipes</h2>
+  <p>Hello @User.Identity.Name!</p>
+  <h2>Upcoming Dinner Recipes</h2>
   @if(Model.Count == 0){
     <p>No upcoming meals, create some meal plans to get started!</p>
   }
   else{
-    <ul>
-    <li>@Html.ActionLink($"{@Model[0].Week[0].Dinner.Title}", "Details", "Recipes", new {id = $"{@Model[0].Week[0].Dinner.RecipeId}"})</li>
-    <li>@Html.ActionLink($"{@Model[0].Week[1].Dinner.Title}", "Details", "Recipes", new {id = $"{@Model[0].Week[1].Dinner.RecipeId}"})</li>
-    <li>@Html.ActionLink($"{@Model[0].Week[2].Dinner.Title}", "Details", "Recipes", new {id = $"{@Model[0].Week[2].Dinner.RecipeId}"})</li>
-  </ul>
+    <h3 class="day">Thursday</h3>
+    <p>@Html.ActionLink($"{@Model[0].Week[3].Dinner.Title}", "Details", "Recipes", new {id = $"{@Model[0].Week[0].Dinner.RecipeId}"})</p>
+    <h3 class="day">Friday</h3>
+    <p>@Html.ActionLink($"{@Model[0].Week[4].Dinner.Title}", "Details", "Recipes", new {id = $"{@Model[0].Week[1].Dinner.RecipeId}"})</p>
+    <h3 class="day">Saturday</h3>
+    <p>@Html.ActionLink($"{@Model[0].Week[5].Dinner.Title}", "Details", "Recipes", new {id = $"{@Model[0].Week[2].Dinner.RecipeId}"})</p>
   }
-
+  @using (Html.BeginForm("LogOff", "Account"))
+  {
+    <input type="submit" class="submit" value="Log out"/>
+  }
 
 }
 
