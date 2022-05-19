@@ -18,6 +18,7 @@ If you hate trying to figure out what you're going to eat, and you also hate usi
 ## Setup/Installation Requirements
 
 * To use this app you need MySQL and MySQL Workbench installed. Follow setup instructions [here](https://www.learnhowtoprogram.com/c-and-net/getting-started-with-c/installing-and-configuring-mysql).
+* You will also need an API Key for the Spoonacular API which can be attained [here](https://spoonacular.com/food-api)
 * Clone this repository to your local machine
 * In the root folder, create an ```appsettings.json``` file with the following code:
 
@@ -32,6 +33,17 @@ If you hate trying to figure out what you're going to eat, and you also hate usi
 
 * Replace {YOURPASSWORDHERE} with the password you used when setting up MySQL
 * Save this file then navigate to the main project folder by typing ```cd WhatsForDinner``` in your terminal
+* Navigate to the EnvironmentVariables.cs file in the Models folder using the file browser
+* Input your Spoonacular API Key here, and then save the file:
+
+  ``` c#
+  public static class EnvironmentVariables
+  {
+    public static string apiKey = "{YOURAPIKEYHERE}";
+  }
+  ```
+
+* Make sure you are still in the main project folder within your terminal before the following steps.
 * type dotnet restore into the terminal to install the project's necessary dependencies.
 * type ```dotnet ef database update``` into the terminal to ensure the database is properly connected.
 * to run the app, type ```dotnet run``` into the terminal.

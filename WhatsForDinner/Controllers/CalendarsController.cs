@@ -108,7 +108,6 @@ namespace WhatsForDinner.Controllers
       }
       _db.RecipeWeeks.Add(thisWeek);
       _db.SaveChanges();
-      Console.WriteLine(thisWeek.Week[0].BreakfastRecipeId);
       return RedirectToAction("Index");
     }
 
@@ -175,7 +174,6 @@ namespace WhatsForDinner.Controllers
       }
       _db.RecipeWeeks.Add(thisWeek);
       _db.SaveChanges();
-      Console.WriteLine(thisWeek.Week[0].BreakfastRecipeId);
       return RedirectToAction("Index");
     }
       public async Task<ActionResult> CreateLunch()
@@ -240,7 +238,6 @@ namespace WhatsForDinner.Controllers
       }
       _db.RecipeWeeks.Add(thisWeek);
       _db.SaveChanges();
-      Console.WriteLine(thisWeek.Week[0].LunchRecipeId);
       return RedirectToAction("Index");
     }
 
@@ -305,7 +302,6 @@ namespace WhatsForDinner.Controllers
       }
       _db.RecipeWeeks.Add(thisWeek);
       _db.SaveChanges();
-      Console.WriteLine(thisWeek.Week[0].DinnerRecipeId);
       return RedirectToAction("Index");
     }
     public ActionResult Details(int id)
