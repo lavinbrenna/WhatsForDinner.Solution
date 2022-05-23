@@ -51,7 +51,8 @@ If you hate trying to figure out what you're going to eat, and you also hate usi
 
 ### Known Bugs
 
-* none
+* Import recipe from URL doesn't work for all websites, will likely work mostly for popular websites.
+* Ingredients from imported recipes need to be added manually.
 
 ### Research and Planning Log
 

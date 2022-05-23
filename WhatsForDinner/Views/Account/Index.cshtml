@@ -15,11 +15,11 @@
   }
   else{
     <h3 class="day">Thursday</h3>
-    <p>@Html.ActionLink($"{@Model[0].Week[3].Dinner.Title}", "Details", "Recipes", new {id = $"{@Model[0].Week[0].Dinner.RecipeId}"})</p>
+    <p>@Html.ActionLink($"{@Model[3].Week[3].Dinner.Title}", "Details", "Recipes", new {id = $"{@Model[0].Week[0].Dinner.RecipeId}"})</p>
     <h3 class="day">Friday</h3>
-    <p>@Html.ActionLink($"{@Model[0].Week[4].Dinner.Title}", "Details", "Recipes", new {id = $"{@Model[0].Week[1].Dinner.RecipeId}"})</p>
+    <p>@Html.ActionLink($"{@Model[3].Week[4].Dinner.Title}", "Details", "Recipes", new {id = $"{@Model[0].Week[1].Dinner.RecipeId}"})</p>
     <h3 class="day">Saturday</h3>
-    <p>@Html.ActionLink($"{@Model[0].Week[5].Dinner.Title}", "Details", "Recipes", new {id = $"{@Model[0].Week[2].Dinner.RecipeId}"})</p>
+    <p>@Html.ActionLink($"{@Model[3].Week[5].Dinner.Title}", "Details", "Recipes", new {id = $"{@Model[0].Week[2].Dinner.RecipeId}"})</p>
   }
   @using (Html.BeginForm("LogOff", "Account"))
   {
